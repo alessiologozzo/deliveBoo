@@ -1,3 +1,4 @@
+crud
 // $fa-font-path: "../fonts/webfonts" !default;
 
 // @import "~@fortawesome/fontawesome-free/scss/fontawesome";
@@ -6,3 +7,190 @@
 // @import "~@fortawesome/fontawesome-free/scss/brands";
 
 @import "~bootstrap/scss/bootstrap";
+
+@use "./partials/variables.scss" as *;
+@import '~bootstrap/scss/bootstrap';
+
+$fa-font-path: "..fonts/webfonts" !default;
+@import "@fortawesome/fontawesome-free/css/all.css";
+
+body{
+    overflow-x: hidden;
+    word-wrap: break-word;
+}
+
+aside{
+    width: $sidebar_width;
+    height: 100vh;
+    overflow-y: auto;
+    background-color: $sidebar_color;
+    color: white;
+    transition: width 300ms;
+
+    .logo-container{
+        height: $topbar_height;
+        min-height: $topbar_height;
+        display: flex;
+        align-items: center;
+        padding-left: 1rem;
+        border-bottom: 1px solid black;
+
+        img{
+            width: 80%;
+
+            @media screen and (min-width: 768px){
+                width: 120px;
+            }
+        }
+    }
+
+    a{
+        color: white;
+        text-decoration: none;
+    }
+
+    i{
+        font-size: $sidebar_icon_size;
+    }
+
+    .sidebar-item{
+        padding: $sidebar_item_py 0;
+        border-bottom: 1px solid black;
+        transition: background-color 300ms;
+
+        &:hover{
+            background-color: $sidebar_item_hover_color;
+        }
+    }
+
+    .drop-menu{
+        height: 0;
+        overflow: hidden;
+        transition: height 300ms;
+    }
+
+    .drop-menu-grow{
+        height: 100%;
+    }
+
+    .drop-item{
+        padding: $sidebar_item_py 2rem;
+        border-bottom: 1px solid black;
+        background-color: $sidebar_drop_item_color;
+        transition: background-color 300ms;
+
+        &:hover{
+            background-color: $sidebar_drop_item_hover_color;
+        }
+    }
+
+    .drop-size{
+        font-size: $sidebar_drop_arrow_size;
+    }
+
+    .sidebar-resizer {
+        width: 35px;
+        height: 35px;
+        min-width: 35px;
+        min-height: 35px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        align-self: center;
+        margin-top: auto;
+        margin-bottom: 1.5rem;
+        border: 1px solid grey;
+        border-radius: 50%;
+        transition: transform 300ms;
+        cursor: pointer;
+
+        &:hover {
+            transform: scale(1.1);
+        }
+
+        i {
+            font-size: 1.1rem;
+        }
+
+        @media screen and (min-width: 768px) {
+            display: none;
+        }
+    }
+
+    //Sidebar media query
+    @media screen and (min-width: 768px) {
+            width: $sidebar_width_md;
+    }
+}
+
+.sidebar-resized {
+    width: $sidebar_width_md;
+}
+
+.topbar-resized {
+    width: calc(100vw - $sidebar_width_md);
+}
+
+header{
+    width: calc(100vw - $sidebar_width);
+    height: $topbar_height;
+    background: rgb(220,24,90);
+    background: linear-gradient(90deg, rgba(220,24,90,1) 0%, rgba(244,45,74,1) 30%, rgba(248,70,44,1) 60%, rgba(251,84,26,1) 85%, rgba(254,102,3,1) 100%);
+    padding: 10px 40px;
+    color: white;
+    transition: width 300ms;
+
+    @media screen and (min-width: 768px){
+        width: calc(100vw - $sidebar_width_md);
+    }
+}
+
+main {
+    width: calc(100vw - $sidebar_width_md);
+    height: calc(100vh - $topbar_height);
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 1.5rem;
+    word-wrap: break-word;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+.al-menu {
+    // transform-origin: top right;
+    transform: scale(0);
+    position: absolute;
+    right: 0;
+    // transition: transform 200ms;
+    border-radius: 5px;
+    border: 1px solid grey;
+    background-color: white;
+    z-index: 100;
+}
+
+.al-menu-item {
+    display: block;
+    white-space: nowrap;
+    background-color: white;
+    padding: 10px 55px 10px 18px;
+    cursor: pointer;
+    transition: background-color 200ms;
+    border-radius: 5px;
+    z-index: 10;
+    color: black;
+
+    a {
+        color: black;
+    }
+}
+
+.al-menu-item:hover {
+    background-color: lightgray;
+}
+
+.al-menu-visible {
+    transform: scale(1);
+}
+main
