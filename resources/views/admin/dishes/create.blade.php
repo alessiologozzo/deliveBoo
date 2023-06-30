@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="dish-create" class="container">
-<form action="{{ route('admin.dishes.store') }}" enctype="multipart/form-data" method="POST" >
+<form action="{{ route('dishes.store') }}" enctype="multipart/form-data" method="POST" >
                 @csrf
                 <div class="mb-3">
                     <label for="image">Image</label>

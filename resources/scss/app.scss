@@ -6,9 +6,9 @@
 // @import "~@fortawesome/fontawesome-free/scss/solid";
 // @import "~@fortawesome/fontawesome-free/scss/brands";
 
+@use "./partials/variables.scss" as *;
 @import "~bootstrap/scss/bootstrap";
 
-@use "./partials/variables.scss" as *;
 @import '~bootstrap/scss/bootstrap';
 
 $fa-font-path: "..fonts/webfonts" !default;

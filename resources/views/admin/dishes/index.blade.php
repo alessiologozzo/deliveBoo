@@ -2,7 +2,7 @@
 
 @section('content')
 <div id="dish-index" class="container">
-    <a href="{{ route('admin.dishes.create') }}">crea nuovo piatto</a>
+    <a href="{{ route('dishes.create') }}">crea nuovo piatto</a>
     <table class="table table-striped">
       <thead>
         <tr>
@@ -20,7 +20,7 @@
             <td>{{ $item->name }}</td>
             <td>{{ $item->price }} euro</td>
             <td>{{ $item->category }}</td>
-            <td><a href="{{ route('admin.dishes.show', $item->slug) }}">Show</a></td>
+            <td><a href="{{ route('dishes.show', $item->slug) }}">Show</a></td>
         </tr>
         @endforeach
       </tbody>
