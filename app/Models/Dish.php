@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class Dish extends Model
 {
@@ -17,7 +17,7 @@ class Dish extends Model
         return $this->belongsTo(Restaurant::class);
     }
 
-    public function orders(): HasMany
+    public function orders(): BelongsToMany
     {
         return $this->hasMany(Order::class);
     }
