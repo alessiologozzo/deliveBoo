@@ -14,6 +14,15 @@ crud
 $fa-font-path: "..fonts/webfonts" !default;
 @import "@fortawesome/fontawesome-free/css/all.css";
 
+da qui ==
+
+
+#dish-index{
+    img{
+        width: 100px;
+    }
+}
+qui ==
 body{
     overflow-x: hidden;
     word-wrap: break-word;
@@ -193,4 +202,4 @@ main {
 .al-menu-visible {
     transform: scale(1);
 }
-main
+

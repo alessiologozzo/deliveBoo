@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+da qui ==
+use App\Http\Controllers\Admin\DishController;
+a qui ==
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\RestaurantController;
+da qui ==
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +29,11 @@ Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(
     Route::resource('restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:slug']);
 });
 
+
+
+Route::middleware(['auth', 'verified'])->name('admin.')->prefix('admin')->group(function () {
+    Route::resource('dishes', DishController::class)->parameters(['dishes' => 'dish:slug']); 
+});
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
