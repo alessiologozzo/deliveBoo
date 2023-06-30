@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Dish extends Model
 {
     use HasFactory;
+    protected $fillable = ['name', 'image', 'description', 'price', 'visible', 'category', 'slug', 'restaurant_id'];
 
     public function restaurant(): BelongsTo
     {
