@@ -34,7 +34,7 @@ aside{
     overflow-y: auto;
     background-color: $sidebar_color;
     color: white;
-    transition: width 300ms;
+    transition: width $transition_time;
 
     .logo-container{
         height: $topbar_height;
@@ -65,7 +65,7 @@ aside{
     .sidebar-item{
         padding: $sidebar_item_py 0;
         border-bottom: 1px solid black;
-        transition: background-color 300ms;
+        transition: background-color $transition_time;
 
         &:hover{
             background-color: $sidebar_item_hover_color;
@@ -75,7 +75,7 @@ aside{
     .drop-menu{
         height: 0;
         overflow: hidden;
-        transition: height 300ms;
+        transition: height $transition_time;
     }
 
     .drop-menu-grow{
@@ -86,7 +86,7 @@ aside{
         padding: $sidebar_item_py 2rem;
         border-bottom: 1px solid black;
         background-color: $sidebar_drop_item_color;
-        transition: background-color 300ms;
+        transition: background-color $transition_time;
 
         &:hover{
             background-color: $sidebar_drop_item_hover_color;
@@ -110,7 +110,7 @@ aside{
         margin-bottom: 1.5rem;
         border: 1px solid grey;
         border-radius: 50%;
-        transition: transform 300ms;
+        transition: transform $transition_time;
         cursor: pointer;
 
         &:hover {
@@ -136,7 +136,7 @@ aside{
     width: $sidebar_width_md;
 }
 
-.topbar-resized {
+.topbar-resized, .main-resized {
     width: calc(100vw - $sidebar_width_md);
 }
 
@@ -147,7 +147,7 @@ header{
     background: linear-gradient(90deg, rgba(220,24,90,1) 0%, rgba(244,45,74,1) 30%, rgba(248,70,44,1) 60%, rgba(251,84,26,1) 85%, rgba(254,102,3,1) 100%);
     padding: 10px 40px;
     color: white;
-    transition: width 300ms;
+    transition: width $transition_time;
 
     @media screen and (min-width: 768px){
         width: calc(100vw - $sidebar_width_md);
@@ -155,12 +155,17 @@ header{
 }
 
 main {
-    width: calc(100vw - $sidebar_width_md);
+    width: calc(100vw - $sidebar_width);
     height: calc(100vh - $topbar_height);
     overflow-y: auto;
     overflow-x: hidden;
     padding: 1.5rem;
     word-wrap: break-word;
+    transition: width $transition_time;
+
+    @media screen and (min-width: 768px){
+        width: calc(100vw - $sidebar_width_md);
+    }
 }
 
 .cursor-pointer {
