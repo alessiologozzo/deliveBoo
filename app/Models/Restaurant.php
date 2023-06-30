@@ -31,6 +31,6 @@ class Restaurant extends Model
 
     public function category(): BelongsToMany
     {
-        return $this->HasMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 }

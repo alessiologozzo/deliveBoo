@@ -12,6 +12,6 @@ class Category extends Model
 
     public function restaurants(): BelongsToMany
     {
-        return $this->hasMany(Restaurant::class);
+        return $this->BelongsToMany(Restaurant::class);
     }
 }
