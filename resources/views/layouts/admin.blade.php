@@ -27,7 +27,11 @@
         <div>
             <x-topbar />
 
-            <main>
+            <div id="loader" class="h-100 w-100 bg-primary">
+                <p class="loader-content">Loading...</p>
+            </div>
+
+            <main id="main-loader">
                 @yield("content")
             </main>
         </div>
