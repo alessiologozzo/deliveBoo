@@ -37,7 +37,7 @@ class OrdersSeeder extends Seeder
                 for($k = 0; $k < $generatedEntryPerOrder; $k++){
                     do
                         $randomDish = rand(0, $dishesInTheMenuNumber - 1);
-                    while (array_search($randomDish, $generatedDishPerOrder) != false);
+                    while (in_array($randomDish, $generatedDishPerOrder));
                     array_push($generatedDishPerOrder, $randomDish);
 
                     $quantity = rand(1, 4);

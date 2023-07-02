@@ -19,12 +19,13 @@ class CategoryRestaurantSeeder extends Seeder
         $categoriesNumber = Category::all()->count();
 
         for($i = 0; $i < $restaurantsNumber; $i++){
-            $categoriesPerRestaurant = rand(1, 4);
-            $alreadyGeneratedCategories = [];
+            $categoriesPerRestaurant = rand(1, $categoriesNumber);
+            $generatedCategories = [];
             for($j = 0; $j < $categoriesPerRestaurant; $j++){
                 do
                     $randomCategory = rand(1, $categoriesNumber);
-                while (array_search($randomCategory, $alreadyGeneratedCategories) != false);
+                while (in_array($randomCategory, $generatedCategories));
+                array_push($generatedCategories, $randomCategory);
 
                 $newCategoryRestaurant = new CategoryRestaurant();
                 $newCategoryRestaurant->category_id = $randomCategory;

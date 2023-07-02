@@ -26,7 +26,7 @@ class DashboardController extends Controller
             AND orders.date_time BETWEEN date_sub(CURDATE(), interval 6 month) AND CURDATE()
             GROUP BY 1
             ");
-
+            
         return view('admin.dashboard', ["orders" => $orders]);
     }
 }
