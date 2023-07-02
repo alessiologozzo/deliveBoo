@@ -14,4 +14,18 @@ window.Var = {
 let app = document.getElementById("app");
 app.addEventListener("click", Func.removeMenusHandler);
 
+chart-implementation
 Func.drawChart();
+
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  document.getElementById('main-loader').style.display = 'none';
+});
+
+ 
+window.addEventListener('load', function () {
+  document.getElementById('loader').style.cssText = 'display: none !important;';
+  document.getElementById('main-loader').style.display = 'block';
+});
+ main

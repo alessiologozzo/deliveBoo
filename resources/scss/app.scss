@@ -208,6 +208,7 @@ main {
     transform: scale(1);
 }
 
+ chart-implementation
 .dashboard-chart{
     width: 100;
     height: 200px;
@@ -231,4 +232,11 @@ main {
     @media screen and (min-width: 1400px){
         height: 350px;
     }
+
+#loader{
+    display: none;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+ main
 }
