@@ -5,9 +5,8 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Faker\Generator as Faker;
-use App\Models\Order;
 use App\Models\Restaurant;
-use App\Models\DishOrder;
+use Illuminate\Support\Facades\DB;
 
 class OrdersSeeder extends Seeder
 {
@@ -19,42 +18,59 @@ class OrdersSeeder extends Seeder
         $restaurantsNumber = Restaurant::all()->count();
         $restaurants = Restaurant::with("dishes")->get();
 
+        DB::disableQueryLog();
+        $dispatcher = DB::connection()->getEventDispatcher();
+        DB::connection()->unsetEventDispatcher();
+
         for($i = 0; $i < $restaurantsNumber; $i++){
-            $generatedOrdersNumber = rand(80, 200);
+            $generatedOrdersNumber = rand(1000, 2000);
             $dishesInTheMenuNumber = count($restaurants[$i]->dishes);
 
+            $newOrders = [$generatedOrdersNumber];
+            $newDishOrders = [];
             for($j = 0; $j < $generatedOrdersNumber; $j++){
-                $newOrder = new Order();
-                $newOrder->customer_name = $faker->name();
-                $newOrder->date_time = $faker->dateTimeBetween("-1 years", "now");
-                $newOrder->customer_address = $faker->address();
-                $newOrder->instructions = $faker->realTextBetween(20, 70);
-                $newOrder->price = 0;
-                $newOrder->order_num = "";
-                $newOrder->save();
 
                 $generatedEntryPerOrder = rand(1, 5);
                 $price = 0;
                 $generatedDishPerOrder = [];
+                $partialsDishOrders = [$generatedEntryPerOrder];
                 for($k = 0; $k < $generatedEntryPerOrder; $k++){
                     do
                         $randomDish = rand(0, $dishesInTheMenuNumber - 1);
                     while (array_search($randomDish, $generatedDishPerOrder) != false);
                     array_push($generatedDishPerOrder, $randomDish);
 
-                    $newDishOrder = new DishOrder();
-                    $newDishOrder->dish_id = $restaurants[$i]->dishes[$randomDish]->id;
-                    $newDishOrder->quantity = rand(1, 4);
-                    $price += $restaurants[$i]->dishes[$randomDish]->price * $newDishOrder->quantity;
-
-                    $newDishOrder->order_id = $newOrder->id;
-                    $newDishOrder->save();
+                    $quantity = rand(1, 4);
+                    $partialsDishOrders[$k] = [
+                        "dish_id" => $restaurants[$i]->dishes[$randomDish]->id,
+                        "quantity" => $quantity,
+                        "order_id" => $j + 1,
+                        "created_at" => now(),
+                        "updated_at" => now()
+                    ];
+                    $price += $restaurants[$i]->dishes[$randomDish]->price * $quantity;
                 }
 
-                $newOrder->price = $price;
-                $newOrder->order_num = substr(sha1($newOrder->id), 0, 8) . $newOrder->id;
-                $newOrder->save();
+                $newDishOrders = array_merge($newDishOrders, $partialsDishOrders);
+
+                $newOrders[$j] = [
+                    "customer_name" => $faker->name(),
+                    "date_time" =>  $faker->dateTimeBetween("-6 months", "now"),
+                    "customer_address" => $faker->address(),
+                    "instructions" => $faker->realTextBetween(20, 70),
+                    "price" => $price,
+                    "order_num" => substr(sha1($j + 1), 0, 8) . $j + 1,
+                    "created_at" => now(),
+                    "updated_at" => now()
+                ];
             }
+
+            DB::table("orders")->insert($newOrders);
+            DB::table("dish_order")->insert($newDishOrders);
         }
+
+
+        DB::enableQueryLog();
+        DB::connection()->setEventDispatcher($dispatcher);
     }
 }
