@@ -30,31 +30,34 @@
                                         {{ $dish['description'] }}
                                     </div>
                                 </div>
-                                <div class="grid-container">
-                                    @foreach ($dish->orders as $order)
-                                        <div class="rectangle p-3">
-                                            <h3 class="fw-bold text-white text-uppercase small">
-                                                order informations
-                                            </h3>
-                                            <div>
-                                                <span class="fst-italic text-white">Customer name:</span>
-                                                <div>{{ $order['customer_name'] }}</div>
+                                <div class="container">
+                                    <div class="row justify-content-center gy-3">
+                                        @foreach ($dish->orders as $order)
+                                            <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                                                <div class="card order_rectangle p-3">
+                                                    <h3 class="fw-bold text-white text-uppercase small">
+                                                        order
+                                                    </h3>
+                                                    <div class="pb-3">
+                                                        <span class="fst-italic text-white">Order number:</span>
+                                                        <div class="order_num">{{ $order['order_num'] }}</div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fst-italic text-white">Date & Time:</span>
+                                                        <div class="order_date">{{ $order['date_time'] }}</div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fst-italic text-white">Price:</span>
+                                                        <div>{{ $order['price'] }} <span>&euro;</span></div>
+                                                    </div>
+                                                    <div>
+                                                        <span class="fst-italic text-white">Customer name:</span>
+                                                        <div class="order_customer">{{ $order['customer_name'] }}</div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div>
-                                                <span class="fst-italic text-white">Date & Time:</span>
-                                                <div>{{ $order['date_time'] }}</div>
-                                            </div>
-                                            <div>
-                                                <span class="fst-italic text-white">Price:</span>
-                                                {{ $order['price'] }}
-                                                <span>&euro;</span>
-                                            </div>
-                                            <div>
-                                                <span class="fst-italic text-white">Order number:</span>
-                                                <div>{{ $order['order_num'] }}</div>
-                                            </div>
-                                        </div>
-                                    @endforeach
+                                        @endforeach
+                                    </div>
                                 </div>
                             </div>
                         </div>
