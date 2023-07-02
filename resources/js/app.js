@@ -13,3 +13,5 @@ window.Var = {
 
 let app = document.getElementById("app");
 app.addEventListener("click", Func.removeMenusHandler);
+
+Func.drawChart();

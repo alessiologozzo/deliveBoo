@@ -1,3 +1,6 @@
+import { forEach } from "lodash";
+import * as Chart from "./charts.js";
+
 export function showMenu(e) {
     e.stopPropagation();
     let menu = e.currentTarget.querySelector(".al-menu");
@@ -77,5 +80,26 @@ export function toggleMenu(event){
     else{
         dropArrow.classList.remove("fa-chevron-down");
         dropArrow.classList.add("fa-chevron-left");
+    }
+}
+
+export function drawChart(){
+    let chartContainers = document.getElementsByClassName("chart-container-data");
+    console.log(chartContainers.length);
+    if(chartContainers.length > 0){
+        for(let i = 0; i < chartContainers.length; i++){
+            let chartId = chartContainers[i].dataset.chartId;
+            let chartType = chartContainers[i].dataset.chartType;
+            let chartName = chartContainers[i].dataset.chartName;
+            let chartData = JSON.parse(chartContainers[i].dataset.chartData);
+            switch(chartType){
+                case "line-chart":
+                    Chart.lineChart(chartId, chartData, chartName);
+                    break;
+                case "bar-chart":
+                    Chart.barChart(chartId, chartData, chartName);
+                    break;
+            }
+        }
     }
 }
