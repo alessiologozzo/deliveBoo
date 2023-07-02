@@ -85,7 +85,7 @@ export function toggleMenu(event){
 
 export function drawChart(){
     let chartContainers = document.getElementsByClassName("chart-container-data");
-    console.log(chartContainers.length);
+    
     if(chartContainers.length > 0){
         for(let i = 0; i < chartContainers.length; i++){
             let chartId = chartContainers[i].dataset.chartId;
