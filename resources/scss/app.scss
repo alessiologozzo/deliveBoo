@@ -22,6 +22,17 @@ $fa-font-path: "..fonts/webfonts" !default;
         width: 100px;
     }
 }
+#dish-show{
+    .height-overflow{
+        height: 600px;
+
+        table{
+            img{
+                width: 50px;
+            }
+        }
+    }
+}
 
 body{
     overflow-x: hidden;
