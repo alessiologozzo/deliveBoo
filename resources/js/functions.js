@@ -90,14 +90,17 @@ export function drawChart(){
         for(let i = 0; i < chartContainers.length; i++){
             let chartId = chartContainers[i].dataset.chartId;
             let chartType = chartContainers[i].dataset.chartType;
-            let chartName = chartContainers[i].dataset.chartName;
+            let chartTitle = chartContainers[i].dataset.chartTitle;
             let chartData = JSON.parse(chartContainers[i].dataset.chartData);
+            let chartLabel = chartContainers[i].dataset.chartLabel;
+            let chartYLabel = chartContainers[i].dataset.chartYLabel;
+            let chartXLabel = chartContainers[i].dataset.chartXLabel;
             switch(chartType){
                 case "line-chart":
-                    Chart.lineChart(chartId, chartData, chartName);
+                    Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel);
                     break;
                 case "bar-chart":
-                    Chart.barChart(chartId, chartData, chartName);
+                    Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel);
                     break;
             }
         }

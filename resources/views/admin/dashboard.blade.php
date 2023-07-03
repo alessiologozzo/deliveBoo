@@ -26,13 +26,13 @@
 
 <div class="row">
     <div class="col-12 col-lg-6">
-        <div class="chart-container-data dashboard-chart" data-chart-id="line-chart" data-chart-type="line-chart" data-chart-data="{{json_encode($orders)}}" data-chart-name="Ordini">
+        <div class="chart-container-data dashboard-chart" data-chart-id="line-chart" data-chart-type="line-chart" data-chart-data="{{json_encode($orders)}}" data-chart-title="Orders from the last six months" data-chart-label="Orders" data-chart-y-label="Orders Numbers" data-chart-x-label="Time">
             <canvas id="line-chart"></canvas>
         </div>
     </div>
 
     <div class="col-12 col-lg-6">
-        <div class="chart-container-data dashboard-chart" data-chart-id="bar-chart" data-chart-type="bar-chart" data-chart-data="{{json_encode($orders)}}" data-chart-name="DA DECIDERE">
+        <div class="chart-container-data dashboard-chart" data-chart-id="bar-chart" data-chart-type="bar-chart" data-chart-data="{{json_encode($orders)}}" data-chart-title="Orders from the last six months" data-chart-label="Orders" data-chart-y-label="Orders Numbers" data-chart-x-label="Time">
             <canvas id="bar-chart"></canvas>
         </div>
     </div>
