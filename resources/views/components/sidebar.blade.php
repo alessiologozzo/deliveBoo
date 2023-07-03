@@ -8,17 +8,17 @@
         <span class="d-none d-md-block">Home</span>
     </a>
 
-    <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">
+    <a href="{{ url('/') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-chart-line"></i>
         <span class="d-none d-md-block">Dashboard</span>
     </a>
 
-    <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">
+    <a href="{{ url('/dishes') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-burger"></i>
         <span class="d-none d-md-block">My Foods</span>
     </a>
 
-    <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">
+    <a href="{{ url('/orders') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="d-none d-md-block">My Orders</span>
     </a>
@@ -28,7 +28,7 @@
         <span class="d-none d-md-block">My Images</span>
     </a>
 
-    
+
 
     <div onclick="window.Func.toggleMenu(event)" class="drop-menu-data mb-3">
         <div class="d-flex justify-content-between gap-3 sidebar-item px-3 sidebar-item cursor-pointer drop-master-data">
@@ -36,19 +36,19 @@
                 <i class="fa-solid fa-utensils"></i>
                 <span class="d-none d-md-block">My Restaurant</span>
             </div>
-    
+
             <div class="d-flex align-items-center">
                 <i class="fa-solid fa-chevron-left drop-size"></i>
             </div>
         </div>
 
         <div class="drop-menu">
-            <a href="#" class="drop-item d-flex align-items-center gap-3 sidebar-item">
+            <a href="{{ url('/users') }}" class="drop-item d-flex align-items-center gap-3 sidebar-item">
                 <i class="fa-solid fa-user"></i>
                 <span class="d-none d-md-block">Profile</span>
             </a>
 
-            <a href="#" class="drop-item d-flex align-items-center gap-3 sidebar-item">
+            <a href="{{ url('/restaurants') }}" class="drop-item d-flex align-items-center gap-3 sidebar-item">
                 <i class="fa-regular fa-circle"></i>
                 <span class="d-none d-md-block">Restaurant</span>
             </a>

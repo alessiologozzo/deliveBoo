@@ -23,7 +23,7 @@ class DishController extends Controller
     {
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
-        
+
         if ($restaurant) {
             $dishes = $restaurant->dishes()->paginate(10);
             return view('admin.dishes.index', compact('dishes'));
@@ -35,7 +35,7 @@ class DishController extends Controller
      */
     public function create()
     {
-        
+
         $dishes = Dish::all();
         return view('admin.dishes.create', compact('dishes'));
     }
@@ -70,7 +70,7 @@ class DishController extends Controller
     public function show(Dish $dish)
     {
         $orderCount = $dish->orders()->count();
-        
+
         $totalAmount = $dish->orders()->get()->map(function ($item) use ($dish) {
             return $item->pivot->quantity * $dish->price;
         })->sum();
@@ -81,7 +81,7 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
-        
+
         return view('admin.dishes.show', compact('dish', 'orderCount', 'totalAmount','totalDishes','dishes'));
     }
 
@@ -90,7 +90,7 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        //
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -98,7 +98,18 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
-        //
+        $data = $request->validated();
+        $slug = Str::slug($request->name, '-');
+        $data['slug'] = $slug;
+        if ($request->has('image')) {
+            if ($dish->image) {
+                Storage::delete($dish->image);
+            }
+            $image_path = Storage::put('images', $request->image);
+            $data['image'] = $image_path;
+        }
+        $dish->update($data);
+        return redirect()->route('admin.dish.index', $dish->slug);
     }
 
     /**
