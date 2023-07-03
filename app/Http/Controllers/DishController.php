@@ -69,7 +69,20 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
-        return view('admin.dishes.show', compact('dish'));
+        $orderCount = $dish->orders()->count();
+        
+        $totalAmount = $dish->orders()->get()->map(function ($item) use ($dish) {
+            return $item->pivot->quantity * $dish->price;
+        })->sum();
+        $totalDishes = $dish->orders()->get()->sum(function ($item) {
+            return $item->pivot->quantity;
+        });
+
+        $user = Auth::id();
+        $restaurant = Restaurant::where('user_id', $user)->first();
+        $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
+        
+        return view('admin.dishes.show', compact('dish', 'orderCount', 'totalAmount','totalDishes','dishes'));
     }
 
     /**
