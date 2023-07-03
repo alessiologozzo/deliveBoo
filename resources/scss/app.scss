@@ -282,3 +282,22 @@ main {
     }
 
 }
+.card{
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 10px;
+    .card-header{
+        background-color: #FF9141;
+        text-align: center;
+        padding: 10px;
+    }
+    .card-body{
+        background-color: #FFFFFF;
+        padding: 40px;
+    }
+    .btn-form{
+        background-color: #FF9141;
+        padding: 6px 10px;
+        border-radius: 10px;
+        border: none;
+    }
+}
