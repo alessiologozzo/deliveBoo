@@ -21,7 +21,7 @@
                             </div>
                             <div class="card-text">
                                 <div>
-                                    <span class="fw-bold">Categoryy:</span>
+                                    <span class="fw-bold">Category:</span>
                                     {{ $dish['category'] }}
                                 </div>
                                 <div class="pb-4">

@@ -21,12 +21,13 @@ $fa-font-path: "..fonts/webfonts" !default;
         width: 100px;
     }
 }
-#dish-show{
-    .height-overflow{
+
+#dish-show {
+    .height-overflow {
         height: 600px;
 
-        table{
-            img{
+        table {
+            img {
                 width: 50px;
             }
         }
@@ -146,7 +147,8 @@ aside {
     width: $sidebar_width_md;
 }
 
-.topbar-resized, .main-resized {
+.topbar-resized,
+.main-resized {
     width: calc(100vw - $sidebar_width_md);
 }
 
@@ -173,7 +175,7 @@ main {
     word-wrap: break-word;
     transition: width $transition_time;
 
-    @media screen and (min-width: 768px){
+    @media screen and (min-width: 768px) {
         width: calc(100vw - $sidebar_width_md);
     }
 }
@@ -253,34 +255,36 @@ main {
     .order_rectangle {
         height: 18rem;
     }
-.dashboard-chart{
-    width: 100;
-    height: 200px;
 
-    @media screen and (min-width: 576px){
-        height: 250px;
+    .dashboard-chart {
+        width: 100;
+        height: 200px;
+
+        @media screen and (min-width: 576px) {
+            height: 250px;
+        }
+
+        @media screen and (min-width: 768px) {
+            height: 300px;
+        }
+
+        @media screen and (min-width: 992px) {
+            height: 250px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            height: 300px;
+        }
+
+        @media screen and (min-width: 1400px) {
+            height: 350px;
+        }
     }
 
-    @media screen and (min-width: 768px){
-        height: 300px;
+    #loader {
+        display: none;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
     }
-
-    @media screen and (min-width: 992px){
-        height: 250px;
-    }
-
-    @media screen and (min-width: 1200px){
-        height: 300px;
-    }
-
-    @media screen and (min-width: 1400px){
-        height: 350px;
-    }
-}
-
-#loader{
-    display: none;
-    display: flex !important;
-    justify-content: center !important;
-    align-items: center !important;
 }
