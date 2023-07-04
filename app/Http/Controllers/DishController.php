@@ -90,7 +90,7 @@ class DishController extends Controller
      */
     public function edit(Dish $dish)
     {
-        //
+        return view('admin.dishes.edit', compact('dish'));
     }
 
     /**
@@ -98,7 +98,18 @@ class DishController extends Controller
      */
     public function update(Request $request, Dish $dish)
     {
-        //
+        $data = $request->validated();
+        $slug = Str::slug($request->name, '-');
+        $data['slug'] = $slug;
+        if ($request->has('image')) {
+            if ($dish->image) {
+                Storage::delete($dish->image);
+            }
+            $image_path = Storage::put('images', $request->image);
+            $data['image'] = $image_path;
+        }
+        $dish->update($data);
+        return redirect()->route('admin.dish.index', $dish->slug);
     }
 
     /**

@@ -15,12 +15,12 @@
       </thead>
       <tbody>
           @foreach ($dishes as $item )
-        <tr> 
+        <tr>
             <td><img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"></td>
             <td>{{ $item->name }}</td>
             <td>{{ $item->price }} euro</td>
             <td>{{ $item->category }}</td>
-            <td><a href="{{ route('dishes.show', $item->slug) }}">Show</a></td>
+            <td><a href="{{ route('dishes.show', $item->slug) }}">Show</a> <a href="{{ route('dishes.edit', $item->slug) }}">Edit</a></td>
         </tr>
         @endforeach
       </tbody>

@@ -72,6 +72,29 @@
                                             </tr>
                                         </tbody>
                                     </table>
+            @foreach ($dishes as $dish)
+                <div class="col-12 mt-4 mb-4">
+                    <div class="card w-100 mx-auto">
+                        <div class="card-body text-center">
+                            <h3 class="fw-bold text-primary text-uppercase fst-italic">dish informations</h3>
+                            <div class="card-title text-uppercase pt-2">
+                                <a href="#" class="text-decoration-none text-dark">
+                                    <span class="fw-bold">dish name:</span>
+                                    <div>
+                                        {{ $dish['name'] }}
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="card-text">
+                                <div>
+                                    <span class="fw-bold">Category:</span>
+                                    {{ $dish['category'] }}
+                                </div>
+                                <div class="pb-4">
+                                    <span class="fw-bold">Ingredients:</span>
+                                    <div>
+                                        {{ $dish['description'] }}
+                                    </div>
                                 </div>
                             @endif
                         @endforeach
