@@ -18,11 +18,11 @@
                             $dishNames = [];
                         @endphp
                         @foreach ($dishes as $dish)
-                            @unless (in_array($dish['name'], $dishNames))
-                                <option value="{{ $dish['id'] }}" @if ($selectedDish == $dish['id']) selected @endif>
-                                    {{ $dish['name'] }}</option>
+                            @unless (in_array($dish->name, $dishNames))
+                                <option value="{{ $dish->id }}" @if ($selectedDish == $dish->id) selected @endif>
+                                    {{ $dish->name }}</option>
                                 @php
-                                    $dishNames[] = $dish['name'];
+                                    $dishNames[] = $dish->name;
                                 @endphp
                             @endunless
                         @endforeach
@@ -41,111 +41,9 @@
         </div>
         <div class="col-12 mt-4 mb-4">
             @if ($selectedDish)
-                @foreach ($restaurants as $restaurant)
-                    @foreach ($restaurant->dishes as $dish)
+                @foreach ($dishes as $dish)
+                    @if ($dish->id == $selectedDish)
                         @foreach ($dish->orders as $order)
-                            @if ($dish['id'] == $selectedDish)
-                                <div class="table-responsive">
-                                    <table class="table">
-                                        <thead>
-                                            <tr class="text-center align-middle">
-                                                <th scope="col"></th>
-                                                <th scope="col">Dish Name</th>
-                                                <th scope="col">Category</th>
-                                                <th scope="col">Ingredients</th>
-                                                <th scope="col">Order number</th>
-                                                <th scope="col">Order date & time</th>
-                                                <th scope="col">Order price</th>
-                                                <th scope="col">Customer name of the order</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr class="text-center">
-                                                <th scope="row"></th>
-                                                <td class="fw-bold">{{ $dish['name'] }}</td>
-                                                <td>{{ $dish['category'] }}</td>
-                                                <td>{{ $dish['description'] }}</td>
-                                                <td>{{ $order['order_num'] }}</td>
-                                                <td>{{ $order['date_time'] }}</td>
-                                                <td>{{ $order['customer_name'] }}</td>
-                                                <td>{{ $order['price'] }} <span>&euro;</span></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
-            @foreach ($dishes as $dish)
-                <div class="col-12 mt-4 mb-4">
-                    <div class="card w-100 mx-auto">
-                        <div class="card-body text-center">
-                            <h3 class="fw-bold text-primary text-uppercase fst-italic">dish informations</h3>
-                            <div class="card-title text-uppercase pt-2">
-                                <a href="#" class="text-decoration-none text-dark">
-                                    <span class="fw-bold">dish name:</span>
-                                    <div>
-                                        {{ $dish['name'] }}
-                                    </div>
-                                </a>
-                            </div>
-                            <div class="card-text">
-                                <div>
-                                    <span class="fw-bold">Category:</span>
-                                    {{ $dish['category'] }}
-                                </div>
-                                <div class="pb-4">
-                                    <span class="fw-bold">Ingredients:</span>
-                                    <div>
-                                        {{ $dish['description'] }}
-                                    </div>
-                                </div>
-                            @endif
-                        @endforeach
-                    @endforeach
-                @endforeach
-            @elseif ($searchedOrder)
-                @foreach ($orders as $order)
-                    @if ($order['id'] == $searchedOrder)
-                        <div class="col-12">
-                            <div class="card w-50 mx-auto">
-                                <div class="card-body text-center">
-                                    <div class="card-text order_rectangle p-3">
-                                        <h3 class="fw-bold text-white text-uppercase small">
-                                            order
-                                        </h3>
-                                        <div class="pb-3">
-                                            <span class="fst-italic text-white">Order ID:</span>
-                                            <div class="order_num">{{ $order['id'] }}</div>
-                                        </div>
-                                        <div class="pb-3">
-                                            <span class="fst-italic text-white">Order number:</span>
-                                            <div class="order_num">{{ $order['order_num'] }}</div>
-                                        </div>
-                                        <div>
-                                            <span class="fst-italic text-white">Date & Time:</span>
-                                            <div class="order_date">{{ $order['date_time'] }}</div>
-                                        </div>
-                                        <div>
-                                            <span class="fst-italic text-white">Price:</span>
-                                            <div>{{ $order['price'] }} <span>&euro;</span></div>
-                                        </div>
-                                        <div>
-                                            <span class="fst-italic text-white">Customer
-                                                name:</span>
-                                            <div class="order_customer">
-                                                {{ $order['customer_name'] }}
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endif
-                @endforeach
-            @else
-                @foreach ($restaurants as $restaurant)
-                    @foreach ($restaurant->dishes as $dish)
-                        @foreach ($dish->orders as $order)
-                            @php
-                                $dishNames = array_diff($dishNames, [$dish['name']]);
-                            @endphp
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -163,13 +61,87 @@
                                     <tbody>
                                         <tr class="text-center">
                                             <th scope="row"></th>
-                                            <td class="fw-bold">{{ $dish['name'] }}</td>
-                                            <td>{{ $dish['category'] }}</td>
-                                            <td>{{ $dish['description'] }}</td>
-                                            <td>{{ $order['order_num'] }}</td>
-                                            <td>{{ $order['date_time'] }}</td>
-                                            <td>{{ $order['customer_name'] }}</td>
-                                            <td>{{ $order['price'] }} <span>&euro;</span></td>
+                                            <td class="fw-bold">{{ $dish->name }}</td>
+                                            <td>{{ $dish->category }}</td>
+                                            <td>{{ $dish->description }}</td>
+                                            <td>{{ $order->order_num }}</td>
+                                            <td>{{ $order->date_time }}</td>
+                                            <td>{{ $order->customer_name }}</td>
+                                            <td>{{ $order->price }} <span>&euro;</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endforeach
+                    @endif
+                @endforeach
+            @elseif ($searchedOrder)
+                @foreach ($orders as $order)
+                    @if ($order->id == $searchedOrder)
+                        <div class="col-12">
+                            <div class="card w-50 mx-auto">
+                                <div class="card-body text-center">
+                                    <div class="card-text order_rectangle p-3">
+                                        <h3 class="fw-bold text-white text-uppercase small">
+                                            order
+                                        </h3>
+                                        <div class="pb-3">
+                                            <span class="fst-italic text-white">Order ID:</span>
+                                            <div class="order_num">{{ $order->id }}</div>
+                                        </div>
+                                        <div class="pb-3">
+                                            <span class="fst-italic text-white">Order number:</span>
+                                            <div class="order_num">{{ $order->order_num }}</div>
+                                        </div>
+                                        <div>
+                                            <span class="fst-italic text-white">Date & Time:</span>
+                                            <div class="order_date">{{ $order->date_time }}</div>
+                                        </div>
+                                        <div>
+                                            <span class="fst-italic text-white">Price:</span>
+                                            <div>{{ $order->price }} <span>&euro;</span></div>
+                                        </div>
+                                        <div>
+                                            <span class="fst-italic text-white">Customer
+                                                name:</span>
+                                            <div class="order_customer">
+                                                {{ $order->customer_name }}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    @endif
+                @endforeach
+            @else
+                @foreach ($restaurants as $restaurant)
+                    @foreach ($restaurant->dishes as $dish)
+                        @foreach ($dish->orders as $order)
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="text-center align-middle">
+                                            <th scope="col"></th>
+                                            <th scope="col">Dish Name</th>
+                                            <th scope="col">Category</th>
+                                            <th scope="col">Ingredients</th>
+                                            <th scope="col">Order number</th>
+                                            <th scope="col">Order date & time</th>
+                                            <th scope="col">Order price</th>
+                                            <th scope="col">Customer name of the order</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="text-center">
+                                            <th scope="row"></th>
+                                            <td class="fw-bold">{{ $dish->name }}</td>
+                                            <td>{{ $dish->category }}</td>
+                                            <td>{{ $dish->description }}</td>
+                                            <td>{{ $order->order_num }}</td>
+                                            <td>{{ $order->date_time }}</td>
+                                            <td>{{ $order->customer_name }}</td>
+                                            <td>{{ $order->price }} <span>&euro;</span></td>
                                         </tr>
                                     </tbody>
                                 </table>
