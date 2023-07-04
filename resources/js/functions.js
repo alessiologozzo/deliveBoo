@@ -95,12 +95,24 @@ export function drawChart(){
             let chartLabel = chartContainers[i].dataset.chartLabel;
             let chartYLabel = chartContainers[i].dataset.chartYLabel;
             let chartXLabel = chartContainers[i].dataset.chartXLabel;
+            let chartYParam = chartContainers[i].dataset.chartYParam;
+            let chartTooltipExtra = chartContainers[i].dataset.chartTooltipExtra;
+
+            if(chartTitle == undefined)
+                chartTitle = "";
+            if(chartYLabel == undefined)
+                chartYLabel = "";
+            if(chartXLabel == undefined)
+                chartXLabel = "";
+            if(chartYParam == undefined)
+                chartYParam = "";
+
             switch(chartType){
                 case "line-chart":
-                    Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel);
+                    Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra);
                     break;
                 case "bar-chart":
-                    Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel);
+                    Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra);
                     break;
             }
         }

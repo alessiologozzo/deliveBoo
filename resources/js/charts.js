@@ -1,4 +1,4 @@
-export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel){
+export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
 
     const ctx = document.getElementById(chartId).getContext("2d");
 
@@ -12,8 +12,8 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
     let delayed;
 
     chartData.forEach(data => {
-        labels.push(data.date);
-        values.push(data.orders_number)
+        labels.push(data.label);
+        values.push(data.value)
     });
 
     const data = {
@@ -45,13 +45,34 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
                     display: true,
                     text: chartTitle,
                     position: "top",
-                    align: "start"
+                    align: "center",
+                    font: {
+                        size: 16
+                    }
                 },
 
                 legend: {
                     display: true,
                     position: "top",
                     align: "end"
+                },
+
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            if(chartTooltipExtra != undefined) {
+                                let label = context.dataset.label;
+
+                                if(label)
+                                    label += ": ";
+                                
+                                if(context.parsed.y !== null)
+                                    label += context.parsed.y + chartTooltipExtra;
+
+                                return label;
+                            }
+                        }
+                    }
                 }
             },
             scales: {
@@ -63,7 +84,7 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
                     },
                     ticks: {
                         callback: function (value) {
-                            return value;
+                            return value + chartYParam;
                         }
                     },
                     afterDataLimits(scale) {
@@ -95,7 +116,7 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
     let myChart = new Chart(ctx, config);
 }
 
-export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel){
+export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
     const ctx = document.getElementById(chartId).getContext("2d");
 
     let labels = [];
@@ -108,8 +129,8 @@ export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel
     let delayed;
 
     chartData.forEach(data => {
-        labels.push(data.date);
-        values.push(data.orders_number)
+        labels.push(data.label);
+        values.push(data.value)
     });
 
     const data = {
@@ -134,20 +155,41 @@ export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel
                     display: true,
                     text: chartTitle,
                     position: "top",
-                    align: "start"
+                    align: "center",
+                    font: {
+                        size: 16
+                    }
                 },
 
                 legend: {
                     display: true,
                     position: "top",
                     align: "end"
+                },
+
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            if(chartTooltipExtra != undefined) {
+                                let label = context.dataset.label;
+
+                                if(label)
+                                    label += ": ";
+                                
+                                if(context.parsed.y !== null)
+                                    label += context.parsed.y + chartTooltipExtra;
+
+                                return label;
+                            }
+                        }
+                    }
                 }
             },
             scales: {
                 y: {
                     ticks: {
                         callback: function (value) {
-                            return value;
+                            return value + chartYParam;
                         }
                     },
                     afterDataLimits(scale) {
