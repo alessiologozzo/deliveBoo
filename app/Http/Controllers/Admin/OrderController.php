@@ -26,8 +26,8 @@ class OrderController extends Controller
             });
         }
     }])
-        ->where("user_id", Auth::id())
-        ->paginate(15);
+        ->where("user_id", Auth::id());
+        // ->paginate(15);
 
     return view('admin.orders.index', compact('restaurants', 'orders', 'dishes', 'selectedDish', 'searchedOrder'));
 }
