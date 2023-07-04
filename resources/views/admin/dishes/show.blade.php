@@ -11,8 +11,8 @@
          <div class="row">
             <!-- col-8 -->
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-7 p-3">
-               <div class="card">
-                  <img class="" src="{{ asset('storage/' . $dish->image) }}" alt="{{ $dish->name }}">
+               <div>
+                  <img class="w-100" src="{{ asset('storage/' . $dish->image) }}" alt="{{ $dish->name }}">
                </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-6 col-xl-6 col-xxl-4 p-3">
