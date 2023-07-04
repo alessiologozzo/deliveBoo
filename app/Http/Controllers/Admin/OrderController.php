@@ -8,12 +8,30 @@ use App\Models\Order;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function index() {
-        $restaurant = Restaurant::with("dishes.orders")->where("user_id", Auth::id())->first();
-        // dd($restaurant[0]->dishes[0]->orders);
-        return view('admin.orders.index', ['dishes' => $restaurant->dishes]);
-    }
+    public function index(Request $request)
+{
+    $selectedDish = $request->input('selectedDish');
+    $searchedOrder = $request->input('searchedOrder');
+
+    $dishes = Dish::all();
+    $orders = Order::all();
+
+    $restaurants = Restaurant::with(['dishes' => function ($query) use ($selectedDish, $searchedOrder) {
+        if ($selectedDish) {
+            $query->where('id', $selectedDish);
+        }
+
+        if ($searchedOrder) {
+            $query->where('id', $searchedOrder);
+        }
+    }])
+        ->where("user_id", Auth::id())
+        ->paginate(15);
+
+    return view('admin.orders.index', compact('restaurants', 'dishes', 'orders', 'selectedDish', 'searchedOrder'));
+}
 }
