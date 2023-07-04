@@ -2,9 +2,6 @@
 
 @section('content')
     <div class="container">
-        <div class="text-center pt-5 pb-5">
-            <h1 class="fw-bold text-primary text-uppercase fst-italic">my orders</h1>
-        </div>
         <div class="row">
         </div>
         <div class="d-flex justify-content-center mt-3 mb-3">
@@ -152,6 +149,5 @@
             @endif
         </div>
     </div>
-    {{ $restaurants->links('vendor.pagination.bootstrap-5') }}
     </div>
 @endsection
