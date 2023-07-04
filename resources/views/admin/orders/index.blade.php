@@ -149,5 +149,5 @@
             @endif
         </div>
     </div>
-    </div>
+    {{ $restaurants->links('vendor.pagination.bootstrap-5') }}
 @endsection
