@@ -68,35 +68,8 @@
          <div class="mt-3 mb-3">
             <p class="fs-3">Category relates</p>
          </div>
-         <div class="row flex-nowrap overflow-auto">
+         <div class="row flex-nowrap overflow-auto p-3">
             @foreach ($disheCategory as $item)   
-            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3">
-               <div class="card">
-                  <img class="img-show-category img-fluid" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
-                  <div class="card-body">
-                     {{ Str::limit($item->name, 15, '...') }}
-                     <span class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">{{ $item->category }}</span>
-                  </div>
-               </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3">
-               <div class="card">
-                  <img class="img-show-category img-fluid" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
-                  <div class="card-body">
-                     {{ Str::limit($item->name, 15, '...') }}
-                     <span class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">{{ $item->category }}</span>
-                  </div>
-               </div>
-            </div>
-            <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3">
-               <div class="card">
-                  <img class="img-show-category img-fluid" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
-                  <div class="card-body">
-                     {{ Str::limit($item->name, 15, '...') }}
-                     <span class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">{{ $item->category }}</span>
-                  </div>
-               </div>
-            </div>
             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3">
                <div class="card">
                   <img class="img-show-category img-fluid" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
@@ -118,9 +91,9 @@
                <table class="table">
                   <thead>
                      <tr>
-                        <th>Image</th>
-                        <th>Name</th>
-                        <th>Category</th>
+                        <th class="text-white">Image</th>
+                        <th class="text-white">Name</th>
+                        <th class="text-white">Category</th>
                      </tr>
                   </thead>
                   <tbody>
