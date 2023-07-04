@@ -21,13 +21,48 @@ class DishController extends Controller
      */
     public function index()
     {
+        //selezione ristorante user loggato
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
+
+        //paginazione piatti
+        $dishes = $restaurant->dishes()
+        ->paginate(10);
+
+        //count piatti
+        $totalDish = $restaurant->dishes()
+        ->count();
+
+        //count categoria e piatti
+        $categoryDishes = $restaurant->dishes()
+        ->select('category')
+        ->selectRaw('COUNT(*) as total')
+        ->groupBy('category')
+        ->get();
+
+        //top 5 piatti più venduti
+        $topSellers = $restaurant->dishes()
+        ->withCount('orders')
+        ->orderBy('orders_count', 'desc')
+        ->limit(5)
+        ->get();
+
+        //dd($topSellers);  
         
-        if ($restaurant) {
-            $dishes = $restaurant->dishes()->paginate(10);
-            return view('admin.dishes.index', compact('dishes'));
-        }
+        //top 5 piatti più costosi
+        $topExpensive = $restaurant->dishes()
+        ->select('*')
+        ->orderBy('price', 'desc')
+        ->limit(5)
+        ->get();
+
+        //dd($topExpensive);
+
+
+
+        
+        return view('admin.dishes.index', compact('dishes','totalDish','categoryDishes','topSellers','topExpensive'));
+        
     }
 
     /**
@@ -81,8 +116,9 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
+        $disheCategory = $restaurant->dishes()->where('category', $dish->category )->get();
         
-        return view('admin.dishes.show', compact('dish', 'orderCount', 'totalAmount','totalDishes','dishes'));
+        return view('admin.dishes.show', compact('dish', 'orderCount', 'totalAmount','totalDishes','dishes','disheCategory'));
     }
 
     /**
