@@ -13,24 +13,22 @@ class OrderController extends Controller
 {
     public function index(Request $request)
 {
-    $selectedDish = $request->input('selectedDish');
-    $searchedOrder = $request->input('searchedOrder');
-
     $dishes = Dish::all();
     $orders = Order::all();
 
-    $restaurants = Restaurant::with(['dishes' => function ($query) use ($selectedDish, $searchedOrder) {
-        if ($selectedDish) {
-            $query->where('id', $selectedDish);
-        }
+    $selectedDish = $request->input('selectedDish');
+    $searchedOrder = $request->input('searchedOrder');
 
+    $restaurants = Restaurant::with(['dishes' => function ($query) use ($searchedOrder) {
         if ($searchedOrder) {
-            $query->where('id', $searchedOrder);
+            $query->whereHas('orders', function ($query) use ($searchedOrder) {
+                $query->where('id', $searchedOrder);
+            });
         }
     }])
         ->where("user_id", Auth::id())
         ->paginate(15);
 
-    return view('admin.orders.index', compact('restaurants', 'dishes', 'orders', 'selectedDish', 'searchedOrder'));
+    return view('admin.orders.index', compact('restaurants', 'orders', 'dishes', 'selectedDish', 'searchedOrder'));
 }
 }
