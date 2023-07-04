@@ -19,10 +19,10 @@ Func.drawChart();
 
 
 document.addEventListener('DOMContentLoaded', function () {
-  document.getElementById('main-loader').style.display = 'none';
+    document.getElementById('main-loader').style.display = 'none';
 });
 
 window.addEventListener('load', function () {
-  document.getElementById('loader').style.cssText = 'display: none !important;';
-  document.getElementById('main-loader').style.display = 'block';
+    document.getElementById('loader').style.cssText = 'display: none !important;';
+    document.getElementById('main-loader').style.display = 'block';
 });
