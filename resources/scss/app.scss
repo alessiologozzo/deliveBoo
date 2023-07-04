@@ -8,8 +8,6 @@
 @use "./partials/variables.scss" as *;
 @import "~bootstrap/scss/bootstrap";
 
-@import '~bootstrap/scss/bootstrap';
-
 $fa-font-path: "..fonts/webfonts" !default;
 @import "@fortawesome/fontawesome-free/css/all.css";
 
@@ -225,7 +223,7 @@ main {
 // admin.orders.index
 
 .card {
-    background-color: #f5f5f5;
+    background-color: $light_grey;
 }
 
 .order_rectangle {
@@ -237,6 +235,19 @@ main {
 .order_rectangle:hover {
     background-color: $rectangle_hover;
     transition: background-color 0.5s ease-in;
+}
+
+.table {
+    cursor: pointer;
+
+    thead tr th {
+        background-color: $rectangle_bg;
+    }
+
+    tbody tr th,
+    td {
+        background-color: $light_grey;
+    }
 }
 
 @media (min-width: 576px) {
@@ -253,7 +264,7 @@ main {
 
 @media (min-width: 611px) {
     .order_rectangle {
-        height: 18rem;
+        height: 21rem;
     }
 
     .dashboard-chart {
@@ -267,6 +278,27 @@ main {
         @media screen and (min-width: 768px) {
             height: 300px;
         }
+
+        @media screen and (min-width: 992px) {
+            height: 250px;
+        }
+
+        @media screen and (min-width: 1200px) {
+            height: 300px;
+        }
+
+        @media screen and (min-width: 1400px) {
+            height: 350px;
+        }
+    }
+
+    #loader {
+        display: none;
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+    }
+}
 
         @media screen and (min-width: 992px) {
             height: 250px;
