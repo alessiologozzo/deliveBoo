@@ -25,7 +25,6 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
 
-
         //paginazione piatti
         $dishes = $restaurant->dishes()
         ->paginate(10);
@@ -118,7 +117,6 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
-      
         $disheCategory = $restaurant->dishes()->where('category', $dish->category )->get();
         
         return view('admin.dishes.show', compact('dish', 'orderCount', 'totalAmount','totalDishes','dishes','disheCategory'));

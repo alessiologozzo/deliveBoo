@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dish;
@@ -22,11 +22,12 @@ class OrderController extends Controller
     $restaurants = Restaurant::with(['dishes' => function ($query) use ($searchedOrder) {
         if ($searchedOrder) {
             $query->whereHas('orders', function ($query) use ($searchedOrder) {
-                $query->where('id', $searchedOrder);
+                $query->where('orders.id', $searchedOrder);
             });
         }
     }])
-        ->where("user_id", Auth::id());
+        ->where("user_id", Auth::id())
+        ->paginate(15);
 
     return view('admin.orders.index', compact('restaurants', 'orders', 'dishes', 'selectedDish', 'searchedOrder'));
 }
