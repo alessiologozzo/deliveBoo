@@ -49,7 +49,7 @@
       <div class="card">
         <table class="table">
           <thead class="table-light">
-            <tr>
+            <tr class="rounded-top rounded-5">
               <th>Image</th>
               <th>Name</th>
               <th class="d-none d-sm-table-cell">Price</th>
