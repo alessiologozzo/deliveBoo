@@ -157,8 +157,7 @@ aside {
 header {
     width: calc(100vw - $sidebar_width);
     height: $topbar_height;
-    background: rgb(220, 24, 90);
-    background: linear-gradient(90deg, rgba(220, 24, 90, 1) 0%, rgba(244, 45, 74, 1) 30%, rgba(248, 70, 44, 1) 60%, rgba(251, 84, 26, 1) 85%, rgba(254, 102, 3, 1) 100%);
+    background: $topbar_background;
     padding: 10px 40px;
     color: white;
     transition: width $transition_time;
@@ -272,8 +271,9 @@ main {
     }
 
     .dashboard-chart {
-        width: 100;
+        width: 100%;
         height: 200px;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 
         @media screen and (min-width: 576px) {
             height: 250px;
@@ -284,11 +284,15 @@ main {
         }
 
         @media screen and (min-width: 992px) {
-            height: 250px;
+            height: 300px;
         }
 
         @media screen and (min-width: 1200px) {
-            height: 300px;
+            height: 350px;
+        }
+
+        @media screen and (min-width: 1400px) {
+            height: 450px;
         }
 
         @media screen and (min-width: 1400px) {
@@ -307,9 +311,15 @@ main {
 .card {
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     border-radius: 10px;
+ dashboard
+    .card-header{
+        background: rgb(255,217,65);
+        background: linear-gradient(90deg, rgba(255,217,65,1) 0%, rgba(255,145,65,1) 35%, rgba(255,121,24,1) 63%, rgba(255,145,65,1) 100%);
+
 
     .card-header {
         background-color: #FF9141;
+ main
         text-align: center;
         padding: 10px;
         color: white;
@@ -327,4 +337,104 @@ main {
         border: none;
         color: white;
     }
+ dashboard
+}
+
+.dashboard-card{
+    border-radius: 5px;
+    color: white;
+    text-decoration: none;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    transition: transform $transition_time;
+
+    i{
+        font-size: 2.5rem;
+    }
+
+    &:hover{
+        transform: scale(1.05);
+    }
+
+    @media screen and (max-width: 576px){
+        h3{
+            font-size: 20px;
+        } 
+
+        h4{
+            font-size: 16px;
+        }
+
+        i{
+            font-size: 1.8rem;
+        }
+    }
+}
+
+.first-dashboard-card{
+    background: $dashboard_first_card_background;
+}
+
+.second-dashboard-card{
+    background: $dashboard_second_card_background;
+}
+
+.third-dashboard-card{
+    background: $dashboard_third_card_background;
+}
+
+.fourth-dashboard-card{
+    background: $dashboard_fourth_card_background;
+}
+
+.changeable{
+    position: relative;
+
+    .section-1, .section-2{
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        transition: opacity $transition_time;
+    }
+
+    .section-1{
+        opacity: 1;
+    }
+
+    .section-2{
+        opacity: 0;
+    }
+
+    .section-height{
+        visibility: hidden;
+    }
+
+    &:hover{
+        .section-1{
+            opacity: 0;
+        }
+
+        .section-2{
+            opacity: 1;
+            border-radius: 5px;
+            z-index: 100;
+
+            .col-6{
+                border-radius: 5px;
+                transition: background-color $transition_time;
+            }
+
+            .col-6:hover{
+                background-color: rgba(255, 255, 255, 0.2);
+            }
+        }
+    }
+
+    a{
+        color: white;
+        text-decoration: none;
+    }
+
+ main
 }
