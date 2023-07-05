@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\DishController;
@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,6 +31,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('restaurants', RestaurantController::class)->parameters(['restaurants' => 'restaurant:slug']);
     Route::resource('dishes', DishController::class)->parameters(['dishes' => 'dish:slug']);
     Route::get('orders', [OrderController::class, 'index'])->name('orders');
+    Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::resource('users', UserController::class)->parameters(['users' => 'user:id']);
 });
 
