@@ -5,6 +5,7 @@ use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\DishController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ImageController;
 use App\Http\Controllers\RestaurantController;
 use App\Http\Controllers\UserController;
 
@@ -33,6 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('orders');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::resource('users', UserController::class)->parameters(['users' => 'user:id']);
+    Route::get('images', [ImageController::class, 'index'])->name('images');
 });
 
 
