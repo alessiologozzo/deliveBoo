@@ -242,6 +242,7 @@ main {
     border-radius: 5px;
     z-index: 10;
     color: black;
+    text-decoration: none;
 
     a {
         color: black;
@@ -256,9 +257,25 @@ main {
     transform: scale(1);
 }
 
+.item-expandable{
+    position: relative;
+}
 
+.item-collapse{
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translateX(-100%) scale(0);
+    transition: transform $transition_time;
+    transform-origin: top right;
+    background-color: white;
+    border-radius: 5px;
+    border: 1px solid black;
+}
 
-// admin.orders.index
+.al-menu-item.item-expandable:hover .item-collapse{
+    transform: translateX(-100%) scale(100%);
+}
 
 .card {
     background-color: $light_grey;
