@@ -4,10 +4,32 @@
         <i class="fa-solid fa-chevron-down"></i>
 
         <div class="al-menu">
-            <a href="#" class="al-menu-item">
-                DA DECIDERE...
+            <a href="{{route('orders.index')}}" class="al-menu-item">
+                My Orders
             </a>
 
+            <a href="{{route('dishes.index')}}" class="al-menu-item">
+                My Dishes
+            </a>
+
+            <a href="#" class="al-menu-item">
+                My Images
+            </a>
+
+            <div class="al-menu-item item-expandable">
+                My Profile
+                
+                <div class="item-collapse">
+
+                    <a href="{{route('users.index')}}" class="al-menu-item">
+                        User
+                    </a>
+
+                    <a href="{{route('restaurants.index')}}" class="al-menu-item">
+                        Restaurant
+                    </a>
+                </div>
+            </div>
             <div onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="al-menu-item">
                 Logout
             </div>
