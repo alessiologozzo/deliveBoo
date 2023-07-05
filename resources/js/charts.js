@@ -1,4 +1,4 @@
-export function lineChart(chartId, chartData, chartName){
+export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
 
     const ctx = document.getElementById(chartId).getContext("2d");
 
@@ -12,8 +12,8 @@ export function lineChart(chartId, chartData, chartName){
     let delayed;
 
     chartData.forEach(data => {
-        labels.push(data.date);
-        values.push(data.orders_number)
+        labels.push(data.label);
+        values.push(data.value)
     });
 
     const data = {
@@ -21,7 +21,7 @@ export function lineChart(chartId, chartData, chartName){
         datasets: [
             {
                 data: values,
-                label: chartName,
+                label: chartLabel,
                 fill: true,
                 backgroundColor: gradient,
                 tension: 0.3
@@ -40,14 +40,62 @@ export function lineChart(chartId, chartData, chartName){
             radius: 6,
             hitRadius: 20,
             hoverRadius: 12,
+            plugins: {
+                title:{
+                    display: true,
+                    text: chartTitle,
+                    position: "top",
+                    align: "center",
+                    font: {
+                        size: 16
+                    }
+                },
+
+                legend: {
+                    display: true,
+                    position: "top",
+                    align: "end"
+                },
+
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            if(chartTooltipExtra != undefined) {
+                                let label = context.dataset.label;
+
+                                if(label)
+                                    label += ": ";
+                                
+                                if(context.parsed.y !== null)
+                                    label += context.parsed.y + chartTooltipExtra;
+
+                                return label;
+                            }
+                        }
+                    }
+                }
+            },
             scales: {
                 y: {
+                    beginAtZero: true,
+                    title:{
+                        display: true,
+                        text: chartYLabel
+                    },
                     ticks: {
                         callback: function (value) {
-                            return value;
+                            return value + chartYParam;
                         }
                     },
-                    beginAtZero: true
+                    afterDataLimits(scale) {
+                        scale.max += (scale.max * 5) / 100;
+                    }
+                },
+                x: {
+                    title:{
+                        display: true,
+                        text: chartXLabel
+                    },
                 }
             },
             animation: {
@@ -68,7 +116,7 @@ export function lineChart(chartId, chartData, chartName){
     let myChart = new Chart(ctx, config);
 }
 
-export function barChart(chartId, chartData, chartName){
+export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
     const ctx = document.getElementById(chartId).getContext("2d");
 
     let labels = [];
@@ -81,8 +129,8 @@ export function barChart(chartId, chartData, chartName){
     let delayed;
 
     chartData.forEach(data => {
-        labels.push(data.date);
-        values.push(data.orders_number)
+        labels.push(data.label);
+        values.push(data.value)
     });
 
     const data = {
@@ -90,7 +138,7 @@ export function barChart(chartId, chartData, chartName){
         datasets: [
             {
                 data: values,
-                label: chartName,
+                label: chartLabel,
                 backgroundColor: gradient,
             }
         ]
@@ -102,13 +150,62 @@ export function barChart(chartId, chartData, chartName){
         options: {
             responsive: true,
             maintainAspectRatio: false,
+            plugins: {
+                title:{
+                    display: true,
+                    text: chartTitle,
+                    position: "top",
+                    align: "center",
+                    font: {
+                        size: 16
+                    }
+                },
+
+                legend: {
+                    display: true,
+                    position: "top",
+                    align: "end"
+                },
+
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            if(chartTooltipExtra != undefined) {
+                                let label = context.dataset.label;
+
+                                if(label)
+                                    label += ": ";
+                                
+                                if(context.parsed.y !== null)
+                                    label += context.parsed.y + chartTooltipExtra;
+
+                                return label;
+                            }
+                        }
+                    }
+                }
+            },
             scales: {
                 y: {
                     ticks: {
                         callback: function (value) {
-                            return value;
+                            return value + chartYParam;
                         }
                     },
+                    afterDataLimits(scale) {
+                        scale.max += (scale.max * 5) / 100;
+                    },
+                    title: {
+                        display: true,
+                        text: chartYLabel
+                    }
+                },
+
+                x: {
+                    title: {
+                        display: true,
+                        text: chartXLabel
+                    }
                 }
             },
             animation: {

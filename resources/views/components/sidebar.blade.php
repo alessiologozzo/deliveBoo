@@ -13,14 +13,14 @@
         <span class="d-none d-md-block">Dashboard</span>
     </a>
 
-    <a href="{{ url('/dishes') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
-        <i class="fa-solid fa-burger"></i>
-        <span class="d-none d-md-block">My Foods</span>
-    </a>
-
     <a href="{{ url('/orders') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-cart-shopping"></i>
         <span class="d-none d-md-block">My Orders</span>
+    </a>
+
+    <a href="{{ url('/dishes') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
+        <i class="fa-solid fa-burger"></i>
+        <span class="d-none d-md-block">My Foods</span>
     </a>
 
     <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">

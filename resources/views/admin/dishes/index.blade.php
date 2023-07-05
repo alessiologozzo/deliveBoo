@@ -1,18 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
-//da qui
+
 
 
 <div id="dish-index" class="container-fluid">
   <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mb-5 mt-3">
     <div class="d-flex">
       <div class="input-group">
-        <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
-        <input class="btn btn-primary" type="submit" value="Cerca">
+        <input type="text" class="form-control shadow bg-body-tertiary rounded" placeholder="Search your Dish" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+        <input class="btn btn-light text-dark shadow bg-body-tertiary rounded ms-2" type="submit" value="Cerca">
       </div>
       <div class="ms-2">
-        <a class="btn btn-primary" href="{{ route('dishes.create') }}" role="button">+</a>
+        <a class="btn btn-light text-dark shadow bg-body-tertiary rounded" href="{{ route('dishes.create') }}" role="button">+</a>
       </div>
     </div>
   </div>
@@ -20,14 +20,14 @@
     <div class="col-12">
       <div class="row">
         <div class="col-12 col-md-3 col-xl-3 col-xxl-2 pb-4">
-          <div class="card p-3">
-            <p>Total dish:</p>
-            <p class="m-0 fs-1">{{ $totalDish }}</p>
+          <div class="card p-3 first-dashboard-card border border-0">
+            <p class="fs-4 text-white">Total dish:</p>
+            <p class="m-0 fs-1 text-white">{{ $totalDish }}</p>
           </div>
         </div>
         <div class="col-12 col-md-3 col-xl-3 col-xxl-2">
-          <div class="card p-3">
-            <p>All category:</p>
+          <div class="card p-3 third-dashboard-card border border-0">
+            <p class="fs-4 text-white">All category:</p>
             @foreach ($categoryDishes as $item )
             <span class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">
               <div class="d-flex justify-content-between ps-2 pe-2">
@@ -41,35 +41,32 @@
       </div>
     </div>
   </div>
-  <div class="row mt-5 mb-3">
-    <h3>All dishes:</h3>
-  </div>
-  <div class="row">
+  <div class="row mt-5 pt-3">
     <div class="col-12 col-lg-8 pe-lg-5">
-      <div class="card">
-      <table class="table">
-  <thead class="table-light">
-    <tr>
-      <th>Image</th>
-      <th>Name</th>
-      <th class="d-none d-sm-table-cell">Price</th>
-      <th>Category</th>
-      <th class="d-none d-md-table-cell">Action</th>
-    </tr>
-  </thead>
-  <tbody>
-    @foreach ($dishes as $item )
-    <tr>
-      <td><a href="{{ route('dishes.show', $item->slug) }}"><img class="img-table p-1" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"></a></td>
-      <th><a class="link-offset-2 link-underline link-underline-opacity-0 d-block pt-2 text-dark" href="{{ route('dishes.show', $item->slug) }}">{{ $item->name }}</a></th>
-      <td class="d-none d-sm-table-cell">{{ $item->price }} euro</td>
-      <td>{{ $item->category }}</td>
-      <td class="d-none d-md-table-cell"><a href="{{ route('dishes.show', $item->slug) }}">Show</a></td>
-    </tr>
-    @endforeach
-  </tbody>
-</table>
-
+      <div class="card p-3">
+        <p class="fs-4">All dishes:</p>
+        <table class="table">
+          <thead class="table-light">
+            <tr class="rounded-top rounded-5">
+              <th class="text-white rounded-start">Image</th>
+              <th class="text-white">Name</th>
+              <th class="d-none d-sm-table-cell text-white">Price</th>
+              <th class="text-white">Category</th>
+              <th class="d-none d-md-table-cell text-white rounded-end">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            @foreach ($dishes as $item )
+            <tr>
+              <td><a href="{{ route('dishes.show', $item->slug) }}"><img class="img-table p-1" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"></a></td>
+              <th><a class="link-offset-2 link-underline link-underline-opacity-0 d-block pt-2 text-dark" href="{{ route('dishes.show', $item->slug) }}">{{ $item->name }}</a></th>
+              <td class="d-none d-sm-table-cell">{{ $item->price }} euro</td>
+              <td>{{ $item->category }}</td>
+              <td class="d-none d-md-table-cell"><a href="{{ route('dishes.show', $item->slug) }}">Show</a></td>
+            </tr>
+            @endforeach
+          </tbody>
+        </table>
       </div>
       <div class="pagination mt-3 d-flex justify-content-center">
         {{ $dishes->links('pagination::bootstrap-4') }}
@@ -79,13 +76,13 @@
       <div class="row">
         <div class="col-12">
           <div class="card p-3">
-            <p>Top 5 seller</p>
+            <p class="fs-4">Top 5 seller</p>
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Orders</th>
+                  <th scope="col" class="text-white rounded-start">Name</th>
+                  <th scope="col" class="text-white">Category</th>
+                  <th scope="col" class="text-white rounded-end">Orders</th>
                 </tr>
               </thead>
               <tbody>
@@ -102,13 +99,13 @@
         </div>
         <div class="col-12 mt-5">
           <div class="card p-3">
-            <p>Top 5 expensive</p>
+            <p class="fs-4">Top 5 expensive</p>
             <table class="table">
               <thead>
                 <tr>
-                  <th scope="col">Name</th>
-                  <th scope="col">Category</th>
-                  <th scope="col">Orders</th>
+                  <th class="text-white rounded-start" scope="col">Name</th>
+                  <th class="text-white" scope="col">Category</th>
+                  <th class="text-white rounded-end" scope="col">Orders</th>
                 </tr>
               </thead>
               <tbody>
@@ -124,41 +121,13 @@
           </div>
         </div>
       </div>
-//da qui
-<div id="dish-index" class="container">
-    <a href="{{ route('dishes.create') }}">crea nuovo piatto</a>
-    <table class="table table-striped">
-      <thead>
-        <tr>
-          <th>Image</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th>Category</th>
-          <th>Action</th>
-        </tr>
-      </thead>
-      <tbody>
-          @foreach ($dishes as $item )
-        <tr>
-            <td><img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"></td>
-            <td>{{ $item->name }}</td>
-            <td>{{ $item->price }} euro</td>
-            <td>{{ $item->category }}</td>
-            <td><a href="{{ route('dishes.show', $item->slug) }}">Show</a> <a href="{{ route('dishes.edit', $item->slug) }}">Edit</a></td>
-        </tr>
-        @endforeach
-      </tbody>
-    </table>
-    <div class="pagination">
-                {{ $dishes->links('pagination::bootstrap-4') }}
-// main
     </div>
   </div>
 </div>
-//fetch-index-show-dish
 
 
-@endsection
+
+
 
 @endsection
 
