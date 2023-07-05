@@ -19,7 +19,7 @@
             <a href="{{ route('dishes.index') }}" class="d-flex p-4 dashboard-card second-dashboard-card">
                 <div>
                     <h4 class="mb-0">My</h4>
-                    <h3>Foods</h3>
+                    <h3>Dishes</h3>
                 </div>
 
                 <div class="w-100 d-flex justify-content-end align-items-center">
@@ -46,18 +46,18 @@
                 <div class="w-100 d-flex section-1 p-4">
                     <div>
                         <h4 class="mb-0">My</h4>
-                        <h3>Restaurant</h3>
+                        <h3>Profile</h3>
                     </div>
 
                     <div class="w-100 d-flex justify-content-end align-items-center">
-                        <i class="fa-solid fa-utensils"></i>
+                        <i class="fa-solid fa-gears"></i>
                     </div>
                 </div>
 
                 <div class="d-flex section-2 w-100">
                     <a href="{{route('users.index')}}" class="col-6 py-4 d-flex justify-content-center align-items-center">
                         <div class="d-flex flex-column">
-                            <h4>Profile</h4>
+                            <h4>User</h4>
                             <i class="fa-solid fa-user fs-2 text-center"></i>
                         </div>
                     </a>
@@ -65,7 +65,7 @@
                     <a href="{{route('restaurants.index')}}" class="col-6 py-4 d-flex justify-content-center align-items-center">
                         <div class="d-flex flex-column">
                             <h4>Restaurant</h4>
-                            <i class="fa-regular fa-circle fs-2 text-center"></i>
+                            <i class="fa-solid fa-utensils fs-2 text-center"></i>
                         </div>
                     </a>
                 </div>

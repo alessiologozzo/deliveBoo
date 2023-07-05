@@ -20,7 +20,7 @@
 
     <a href="{{ url('/dishes') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-burger"></i>
-        <span class="d-none d-md-block">My Foods</span>
+        <span class="d-none d-md-block">My Dishes</span>
     </a>
 
     <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">
@@ -33,8 +33,8 @@
     <div onclick="window.Func.toggleMenu(event)" class="drop-menu-data mb-3">
         <div class="d-flex justify-content-between gap-3 sidebar-item px-3 sidebar-item cursor-pointer drop-master-data">
             <div class="d-flex align-items-center gap-3">
-                <i class="fa-solid fa-utensils"></i>
-                <span class="d-none d-md-block">My Restaurant</span>
+                <i class="fa-solid fa-gears"></i>
+                <span class="d-none d-md-block">My Profile</span>
             </div>
 
             <div class="d-flex align-items-center">
@@ -45,11 +45,11 @@
         <div class="drop-menu">
             <a href="{{ url('/users') }}" class="drop-item d-flex align-items-center gap-3 sidebar-item">
                 <i class="fa-solid fa-user"></i>
-                <span class="d-none d-md-block">Profile</span>
+                <span class="d-none d-md-block">User</span>
             </a>
 
             <a href="{{ url('/restaurants') }}" class="drop-item d-flex align-items-center gap-3 sidebar-item">
-                <i class="fa-regular fa-circle"></i>
+                <i class="fa-solid fa-utensils"></i>
                 <span class="d-none d-md-block">Restaurant</span>
             </a>
         </div>
