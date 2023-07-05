@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Admin\OrderController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProfileController;
 
 use App\Http\Controllers\DishController;
