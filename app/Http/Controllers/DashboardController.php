@@ -18,16 +18,16 @@ class DashboardController extends Controller
 
         $orders = DB::select(
             "SELECT SUBSTR(DATE_FORMAT(orders.date_time, '%Y-%M'), 6, 3) AS 'label', COUNT(DISTINCT orders.id) AS 'value'
-            FROM orders 
+            FROM orders
             JOIN dish_order ON orders.id = dish_order.order_id
             JOIN dishes ON dishes.id = dish_order.dish_id
             JOIN restaurants ON restaurants.id = dishes.restaurant_id
-            WHERE restaurants.user_id = $userId 
+            WHERE restaurants.user_id = $userId
             AND orders.date_time BETWEEN DATE_SUB(DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), interval 1 day), interval 6 month) AND DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), interval 1 day)
             GROUP BY 1
             ORDER BY DATE_FORMAT(orders.date_time, '%Y-%m')
             ");
-            
+
 
         $revenues = DB::select(
             "SELECT SUBSTR(DATE_FORMAT(orders.date_time, '%Y-%M'), 6, 3) AS 'label', SUM(dishes.price * dish_order.quantity) AS 'value'
