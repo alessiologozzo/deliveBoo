@@ -13,10 +13,13 @@ class HomeController extends Controller
     public function index()
     {
         $categories = Category::all();
-        $restautants = Restaurant::inRandomOrder()->limit(8)->get();
+        $restaurants = Restaurant::leftJoin('images', function($join) {
+            $join->on('restaurants.id', 'images.restaurant_id')
+                 ->whereRaw('images.id = (SELECT MIN(id) FROM images WHERE images.restaurant_id = restaurants.id)');
+                })->select('restaurants.*', 'images.image')->paginate(10);
         $data = [
             'categories'=> $categories,
-            'restautants'=> $restautants,
+            'restaurants'=> $restaurants,
         ];
         return response()->json([
             'status' => true,
