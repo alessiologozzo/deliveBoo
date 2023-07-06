@@ -44,7 +44,15 @@ class OrderController extends Controller
         $orders = collect($order ? [$order] : []);
     }
 
-    return view('admin.orders.index', compact('dishes', 'orders', 'selectedDish', 'searchedOrder'));
+    $topExpensive = Order::with('dishes')
+    ->select('orders.*')
+    ->join('dish_order', 'dish_order.order_id', '=', 'orders.id')
+    ->join('dishes', 'dishes.id', '=', 'dish_order.dish_id')
+    ->orderBy('dishes.price', 'desc')
+    ->limit(5)
+    ->get();
+
+    return view('admin.orders.index', compact('dishes', 'orders', 'selectedDish', 'searchedOrder', 'topExpensive'));
 }
 
 public function show(Order $order)
