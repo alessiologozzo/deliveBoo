@@ -282,7 +282,6 @@ main {
 
 .card {
     background-color: $light_grey;
-    cursor: pointer;
 }
 
 .order_rectangle {
@@ -573,4 +572,21 @@ main {
     box-shadow: $box_shadow_color;
     padding: 4rem;
     border: 1px solid lightgrey;
+}
+
+.asterisk-opacity{
+    opacity: 0.5;
+    font-size: 0.8;
+}
+
+.custom-w{
+    width: 100%;
+
+    @media screen and (min-width: 576px){
+        width: 75%;
+    }
+
+    @media screen and (min-width: 768px){
+        width: 50%;
+    }
 }

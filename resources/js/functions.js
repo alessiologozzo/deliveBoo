@@ -161,3 +161,26 @@ export function submitExternalForm() {
     let form = document.getElementsByTagName("form");
     form.submit();
 }
+
+export function validateEqualFields(event, firstElementId, secondElementId, errorElementId, errorMex) {
+    event.preventDefault();
+
+    let result = false;
+    let firstElement = document.getElementById(firstElementId);
+    let secondElement = document.getElementById(secondElementId);
+    let errorElement = document.getElementById(errorElementId);
+
+    if(firstElement.value == secondElement.value)
+        result = true;
+    else{
+        firstElement.classList.add("is-invalid");
+        firstElement.value = "";
+        secondElement.value = "";
+        errorElement.classList.add("d-block");
+        let strong = errorElement.querySelector("strong");
+        strong.textContent = errorMex;
+    }
+
+    return result;
+
+}
