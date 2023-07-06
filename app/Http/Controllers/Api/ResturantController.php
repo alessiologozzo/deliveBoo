@@ -11,10 +11,10 @@ class ResturantController extends Controller
 {
     public function index()
     {
-        $restautants = Restaurant::all();
+        $restaurants = Restaurant::all();
         $categories = Category::all();
         $data = [
-            'restautants'=> $restautants,
+            'restaurants'=> $restaurants,
             'categories'=> $categories
         ];
         return response()->json([
