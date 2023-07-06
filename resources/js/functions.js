@@ -118,3 +118,46 @@ export function drawChart(){
         }
     }
 }
+
+export function askConfirm(e) {
+    e.stopPropagation();
+    let confirmElement = document.getElementsByClassName("al-confirm")[0];
+    confirmElement.classList.remove("d-none");
+}
+
+export function removeConfirmElementHandler(e) {
+    let needToRemove = false;
+    let confirmElement = document.getElementsByClassName("al-confirm")[0];
+
+    if (confirmElement != null) {
+        if (!confirmElement.classList.contains("d-none")) {
+            let confirmElementLeft = confirmElement.getBoundingClientRect().x;
+            let confirmElementRight = confirmElementLeft + confirmElement.getBoundingClientRect().width;
+            let confirmElementTop = confirmElement.getBoundingClientRect().y;
+            let confirmElementBottom = confirmElementTop + confirmElement.getBoundingClientRect().height;
+
+            if ((e.clientX < confirmElementLeft || e.clientX > confirmElementRight) || (e.clientY < confirmElementTop || e.clientY > confirmElementBottom))
+                needToRemove = true;
+        }
+    }
+
+    if (needToRemove)
+        confirmElement.classList.add("d-none");
+}
+
+export function removeConfirmElement() {
+    let confirmElement = document.getElementsByClassName("al-confirm")[0];
+    confirmElement.classList.add("d-none");
+}
+
+export function submitForm(e) {
+    let parent = e.currentTarget.closest(".al-confirm");
+    let form = parent.querySelector("form");
+
+    form.submit();
+}
+
+export function submitExternalForm() {
+    let form = document.getElementsByTagName("form");
+    form.submit();
+}

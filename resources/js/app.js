@@ -13,6 +13,7 @@ window.Var = {
 
 let app = document.getElementById("app");
 app.addEventListener("click", Func.removeMenusHandler);
+app.addEventListener("click", Func.removeConfirmElementHandler);
 
 Func.drawChart();
 

@@ -1,38 +1,66 @@
 @extends('layouts.admin')
 
 @section('content')
-    <div class="text-center  my-4">
-        <h1 class="text-center">Restaurant</h1>
-    </div>
-
-    {{-- @if (session()->has('message'))
-        <div class="alert alert-success">
-            {{ session()->get('message') }}
+    @error('password')
+        <div class="al-mex bg-danger">
+            {{ $message }}
         </div>
-    @endif --}}
-    @foreach ($restaurants as $restaurant)
-    <div class=" d-flex justify-content-center">
-        <div class="card w-25 d-flex flex-column align-items-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px">
-            <img src="{{ asset('storage/' . $restaurant->logo) }}" class="card-img-top w-50 my-3" alt="{{$restaurant->name}}">
-            <div class="card-body">
-                <h5 class="card-title text-center">{{$restaurant->name}}</h5>
-                <p class="card-text text-center">{{$restaurant->address}}</p>
-                <div class="d-flex justify-content-between">
-                    <a href="{{ route('restaurants.edit', $restaurant->slug) }}"
-                        class="btn btn-warning text-white">EDIT</a>
-                    <form action="{{ route('restaurants.destroy', $restaurant->slug) }}" method="POST">
-                        @csrf
-                        @method('DELETE')
-                        <button type='submit' class="delete-button btn btn-danger text-white"
-                            data-item-title="{{ $restaurant->name }}">DELETE</button>
-                    </form>
+    @enderror
+
+    @if (session()->has('mex'))
+        <div class="al-mex">
+            {{ session()->get('mex') }}
+        </div>
+    @endif
+
+
+
+    @if (count($restaurants) > 0)
+        <x-modal-ask-password route="{{ route('restaurants.destroy', $restaurants[0]->slug) }}" method="DELETE"
+            mex="Are you sure you want to delete your restaurant?" danger />
+
+        <div class="text-center  my-4">
+            <h1 class="text-center">Restaurant</h1>
+        </div>
+
+        @foreach ($restaurants as $restaurant)
+            <div class=" d-flex justify-content-center">
+                <div class="card w-25 d-flex flex-column align-items-center"
+                    style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px">
+
+                    @if ($restaurant->logo != null)
+                        <img src="{{ asset('storage/' . $restaurant->logo) }}" class="card-img-top w-50 my-3"
+                            alt="{{ $restaurant->name }}">
+                    @else
+                        <h6 class="text-center py-4 px-3">The restaurant does not have a logo.</h6>
+                    @endif
+
+
+                    <div class="card-body">
+                        <h5 class="card-title text-center">{{ $restaurant->name }}</h5>
+                        <p class="card-text text-center">{{ $restaurant->address }}</p>
+                        <div class="d-flex justify-content-between gap-3">
+                            <a href="{{ route('restaurants.edit', $restaurant->slug) }}"
+                                class="btn btn-warning text-white">EDIT</a>
+                            </a>
+
+                            <button onclick="window.Func.askConfirm(event)" class="delete-button btn btn-danger text-white">
+                                DELETE
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </div>
+        @endforeach
+    @else
+        <div class="centered-card">
+            <span>You don't have a restaurant.</span>
 
-    @endforeach
+            <div class="pt-4">
+                <a href="{{ route('restaurants.create') }}" class="btn btn-primary">Create a new restaurant</a>
+            </div>
+        </div>
+    @endif
+
 
 @endsection
-
-
