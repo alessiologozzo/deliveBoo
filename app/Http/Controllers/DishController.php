@@ -73,7 +73,9 @@ class DishController extends Controller
     {
 
         $dishes = Dish::all();
-        return view('admin.dishes.create', compact('dishes'));
+        $categories = Dish::groupBy('category')->pluck('category');
+        //dd($categories);
+        return view('admin.dishes.create', compact('dishes','categories'));
     }
 
     /**
@@ -97,7 +99,7 @@ class DishController extends Controller
 
         $dish = Dish::create($data);
 
-        return view('admin.dishes.show', compact('dish'));
+        return redirect()->route('dishes.show', $dish->slug);
     }
 
     /**
@@ -117,6 +119,7 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
+        //dd($disheCategory);
         $disheCategory = $restaurant->dishes()->where('category', $dish->category )->get();
         
         return view('admin.dishes.show', compact('dish', 'orderCount', 'totalAmount','totalDishes','dishes','disheCategory'));
