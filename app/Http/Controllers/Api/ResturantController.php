@@ -11,7 +11,10 @@ class ResturantController extends Controller
 {
     public function index()
     {
-        $restaurants = Restaurant::all();
+        $restaurants = Restaurant::leftJoin('images', function($join) {
+            $join->on('restaurants.id', 'images.restaurant_id')
+                 ->whereRaw('images.id = (SELECT MIN(id) FROM images WHERE images.restaurant_id = restaurants.id)');
+                })->select('restaurants.*', 'images.image')->paginate(10);
         $categories = Category::all();
         $data = [
             'restaurants'=> $restaurants,
