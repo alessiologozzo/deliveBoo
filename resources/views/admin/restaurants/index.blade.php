@@ -25,7 +25,7 @@
 
         @foreach ($restaurants as $restaurant)
             <div class=" d-flex justify-content-center">
-                <div class="card w-25 d-flex flex-column align-items-center"
+                <div class="card custom-w d-flex flex-column align-items-center"
                     style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px">
 
                     @if ($restaurant->logo != null)
@@ -36,10 +36,10 @@
                     @endif
 
 
-                    <div class="card-body">
+                    <div class="card-body w-100">
                         <h5 class="card-title text-center">{{ $restaurant->name }}</h5>
                         <p class="card-text text-center">{{ $restaurant->address }}</p>
-                        <div class="d-flex justify-content-between gap-3">
+                        <div class="d-flex justify-content-center gap-3 gap-lg-4 flex-wrap pt-3">
                             <a href="{{ route('restaurants.edit', $restaurant->slug) }}"
                                 class="btn btn-warning text-white">EDIT</a>
                             </a>

@@ -21,11 +21,11 @@
     </div>
 
     <div class="d-flex justify-content-center">
-        <div class="card w-25 d-flex flex-column align-items-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px">
-            <div class="card-body">
+        <div class="card custom-w d-flex flex-column align-items-center" style="box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px">
+            <div class="card-body w-100">
                 <h5 class="card-title text-center pb-2">{{ $user->first_name }} {{ $user->last_name }}</h5>
                 <p class="card-text text-center pb-2">{{ $user->email }}</p>
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-center gap-3 gap-lg-4 flex-wrap pt-3">
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning text-white">EDIT</a>
 
                     <button onclick="window.Func.askConfirm(event)" class="delete-button btn btn-danger text-white">

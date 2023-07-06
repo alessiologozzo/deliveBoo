@@ -11,7 +11,7 @@
                     @csrf
 
                     <div class="mb-4 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('*Restaurant Name') }}</label>
+                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Name') }} <span class="asterisk-opacity">*</span></label>
 
                         <div class="col-md-6">
                             <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus maxlength="255">
@@ -25,7 +25,7 @@
                     </div>
 
                     <div class="mb-4 row">
-                        <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('*Restaurant Address') }}</label>
+                        <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Address') }} <span class="asterisk-opacity">*</span></label>
 
                         <div class="col-md-6">
                             <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus maxlength="255">

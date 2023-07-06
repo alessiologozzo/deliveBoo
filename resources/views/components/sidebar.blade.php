@@ -23,7 +23,7 @@
         <span class="d-none d-md-block">My Dishes</span>
     </a>
 
-    <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">
+    <a href="{{route('images.index')}}" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-images"></i>
         <span class="d-none d-md-block">My Images</span>
     </a>

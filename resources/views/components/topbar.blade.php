@@ -12,7 +12,7 @@
                 My Dishes
             </a>
 
-            <a href="#" class="al-menu-item">
+            <a href="{{route('images.index')}}" class="al-menu-item">
                 My Images
             </a>
 

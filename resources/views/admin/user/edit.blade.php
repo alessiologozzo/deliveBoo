@@ -1,24 +1,18 @@
 @extends('layouts.admin')
 
 @section('content')
-    @error('password')
-        <div class="al-mex bg-danger">
-            {{ $message }}
-        </div>
-    @enderror
-
     <div class="container mt-4">
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">Edit User: {{ $user->first_name }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('users.update', $user->id) }}">
+                        <form onsubmit="if(window.Func.validateEqualFields(event, 'new_password', 'new_password_confirmation', 'err', 'The password field confirmation does not match.')) event.currentTarget.submit();" method="POST" action="{{ route('users.update', $user->id) }}">
                             @csrf
                             @method('PUT')
 
                             <div class="mb-4 row">
-                                <label for="first_name" class="col-md-4 col-form-label text-md-right">First Name</label>
+                                <label for="first_name" class="col-md-4 col-form-label text-md-right">First Name <span class="asterisk-opacity">*</span></label>
                                 <div class="col-md-6">
                                     <input id="first_name" type="text"
                                         class="form-control @error('first_name') is-invalid @enderror" name="first_name"
@@ -32,7 +26,7 @@
                                 </div>
                             </div>
                             <div class="mb-4 row">
-                                <label for="last_name" class="col-md-4 col-form-label text-md-right">Last Name</label>
+                                <label for="last_name" class="col-md-4 col-form-label text-md-right">Last Name <span class="asterisk-opacity">*</span></label>
                                 <div class="col-md-6">
                                     <input id="last_name" type="text"
                                         class="form-control @error('last_name') is-invalid @enderror" name="last_name"
@@ -47,7 +41,7 @@
                             </div>
 
                             <div class="mb-4 row">
-                                <label for="email" class="col-md-4 col-form-label text-md-right">Email</label>
+                                <label for="email" class="col-md-4 col-form-label text-md-right">Email <span class="asterisk-opacity">*</span></label>
                                 <div class="col-md-6">
                                     <input id="email" type="email"
                                         class="form-control @error('email') is-invalid @enderror" name="email"
@@ -66,13 +60,17 @@
                                 <div class="col-md-6">
                                     <input id="new_password" type="password"
                                         class="form-control @error('new_password') is-invalid @enderror" name="new_password"
-                                        autofocus maxlength="255">
+                                        autofocus maxlength="255" minlength="8">
 
                                     @error('new_password')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
                                         </span>
                                     @enderror
+
+                                    <span id="err" class="invalid-feedback" role="alert">
+                                        <strong></strong>
+                                    </span>
                                 </div>
                             </div>
 
@@ -81,7 +79,7 @@
                                 <div class="col-md-6">
                                     <input id="new_password_confirmation" type="password"
                                         class="form-control @error('new_password_confirmation') is-invalid @enderror" name="new_password_confirmation"
-                                        autofocus maxlength="255">
+                                        autofocus maxlength="255" minlength="8">
 
                                     @error('new_password_confirmation')
                                         <span class="invalid-feedback" role="alert">
@@ -93,11 +91,11 @@
 
                             <h6 class="pt-4">You are about to change your sensitive data. Enter your password to continue.</h6>
                             <div class="mb-4 row">
-                                <label for="password" class="col-md-4 col-form-label text-md-right">Password</label>
+                                <label for="password" class="col-md-4 col-form-label text-md-right">Password <span class="asterisk-opacity">*</span></label>
                                 <div class="col-md-6">
                                     <input id="password" type="password"
                                         class="form-control @error('password') is-invalid @enderror" name="password"
-                                        autofocus maxlength="255">
+                                        required autofocus maxlength="255">
 
                                     @error('password')
                                         <span class="invalid-feedback" role="alert">

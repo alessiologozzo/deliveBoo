@@ -34,7 +34,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('orders', [OrderController::class, 'index'])->name('orders');
     Route::get('orders/{order}', [OrderController::class, 'show'])->name('orders.show');
     Route::resource('users', UserController::class)->parameters(['users' => 'user:id']);
-    Route::get('images', [ImageController::class, 'index'])->name('images');
+    Route::resource('images', ImageController::class)->parameters(['images' => 'image:id']);
 });
 
 
