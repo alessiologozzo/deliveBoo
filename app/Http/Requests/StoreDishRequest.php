@@ -31,4 +31,18 @@ class StoreDishRequest extends FormRequest
             
         ];
     }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Il campo nome è obbligatorio.',
+            'price.required' => 'Il campo prezzo è obbligatorio.',
+            'price.numeric' => 'Il campo prezzo deve essere un valore numerico.',
+            'price.min' => 'Il campo prezzo deve essere superiore a :min.',
+            'image.required' => 'Il campo immagine è obbligatorio.',
+            'description.required' => 'Il campo descrizione è obbligatorio.',
+            'visible.required' => 'Il campo visibilità è obbligatorio.',
+            'category.required' => 'Il campo categoria è obbligatorio.',
+        ];
+    }
 }

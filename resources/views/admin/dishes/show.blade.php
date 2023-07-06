@@ -20,19 +20,31 @@
                   <div class="col-6 pb-4">
                      <div class="card p-3 first-dashboard-card border border-0">
                         <p class="fs-4 text-white">Total sell:</p>
-                        <p class="m-0 fs-1 text-white">{{ $totalAmount }} <span class="fs-5">€</span></p>
+                        @if(isset($totalAmount))
+                           <p class="m-0 fs-1 text-white">{{ $totalAmount }} <span class="fs-5">€</span></p>
+                        @else
+                           <p class="m-0 fs-1 text-white">0</p>
+                        @endif
                      </div>
                   </div>
                   <div class="col-6 pb-4">
                      <div class="card p-3 second-dashboard-card border border-0">
                         <p class="fs-4 text-white">Total order:</p>
-                        <p class="m-0 fs-1 text-white">{{ $orderCount }}</p>
+                        @if(isset($orderCount))
+                           <p class="m-0 fs-1 text-white">{{ $orderCount }}</p>
+                        @else
+                           <p class="m-0 fs-1 text-white">0</p>
+                        @endif
                      </div>
                   </div>
                   <div class="col-6 pb-4">
                      <div class="card p-3 third-dashboard-card border border-0">
                         <p class="fs-4 text-white">Total dish sell:</p>
-                        <p class="m-0 fs-1 text-white">{{ $totalDishes }}</p>
+                        @if(isset($totalDishes))
+                           <p class="m-0 fs-1 text-white">{{ $totalDishes }}</p>
+                        @else
+                           <p class="m-0 fs-1 text-white">0</p>
+                        @endif
                      </div>
                   </div>
                   <div class="col-6 pb-4">
@@ -69,6 +81,7 @@
             <p class="fs-3">Category relates</p>
          </div>
          <div class="row flex-nowrap overflow-auto p-3">
+         
             @foreach ($disheCategory as $item)   
             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3">
                <div class="card">
@@ -80,6 +93,7 @@
                </div>
             </div>
             @endforeach
+         
          </div>
       </div>
       <div class="col-xl-12 col-xxl-4">
@@ -97,6 +111,7 @@
                      </tr>
                   </thead>
                   <tbody>
+                 
                      @foreach ($dishes as $item)
                      <tr class="">
                         <td class=""><a href="{{ route('dishes.show', $item->slug) }}"><img class="img-table p-1" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}"></a></td>
@@ -104,6 +119,7 @@
                         <td class=""><span class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">{{ $item->category }}</span></td>
                      </tr>
                      @endforeach
+                 
                   </tbody>
                </table>
             </div>
