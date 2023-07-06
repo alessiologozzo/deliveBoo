@@ -6,7 +6,46 @@
 
 @section('content')
     <div class="container">
-        <div class="d-flex justify-content-center mt-3 mb-3">
+        <div class="row">
+            <div class="col-12 mt-3 mb-3">
+                <div class="card p-3">
+                    <div class="card-body">
+                        <div class="card-text">
+                            <h3 class="text-uppercase fs-3 text-center fw-bold pb-2">the 5 most expensive orders</h3>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr class="text-center align-middle">
+                                            <th scope="col" class="text-white rounded-start">Customer name</th>
+                                            <th scope="col" class="text-white">Order ID</th>
+                                            <th scope="col" class="text-white rounded-end">Price</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($topExpensive as $order)
+                                            <tr class="text-center">
+                                                <th>{{ $order->customer_name }}</th>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                        {{ $order->id }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                        {{ $order->price }} &euro;
+                                                    </span>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center mt-4 mb-3">
             <div class="mx-3">
                 <form method="GET">
                     <label for="searchedOrder" class="form-label">Search your orders by ID!</label>
@@ -47,29 +86,45 @@
                                 <table class="table">
                                     <thead>
                                         <tr class="text-center align-middle">
-                                            <th scope="col"></th>
-                                            <th scope="col" class="text-white">Dish Name</th>
+                                            <th scope="col" class="text-white rounded-start">Dish Name</th>
                                             <th scope="col" class="text-white">Order ID</th>
                                             <th scope="col" class="text-white">Order number</th>
                                             <th scope="col" class="text-white">Order date & time</th>
                                             <th scope="col" class="text-white">Order price</th>
-                                            <th scope="col" class="text-white">Discover!</th>
+                                            <th scope="col" class="text-white rounded-end">Discover!</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($dish->orders as $order)
                                             <tr class="text-center">
-                                                <th scope="row"></th>
-                                                <td class="fw-bold">{{ $dish->name }}</td>
-                                                <td>{{ $order->id }}</td>
-                                                <td>{{ $order->order_num }}</td>
-                                                <td>{{ $order->date_time }}</td>
-                                                <td>{{ $order->price }} <span>&euro;</span></td>
+                                                <th>{{ $dish->name }}</th>
                                                 <td>
-                                                    <a class="text-dark"
-                                                        href="{{ route('orders.show', ['order' => $order->id]) }}">
-                                                        <i class="fa-regular fa-eye"></i>
-                                                    </a>
+                                                    <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                        {{ $order->id }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                        {{ $order->order_num }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                        {{ $order->date_time }}
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                        {{ $order->price }} <span>&euro;</span>
+                                                    </span>
+                                                </td>
+                                                <td>
+                                                    <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                        <a class="text-dark"
+                                                            href="{{ route('orders.show', ['order' => $order->id]) }}">
+                                                            <i class="fa-regular fa-eye"></i>
+                                                        </a>
+                                                    </span>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -115,24 +170,39 @@
                         <table class="table">
                             <thead>
                                 <tr class="text-center align-middle">
-                                    <th scope="col"></th>
-                                    <th scope="col" class="text-white">Dish Name</th>
+                                    <th scope="col" class="text-white rounded-start">Dish Name</th>
                                     <th scope="col" class="text-white">Order ID</th>
                                     <th scope="col" class="text-white">Order number</th>
                                     <th scope="col" class="text-white">Order date & time</th>
                                     <th scope="col" class="text-white">Order price</th>
-                                    <th scope="col" class="text-white">Discover!</th>
+                                    <th scope="col" class="text-white rounded-end">Discover!</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($orders as $order)
                                     <tr class="text-center">
-                                        <th scope="row"></th>
-                                        <td class="fw-bold">{{ $dish->name }}</td>
-                                        <td>{{ $order->id }}</td>
-                                        <td>{{ $order->order_num }}</td>
-                                        <td>{{ $order->date_time }}</td>
-                                        <td>{{ $order->price }} <span>&euro;</span></td>
+                                        <th>{{ $dish->name }}</th>
+                                        <td>
+                                            <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                {{ $order->id }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                {{ $order->order_num }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                {{ $order->date_time }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                {{ $order->price }} <span>&euro;
+                                                </span>
+                                        </td>
+                                        </span>
                                         <td>
                                             <a class="text-dark"
                                                 href="{{ route('orders.show', ['order' => $order->id]) }}">

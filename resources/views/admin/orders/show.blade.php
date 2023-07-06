@@ -70,23 +70,33 @@
                         <table class="table">
                             <thead>
                                 <tr class="text-center align-middle">
-                                    <th scope="col"></th>
-                                    <th scope="col" class="text-white">Dish Name</th>
+                                    <th scope="col" class="text-white rounded-start">Dish Name</th>
                                     <th scope="col" class="text-white">Category</th>
                                     <th scope="col" class="text-white">Description</th>
                                     <th scope="col" class="text-white">Price</th>
-                                    <th scope="col" class="text-white">Image</th>
+                                    <th scope="col" class="text-white rounded-end">Image</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($order->dishes as $dish)
                                     <tr class="text-center align-middle">
-                                        <th scope="row"></th>
-                                        <td class="fw-bold" style="width: 20%">{{ $dish->name }}</td>
-                                        <td style="width: 20%">{{ $dish->category }}</td>
-                                        <td style="width: 20%">{{ $dish->description }}</td>
-                                        <td style="width: 20%">{{ $dish->price }} <span>&euro;</span></td>
-                                        <td style="width: 20%">
+                                        <th>{{ $dish->name }}</th>
+                                        <td>
+                                            <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                {{ $dish->category }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                {{ $dish->description }}
+                                            </span>
+                                        </td>
+                                        <td>
+                                            <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
+                                                {{ $dish->price }} <span>&euro;</span>
+                                            </span>
+                                        </td>
+                                        <td>
                                             <img src="{{ asset('storage/' . $dish->image) }}" style="width: 100%">
                                         </td>
                                     </tr>
