@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Restaurant;
 use Illuminate\Http\Request;
 
@@ -11,8 +12,10 @@ class ResturantController extends Controller
     public function index()
     {
         $restautants = Restaurant::all();
+        $categories = Category::all();
         $data = [
             'restautants'=> $restautants,
+            'categories'=> $categories
         ];
         return response()->json([
             'status' => true,
