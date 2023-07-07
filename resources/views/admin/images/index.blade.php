@@ -5,32 +5,34 @@
 @endsection
 
 @section('content')
-    <div class="container">
-        <div class="row">
-            <div class="col-12">
-                <div class="table-responsive mt-3">
-                    <table class="table">
-                        <thead>
-                            <tr class="text-center align-middle">
-                                <th scope="col" class="text-white">Restaurant Logo</th>
-                                <th scope="col" class="text-white">Name</th>
-                                <th scope="col" class="text-white">Address</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($restaurants as $restaurant)
-                                <tr class="text-center align-middle">
-                                    <td style="width: 20%">
-                                        <img src="{{ asset('storage/' . $restaurant->logo) }}" style="width: 100%">
-                                    </td>
-                                    <td class="fw-bold" style="width: 20%">{{ $restaurant->name }}</td>
-                                    <td style="width: 20%">{{ $restaurant->address }}</td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
+    @if (session()->has('mex'))
+        <div class="al-mex">
+            {{ session()->get('mex') }}
         </div>
+    @endif
+
+    <x-modal-ask mex="Are you sure you want to delete this image?" />
+
+    <a href="{{route('images.create')}}" class="plus-button">
+        <i class="fa-solid fa-plus"></i>
+    </a>
+
+    <div class="row gy-2 pt-4">
+        @for ($i = 0; $i < count($images); $i++)
+            <div class="col-12 col-sm-6 col-md-4 col-lg-3 col-xl-2 p-3">
+                <a href="{{route('images.show', $images[$i]->id)}}" class="img-container d-block">
+                    <img src="{{ asset('storage/' . $images[$i]->image) }}" class="img-fill">
+                    <div onclick="window.Var.modalFormIndex = {{ $i + 1}}; window.Func.askConfirm(event);"
+                        class="trash-icon">
+                        <i class="fa-regular fa-trash-can"></i>
+                    </div>
+                </a>
+            </div>
+
+            <form action="{{ route('images.destroy', $images[$i]->id) }}" method="POST" class="d-none">
+                @csrf
+                @method('DELETE')
+            </form>
+        @endfor
     </div>
 @endsection

@@ -120,6 +120,8 @@ export function drawChart(){
 }
 
 export function askConfirm(e) {
+    console.log(e);
+    e.preventDefault();
     e.stopPropagation();
     let confirmElement = document.getElementsByClassName("al-confirm")[0];
     confirmElement.classList.remove("d-none");
@@ -159,6 +161,13 @@ export function submitForm(e) {
 
 export function submitExternalForm() {
     let form = document.getElementsByTagName("form");
+    form.submit();
+}
+
+export function submitFormIndex(e, index){
+    e.preventDefault();
+
+    let form = document.getElementsByTagName("form")[index];
     form.submit();
 }
 

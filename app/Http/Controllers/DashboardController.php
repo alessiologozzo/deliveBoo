@@ -16,6 +16,11 @@ class DashboardController extends Controller
     {
         $userId = Auth::id();
 
+        $restaurant = Restaurant::where("user_id", $userId)->first();
+        if(!$restaurant)
+            return redirect()->route("restaurants.index");
+
+            
         $orders = DB::select(
             "SELECT SUBSTR(DATE_FORMAT(orders.date_time, '%Y-%M'), 6, 3) AS 'label', COUNT(DISTINCT orders.id) AS 'value'
             FROM orders

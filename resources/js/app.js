@@ -8,7 +8,8 @@ import.meta.glob([
 import * as Func from "./functions.js";
 window.Func = Func;
 window.Var = {
-    resized: false
+    resized: false,
+    modalFormIndex: null
 }
 
 let app = document.getElementById("app");

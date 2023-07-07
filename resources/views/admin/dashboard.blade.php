@@ -29,7 +29,7 @@
         </div>
 
         <div class="col-12 col-md-6 col-xl-3 px-3 px-xl-2 px-xxl-3">
-            <a href="#" class="d-flex p-4 dashboard-card third-dashboard-card">
+            <a href="{{route('images.index')}}" class="d-flex p-4 dashboard-card third-dashboard-card">
                 <div>
                     <h4 class="mb-0">My</h4>
                     <h3>Images</h3>

@@ -13,8 +13,8 @@
         </div>
     @endif
 
-    <x-modal-ask-password route="{{ route('users.destroy', $user->id) }}" method="DELETE"
-        mex="Are you sure you want to delete your account?" danger />
+    <x-modal-ask route="{{ route('users.destroy', $user->id) }}" method="DELETE"
+        mex="Are you sure you want to delete your account?" danger password/>
 
     <div class="text-center  my-4">
         <h1 class="text-center">User</h1>
