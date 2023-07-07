@@ -16,8 +16,8 @@
 
 
     @if (count($restaurants) > 0)
-        <x-modal-ask-password route="{{ route('restaurants.destroy', $restaurants[0]->slug) }}" method="DELETE"
-            mex="Are you sure you want to delete your restaurant?" danger />
+        <x-modal-ask route="{{ route('restaurants.destroy', $restaurants[0]->slug) }}" method="DELETE"
+            mex="Are you sure you want to delete your restaurant?" danger password />
 
         <div class="text-center  my-4">
             <h1 class="text-center">Restaurant</h1>

@@ -21,6 +21,11 @@ class DishController extends Controller
      */
     public function index()
     {
+        $restaurant = Restaurant::where("user_id", Auth::id())->first();
+        if(!$restaurant)
+            return redirect()->route("restaurants.index");
+
+
         //selezione ristorante user loggato
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();

@@ -6,20 +6,21 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ModalAskPassword extends Component
+class ModalAsk extends Component
 {
     /**
      * Create a new component instance.
      */
 
-    public $route, $method, $mex, $danger;
+    public $mex, $route, $method, $danger, $password;
     
-    public function __construct($route, $method, $mex, $danger = "false")
+    public function __construct($mex, $route = false, $method = false, $danger = false, $password = false)
     {
+        $this->mex = $mex;
         $this->route = $route;
         $this->method = $method;
-        $this->mex = $mex;
         $this->danger = $danger;
+        $this->password = $password;
     }
 
     /**
@@ -27,6 +28,6 @@ class ModalAskPassword extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.modal-ask-password');
+        return view('components.modal-ask');
     }
 }

@@ -13,6 +13,12 @@ class OrderController extends Controller
 {
     public function index(Request $request)
 {
+
+    $restaurant = Restaurant::where("user_id", Auth::id())->first();
+    if(!$restaurant)
+        return redirect()->route("restaurants.index");
+
+    
     $dishes = Dish::all();
 
     $selectedDish = $request->input('selectedDish');

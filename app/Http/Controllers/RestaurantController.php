@@ -81,7 +81,7 @@ class RestaurantController extends Controller
             "password" => ["required", "string", "max:255", "current_password"]
         ]);
 
-        $restaurant = Restaurant::with(["images", "dishes"])->where("slug", $slug)->first();
+        $restaurant = Restaurant::with(["images", "dishes.orders"])->where("slug", $slug)->first();
 
         if($restaurant->logo != null)
             Storage::delete($restaurant->logo);
@@ -92,6 +92,9 @@ class RestaurantController extends Controller
         foreach($restaurant->dishes as $dish)
             if($dish->image != null)
                 Storage::delete($dish->image);
+
+        foreach($restaurant->dishes as $dish)
+            $dish->orders()->delete();
 
         $restaurant->delete();
 
