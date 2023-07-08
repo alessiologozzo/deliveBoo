@@ -5,6 +5,11 @@
 
 
 <div id="dish-index" class="container-fluid">
+  @if (session()->has('message'))
+    <div class="alert alert-success">
+        {{ session()->get('message') }}
+    </div>
+  @endif
   <div class="col-12 col-sm-10 col-md-8 col-lg-6 col-xl-4 mb-5 mt-3">
     <div class="d-flex">
       <div class="input-group">
