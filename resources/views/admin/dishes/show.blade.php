@@ -69,6 +69,7 @@
                         <p class="m-0 mb-2 text-white">Visible: <span>no</span></p>
                      @endif
                      <p class="m-0 mb-2 pe-5 text-white">Description: <span>{{ $dish->description }}</span></p>
+                     
                   </div>
                </div>
             </div>

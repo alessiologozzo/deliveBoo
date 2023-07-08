@@ -166,6 +166,13 @@ class DishController extends Controller
      */
     public function destroy(Dish $dish)
     {
-        //
+        if ($dish->image) {
+            // $datogliere = "http://127.0.0.1:8000/storage/";
+            // $imagetoremove = str_replace($datogliere, '', $product->image);
+            //dd($imagetoremove);
+            Storage::delete($dish->image);
+        }
+        $dish->delete();
+        return redirect()->route('dishes.index')->with('message', "$product->name deleted successfully.");
     }
 }
