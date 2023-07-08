@@ -1,7 +1,7 @@
 @extends("layouts.admin")
 
 @section("page_title")
-    Image {{$image->id}}
+    Image
 @endsection
 
 @section("content")
