@@ -85,7 +85,7 @@ class UserController extends Controller
             "password" => ["required", "string", "max:255", "current_password"]
         ]);
 
-        $restaurant = Restaurant::with(["images", "dishes"])->where("user_id", Auth::id())->first();
+        $restaurant = Restaurant::with(["images", "dishes.orders"])->where("user_id", Auth::id())->first();
 
         if($restaurant->logo != null)
             Storage::delete($restaurant->logo);
@@ -96,6 +96,9 @@ class UserController extends Controller
         foreach($restaurant->dishes as $dish)
             if($dish->image != null)
                 Storage::delete($dish->image);
+
+        foreach($restaurant->dishes as $dish)
+            $dish->orders()->delete();
 
         $request->session()->invalidate();
         $request->session()->regenerateToken();
