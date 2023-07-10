@@ -97,7 +97,9 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $dish->image) }}" style="width: 100%">
+                                            <a href="{{ route('dishes.show', $dish->slug) }}">
+                                                <img src="{{ asset('storage/' . $dish->image) }}" style="width: 100%">
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

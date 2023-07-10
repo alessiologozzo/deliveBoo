@@ -13,18 +13,18 @@ class OrderController extends Controller
 {
     public function index(Request $request)
 {
-
-    $restaurant = Restaurant::where("user_id", Auth::id())->first();
+    $user = Auth::id();
+    $restaurant = Restaurant::where("user_id", $user)->first();
     if(!$restaurant)
         return redirect()->route("restaurants.index");
 
-    
+
     $dishes = Dish::all();
 
     $selectedDish = $request->input('selectedDish');
     $searchedOrder = $request->input('searchedOrder');
 
-    $userRestaurantIds = Restaurant::where('user_id', Auth::id())->pluck('id');
+    $userRestaurantIds = Restaurant::where('user_id', $user)->pluck('id');
 
     $ordersQuery = Order::whereHas('dishes.restaurant', function ($query) use ($userRestaurantIds) {
         $query->whereIn('restaurant_id', $userRestaurantIds);

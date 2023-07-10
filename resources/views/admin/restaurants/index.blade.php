@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+    Restaurants
+@endsection
+
 @section('content')
     @error('password')
         <div class="al-mex bg-danger">
