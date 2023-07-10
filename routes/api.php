@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\HomeController;
 use App\Http\Controllers\Api\ResturantController;
+use App\Http\Controllers\Api\OrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,3 +27,4 @@ Route::get('/mixed', [HomeController::class, 'index']);
 
 Route::get('/restaurants', [ResturantController::class, 'index']);
 Route::get('/restaurants/{slug}', [ResturantController::class, 'show']);
+Route::post('/orders', [OrderController::class, 'store']);

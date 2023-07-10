@@ -56,7 +56,7 @@ class RegisteredUserController extends Controller
         $restaurant->name = $request->restaurant_name;
         $restaurant->address = $request->restaurant_name;
         $restaurant->user_id = Auth::id();
-        $restaurant->slug = Str::slug($request->restaurant_name) . "-" . 1;
+        $restaurant->slug = Str::slug($request->restaurant_name) . "-" . Auth::id();
         $restaurant->save();
 
         return redirect(RouteServiceProvider::HOME);
