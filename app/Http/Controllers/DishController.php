@@ -31,19 +31,22 @@ class DishController extends Controller
         $dishes = $restaurant->dishes()
         ->paginate(10);
 
-
-
+        
         $search = $request->input('search');
         
         if (!empty($search)) {
             $searchDish = $restaurant->dishes()->where('name', $search)->first();
             if ($searchDish && $dishes->contains('id', $searchDish->id)) {
-                $searchDish;
-                //dd($searchDish);
+                // La ricerca ha avuto successo, la variabile $searchDish contiene il piatto trovato
+            } else {
+                $searchDish = 'Nessun risultato corrisponde alla ricerca.';
             }
-        } else{
+        } else {
             $searchDish = null;
         }
+         
+
+        //dd(!empty($searchDish) && is_string($searchDish));
 
 
         //count piatti

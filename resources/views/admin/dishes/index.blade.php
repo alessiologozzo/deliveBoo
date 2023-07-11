@@ -50,7 +50,7 @@
       </div>
     </div>
   </div>
-  @if(!empty($searchDish))
+  @if(!empty($searchDish) && !is_string($searchDish))
   <div class="row mt-5 pt-3">
     <div lass="col-12">
       <div class="card p-3">
@@ -71,19 +71,19 @@
               <th><a class="link-offset-2 link-underline link-underline-opacity-0 d-block pt-2 text-dark" href="{{ route('dishes.show', $searchDish->slug) }}">{{ $searchDish->name }}</a></th>
               <td class="d-none d-sm-table-cell">{{ $searchDish->price }} euro</td>
               <td>{{ $searchDish->category }}</td>
-              <td class="d-none d-md-table-cell"><a href="{{ route('dishes.show', $searchDish->slug) }}">Show</a></td>
+              <td class="d-none d-md-table-cell"><a href="{{ route('dishes.show', $searchDish->slug) }}" class="btn btn-primary text-white"><i class="fa-solid fa-eye"></i></td>
             </tr>
           </tbody>
         </table>
       </div>
     </div>
   </div>
-  @else
-  <!-- <div class="alert alert-danger mt-4">
-    <ul class="">
-      <li class="list-group-item">-Nessun risultato corrisponde alla ricerca</li>
+  @elseif (!empty($searchDish) && is_string($searchDish))
+  <div class="alert alert-danger mt-4">
+    <ul>
+      <li class="list-group-item">{{ $searchDish }}</li>
     </ul>
-  </div> -->
+  </div>
   @endif
   <div class="row mt-5 pt-3">
     <div class="col-12 col-lg-8 pe-lg-5">
