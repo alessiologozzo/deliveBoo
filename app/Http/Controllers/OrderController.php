@@ -36,7 +36,7 @@ class OrderController extends Controller
         });
     }
 
-    $orders = $ordersQuery->paginate(10);
+    $orders = $ordersQuery->orderByDesc('orders.date_time')->paginate(10);
 
     $searchedOrder = intval($searchedOrder);
 
@@ -51,10 +51,13 @@ class OrderController extends Controller
     }
 
     $topExpensive = Order::with('dishes')
-    ->select('orders.*')
-    ->join('dish_order', 'dish_order.order_id', '=', 'orders.id')
+    ->select('dish_order.id', 'orders.price', 'dishes.name', 'orders.customer_name')
+    ->join('dish_order', 'dish_order.id', '=', 'orders.id')
     ->join('dishes', 'dishes.id', '=', 'dish_order.dish_id')
-    ->orderBy('dishes.price', 'desc')
+    ->join('restaurants', 'restaurants.id', '=', 'dishes.restaurant_id')
+    ->join('users', 'users.id', '=', 'restaurants.user_id')
+    ->where('users.id', Auth()->id())
+    ->orderByDesc('orders.price')
     ->limit(5)
     ->get();
 

@@ -1,9 +1,11 @@
 <aside class="d-flex flex-column">
     <div class="logo-container">
-        <img src="{{ Vite::asset('resources/img/logo.svg') }}" alt="logo">
+        <a href="http://localhost:5174/">
+            <img src="{{ Vite::asset('resources/img/deliveboo3.png') }}" alt="logo">
+        </a>
     </div>
 
-    <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">
+    <a href="http://localhost:5174/" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-house-chimney"></i>
         <span class="d-none d-md-block">Home</span>
     </a>
@@ -23,7 +25,7 @@
         <span class="d-none d-md-block">My Dishes</span>
     </a>
 
-    <a href="{{route('images.index')}}" class="d-flex align-items-center gap-3 sidebar-item px-3">
+    <a href="{{ route('images.index') }}" class="d-flex align-items-center gap-3 sidebar-item px-3">
         <i class="fa-solid fa-images"></i>
         <span class="d-none d-md-block">My Images</span>
     </a>
@@ -31,7 +33,8 @@
 
 
     <div onclick="window.Func.toggleMenu(event)" class="drop-menu-data mb-3">
-        <div class="d-flex justify-content-between gap-3 sidebar-item px-3 sidebar-item cursor-pointer drop-master-data">
+        <div
+            class="d-flex justify-content-between gap-3 sidebar-item px-3 sidebar-item cursor-pointer drop-master-data">
             <div class="d-flex align-items-center gap-3">
                 <i class="fa-solid fa-gears"></i>
                 <span class="d-none d-md-block">My Profile</span>

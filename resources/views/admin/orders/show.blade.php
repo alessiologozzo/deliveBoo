@@ -74,7 +74,7 @@
                                     <th scope="col" class="text-white">Category</th>
                                     <th scope="col" class="text-white">Description</th>
                                     <th scope="col" class="text-white">Price</th>
-                                    <th scope="col" class="text-white rounded-end">Image</th>
+                                    <th scope="col" class="text-white rounded-end">Click me!</th>
                                 </tr>
                             </thead>
                             <tbody>
