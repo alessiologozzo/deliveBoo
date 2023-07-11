@@ -30,9 +30,9 @@
         <div>
             <x-topbar />
 
-            <div id="loader" class="h-100 w-100 bg-primary">
+            <!-- <div id="loader" class="h-100 w-100 bg-primary">
                 <p class="loader-content">Loading...</p>
-            </div>
+            </div> -->
 
             <main id="main-loader">
                 @yield('content')

@@ -19,20 +19,30 @@ class DishController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $restaurant = Restaurant::where("user_id", Auth::id())->first();
-        if(!$restaurant)
-            return redirect()->route("restaurants.index");
-
-
+        
         //selezione ristorante user loggato
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
+        //dd($restaurant);
 
         //paginazione piatti
         $dishes = $restaurant->dishes()
         ->paginate(10);
+
+
+
+        $search = $request->input('search');
+        
+        if (!empty($search)) {
+            $searchDish = $restaurant->dishes()->where('name', $search)->first();
+            if ($searchDish && $dishes->contains('id', $searchDish->id)) {
+                $searchDish;
+                //dd($searchDish);
+            }
+        }
+
 
         //count piatti
         $totalDish = $restaurant->dishes()
@@ -51,6 +61,7 @@ class DishController extends Controller
         ->orderBy('orders_count', 'desc')
         ->limit(5)
         ->get();
+        //dd($topSellers);
 
         //dd($topSellers);  
         
@@ -66,7 +77,7 @@ class DishController extends Controller
 
 
         
-        return view('admin.dishes.index', compact('dishes','totalDish','categoryDishes','topSellers','topExpensive'));
+        return view('admin.dishes.index', compact('restaurant','dishes','totalDish','categoryDishes','topSellers','topExpensive','searchDish'));
         
 
     }
@@ -124,8 +135,9 @@ class DishController extends Controller
         $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
+        //dd($dishes);
         //dd($disheCategory);
-        $disheCategory = $restaurant->dishes()->where('category', $dish->category )->get();
+        $disheCategory = $restaurant->dishes()->where('category', $dish->category )->whereNotIn('id', [$dish->id])->get();
         
         return view('admin.dishes.show', compact('dish', 'orderCount', 'totalAmount','totalDishes','dishes','disheCategory'));
 
@@ -145,7 +157,7 @@ class DishController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Dish $dish)
+    public function update(UpdateDishRequest $request, Dish $dish)
     {
         $data = $request->validated();
         $slug = Str::slug($request->name, '-');
@@ -158,7 +170,7 @@ class DishController extends Controller
             $data['image'] = $image_path;
         }
         $dish->update($data);
-        return redirect()->route('admin.dish.index', $dish->slug);
+        return redirect()->route('dishes.show', $dish->slug);
     }
 
     /**
@@ -167,12 +179,12 @@ class DishController extends Controller
     public function destroy(Dish $dish)
     {
         if ($dish->image) {
-            // $datogliere = "http://127.0.0.1:8000/storage/";
-            // $imagetoremove = str_replace($datogliere, '', $product->image);
+            $datogliere = "http://127.0.0.1:8000/storage/";
+            $imagetoremove = str_replace($datogliere, '', $dish->image);
             //dd($imagetoremove);
             Storage::delete($dish->image);
         }
         $dish->delete();
-        return redirect()->route('dishes.index')->with('message', "$product->name deleted successfully.");
+        return redirect()->route('dishes.index')->with('message', "$dish->name deleted successfully.");
     }
 }
