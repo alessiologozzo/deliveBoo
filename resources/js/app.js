@@ -64,6 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
+
 document.getElementById('dish-form').addEventListener('submit', function(event) {
     event.preventDefault();
 
@@ -85,6 +87,8 @@ document.getElementById('dish-form').addEventListener('submit', function(event) 
     if (image.value == '') {
         errorsClient.push('Il campo immagine è obbligatorio');
         image.classList.add("is-invalid")
+    } else{
+        
     }
 
     if (name.value == '') {
