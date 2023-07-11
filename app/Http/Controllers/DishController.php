@@ -41,6 +41,8 @@ class DishController extends Controller
                 $searchDish;
                 //dd($searchDish);
             }
+        } else{
+            $searchDish = null;
         }
 
 

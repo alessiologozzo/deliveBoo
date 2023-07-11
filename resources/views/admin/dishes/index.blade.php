@@ -79,11 +79,11 @@
     </div>
   </div>
   @else
-  <div class="alert alert-danger mt-4">
+  <!-- <div class="alert alert-danger mt-4">
     <ul class="">
       <li class="list-group-item">-Nessun risultato corrisponde alla ricerca</li>
     </ul>
-  </div>
+  </div> -->
   @endif
   <div class="row mt-5 pt-3">
     <div class="col-12 col-lg-8 pe-lg-5">
