@@ -59,7 +59,7 @@ class OrdersSeeder extends Seeder
                     "customer_address" => $faker->address(),
                     "instructions" => $faker->realTextBetween(20, 70),
                     "price" => $price,
-                    "order_num" => substr(sha1($j + 1), 0, 8) . $j + 1,
+                    "order_num" => substr(md5($j + 1), 0, 13),
                     "created_at" => now(),
                     "updated_at" => now()
                 ];

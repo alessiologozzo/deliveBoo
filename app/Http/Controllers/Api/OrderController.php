@@ -22,9 +22,10 @@ class OrderController extends Controller
         $newOrder = new Order();
         $newOrder->customer_name = $data["customer_name"];
         $newOrder->customer_address = $data["customer_address"];
-        $newOrder->instructions = "istruzioni";
+        $newOrder->instructions = fake()->realTextBetween(20, 70);
         $newOrder->price = $data["price"];
-        $newOrder->order_num = "dq2221";
+        $newOrder->date_time = now();
+        $newOrder->order_num = uniqid();
         $newOrder->save();
         $newOrder->dishes()->attach($dishIds);
     }
