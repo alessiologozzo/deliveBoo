@@ -13,8 +13,13 @@
             </div>
         @endif
     </div>
+    
+    <div id="errors-lato-client">
+        <ul class="ul-error"></ul>
+    </div>
+ 
     <div>
-        <form action="{{ route('dishes.store') }}" enctype="multipart/form-data" method="POST" >
+        <form action="{{ route('dishes.store') }}" enctype="multipart/form-data" method="POST" id="dish-form">
             @csrf
             <div class="mb-3">
                 <label for="image">Image</label>
@@ -22,7 +27,7 @@
             </div>
             <div class="mb-3">
                 <label for="name">Name</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name">
+                <input require type="text" class="form-control @error('name') is-invalid @enderror" name="name" id="name">
             </div>
             <div class="mb-3">
                 <label for="price">Price</label>

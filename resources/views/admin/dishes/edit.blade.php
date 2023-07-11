@@ -7,8 +7,9 @@
                 <div class="card">
                     <div class="card-header">Edit dish: {{ $dish->name }}</div>
                     <div class="card-body">
-                        <form method="POST" action="{{ route('dishes.update', $dish->slug) }}">
+                        <form action="{{ route('dishes.update', $dish->slug) }}" method="POST" enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="mb-4 row">
                                 <label for="name" class="col-md-4 col-form-label text-md-right">Name</label>
                                 <div class="col-md-6">
@@ -70,7 +71,7 @@
                                 </div>
                             </div>
                             <div class="mb-4 row">
-                                <label for="description" class="col-md-4 col-form-label text-md-right">Visible/Not visible</label>
+                                <label for="visible" class="col-md-4 col-form-label text-md-right">Visible/Not visible</label>
                                 <div class="col-md-6">
                                     <select class="form-select"  name="visible" id="visible">
                                         <option value="0">Visible</option>

@@ -4,8 +4,21 @@
 
 <div id="dish-show" class="container-fluid pb-5">
    <div class="row mt-5">
-      <div class="">
-         <p class="fs-3">{{ $dish->name }}</p>
+      <div class="d-flex">
+         <p class="fs-3 me-3">{{ $dish->name }}</p>
+         <div class="d-flex">
+            <div class="me-2">
+               <a href="{{ route('dishes.edit', $dish->slug) }}" class="btn btn-primary"><i class="fa-solid fa-pen-to-square"></i></a>
+            </div>
+            <div>
+               <form action="{{ route('dishes.destroy', $dish->slug) }}" method="POST">
+                  @csrf
+                  @method('DELETE')
+                  <button type='submit' class="delete-button btn btn-danger text-white"
+                     data-item-title="{{ $dish->name }}"> <i class="fa-solid fa-trash"></i></button>
+               </form>
+            </div>
+         </div>
       </div>
       <div class="col-xxl-10">
          <div class="row">
@@ -76,14 +89,15 @@
          </div>
       </div>
    </div>
+   @if(strlen($dishes) != 0)
    <div class="row mt-5 mb-5">
       <div class="col-xl-12 col-xxl-8 pe-4">
+         @if(!empty($disheCategory) && strlen($disheCategory) > 0)
          <div class="mt-3 mb-3">
             <p class="fs-3">Category relates</p>
          </div>
          <div class="row flex-nowrap overflow-auto p-3">
-         
-            @foreach ($disheCategory as $item)   
+            @foreach ($disheCategory as $item) 
             <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xxl-3">
                <div class="card">
                   <img class="img-show-category img-fluid rounded-top" src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->name }}">
@@ -94,8 +108,8 @@
                </div>
             </div>
             @endforeach
-         
          </div>
+         @endif
       </div>
       <div class="col-xl-12 col-xxl-4">
          <div class="mt-3 mb-3">
@@ -127,6 +141,7 @@
          </div>
       </div>
    </div>
+   @endif
 </div>
-
+@include('components.modal-delete')
 @endsection
