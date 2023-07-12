@@ -14,7 +14,233 @@ return [
             "logo" => "bottega-valtellina-18.png"
         ],
 
-        
+        [
+            "name" => "Sapori Solari",
+            "address" => "Via Sofonisba Anguissola, 54, 20129 Milano Italia",
+            "logo" => "sapori-solari.svg"
+        ],
+
+        [
+            "name" => "Mastro Tortello",
+            "address" => "Via Carlo Tenca, 15 2 min da Stazione Centrale, 20124 Milano Italia",
+            "logo" => "mastro-tortello.png"
+        ],
+
+        [
+            "name" => "La Cantina del Giannone",
+            "address" => "Via Pietro Giannone, 10, 20154 Milano Italia",
+            "logo" => "la-cantina-del-giannone.webp"
+        ],
+
+        [
+            "name" => "La Rava e la Fava",
+            "address" => "Via Principe Eugenio 28, 20155 Milano Italia",
+            "logo" => "la-rava-e-la-fava.jpg"
+        ],
+
+        [
+            "name" => "Un'Altra Pasta",
+            "address" => "Via Bergamini 5, 20122 Milano Italia",
+            "logo" => "un-altra-pasta.jpg"
+        ],
+
+        [
+            "name" => "L'Amurì Sicilian Restaurant",
+            "address" => "Via Maestri Campionesi 30, 20135 Milano Italia",
+            "logo" => "l-amuri-sicilian-restaurant.png"
+        ],
+
+        [
+            "name" => "Poku Poke Place",
+            "address" => "Corso Sempione 12, 20154 Milano Italia",
+            "logo" => "poku-poke-place.png"
+        ],
+
+        [
+            "name" => "TAAC Trattoria",
+            "address" => "Via Enrico Cialdini 73, 20161 Milano Italia",
+            "logo" => "taac-trattoria.png"
+        ],
+
+        [
+            "name" => "Gialle & Co",
+            "address" => "Via Alessandro Volta 12 Moscova, 20121 Milano Italia",
+            "logo" => "gialle-&-co.png"
+        ],
+
+        [
+            "name" => "Don's - Meats & Spirits",
+            "address" => "Vicolo delle Vacche 9, 00186 Roma Italia",
+            "logo" => "don-s-meats-&-spirits.png"
+        ],
+
+        [
+            "name" => "Ad Hoc",
+            "address" => "Via Dei Cerchi 75, 00186 Roma Italia",
+            "logo" => "ad-hoc.png"
+        ],
+
+        [
+            "name" => "Life Ristorante",
+            "address" => "Via della Vite 28, 00187 Roma Italia",
+            "logo" => "life-ristorante.png"
+        ],
+
+        [
+            "name" => "Acquolina",
+            "address" => "Via del Vantaggio 14, 00186 Roma Italia",
+            "logo" => "acquolina.jpg"
+        ],
+
+        [
+            "name" => "Osteria Quarantaquattro",
+            "address" => "Via Aureliana 42/44, Roma Italia",
+            "logo" => "osteria-quarantaquattro.png"
+        ],
+
+        [
+            "name" => "L'Angolo del Gusto",
+            "address" => "Via Taddeo Alderotti 37, 50139 Firenze Italia",
+            "logo" => "l-angolo-del-gusto.png"
+        ],
+
+        [
+            "name" => "Cantina Barbagianni",
+            "address" => "Via Sant'Egidio 13/R, 50122 Firenze Italia",
+            "logo" => "cantina-barbagianni.webp"
+        ],
+
+        [
+            "name" => "Adagio",
+            "address" => "Via De' Macci 79, 50122 Firenze Italia",
+            "logo" => "adagio.png"
+        ],
+
+        [
+            "name" => "Osteria Il basilisco",
+            "address" => "Via Nazionale 124/R, 50123, Firenze Italia",
+            "logo" => "osteria-il-basilisco.png"
+        ],
+
+        [
+            "name" => "Aquarium Restaurant",
+            "address" => "Riviera Di Chiaia, 80122 Napoli Italia",
+            "logo" => "aquarium-restaurant.png"
+        ],
+
+        [
+            "name" => "Veritas",
+            "address" => "Corso Vittorio Emanuele 141, 80121 Napoli Italia",
+            "logo" => "veritas.png"
+        ],
+
+        [
+            "name" => "George Restaurant",
+            "address" => "Corso Vittorio Emanuele 135, 80121 Napoli Italia",
+            "logo" => "george-restaurant.svg"
+        ],
+
+        [
+            "name" => "Ristorante Biancofiore",
+            "address" => "Corso Vittorio Emanuele II 13, 70122 Bari Italia",
+            "logo" => "ristorante-biancofiore.png"
+        ],
+
+        [
+            "name" => "Ovino",
+            "address" => "Corso Mortara 46/A, 10149 Torino Italia",
+            "logo" => "ovino.png"
+        ],
+
+        [
+            "name" => "Trattoria Alle Volte",
+            "address" => "Via Nizza 27, 10125 Torino Italia",
+            "logo" => "trattoria-alle-volte.png"
+        ],
+
+        [
+            "name" => "Casale 93",
+            "address" => "Corso Casale 93, 10143 Torino Italia",
+            "logo" => "casale-93.png"
+        ],
+
+        [
+            "name" => "Eataly",
+            "address" => "Calata Cattaneo 15, 16128 Genova Italia",
+            "logo" => "eataly.svg"
+        ],
+
+        [
+            "name" => "Le Rune",
+            "address" => "Salita Inferiore di Sant'Anna 13, 16125 Genova Italia",
+            "logo" => "le-rune.png"
+        ],
+
+        [
+            "name" => "7 Sensi Cucina Decontaminata",
+            "address" => "Salita Inferiore di Sant'Anna 13, 16125 Genova Italia",
+            "logo" => "7-sensi-cucina-decontaminata.png"
+        ],
+
+        [
+            "name" => "Alla Lunga Ristorante",
+            "address" => "Vico Giannini 10, 16124 Genova Italia",
+            "logo" => "alla-lunga-ristorante.png"
+        ],
+
+        [
+            "name" => "Impronta",
+            "address" => "Sestiere Dorsoduro 3815, 30123 Venezia Italia",
+            "logo" => "impronta.png"
+        ],
+
+        [
+            "name" => "Dona Onesta",
+            "address" => "Dorsoduro 3922, 30123 Venezia Italia",
+            "logo" => "dona-onesta.webp"
+        ],
+
+        [
+            "name" => "Osteria Fanal del Codega",
+            "address" => "Fondamenta del Forner San Polo 2924, 30125 Venezia Italia",
+            "logo" => "osteria-fanal-del-codega.webp"
+        ],
+
+        [
+            "name" => "Vineria all'Amarone",
+            "address" => "C. dei Sbianchesini 1131, 30125 Venezia Italia",
+            "logo" => "vineria-all-amarone.webp"
+        ],
+
+        [
+            "name" => "La Perla del Doge",
+            "address" => "S.S. 16, 70056 Bari Italia",
+            "logo" => "la-perla-del-doge.png"
+        ],
+
+        [
+            "name" => "Ai 2 Ghiottoni",
+            "address" => "Via Nicolo' Putignani 11/B, 70121, Bari Italia",
+            "logo" => "ai-2-ghiottoni.png"
+        ],
+
+        [
+            "name" => "Biga Genio e Farina",
+            "address" => "Via Maqueda 284, 90134 Palermo Italia",
+            "logo" => "biga-genio-e-farina.png"
+        ],
+
+        [
+            "name" => "Cantavespri",
+            "address" => "Vicolo Valguarnera 10, 90133 Palermo Italia",
+            "logo" => "cantavespri.png"
+        ],
+
+        [
+            "name" => "La Brasserie Valderice",
+            "address" => "Via Vincenzo Spinelli 14, 90144 Palermo Italia",
+            "logo" => "la-brasserie-valderice.png"
+        ],
     ],
 
     "dishes" => [
