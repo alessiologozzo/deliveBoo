@@ -1,5 +1,7 @@
 import { forEach } from "lodash";
 import * as Chart from "./charts.js";
+import './bootstrap';
+import * as bootstrap from 'bootstrap';
 
 export function showMenu(e) {
     e.stopPropagation();
@@ -119,44 +121,14 @@ export function drawChart(){
     }
 }
 
-export function askConfirm(e) {
-    console.log(e);
-    e.preventDefault();
-    e.stopPropagation();
-    let confirmElement = document.getElementsByClassName("al-confirm")[0];
-    confirmElement.classList.remove("d-none");
-}
-
-export function removeConfirmElementHandler(e) {
-    let needToRemove = false;
-    let confirmElement = document.getElementsByClassName("al-confirm")[0];
-
-    if (confirmElement != null) {
-        if (!confirmElement.classList.contains("d-none")) {
-            let confirmElementLeft = confirmElement.getBoundingClientRect().x;
-            let confirmElementRight = confirmElementLeft + confirmElement.getBoundingClientRect().width;
-            let confirmElementTop = confirmElement.getBoundingClientRect().y;
-            let confirmElementBottom = confirmElementTop + confirmElement.getBoundingClientRect().height;
-
-            if ((e.clientX < confirmElementLeft || e.clientX > confirmElementRight) || (e.clientY < confirmElementTop || e.clientY > confirmElementBottom))
-                needToRemove = true;
-        }
-    }
-
-    if (needToRemove)
-        confirmElement.classList.add("d-none");
-}
-
-export function removeConfirmElement() {
-    let confirmElement = document.getElementsByClassName("al-confirm")[0];
-    confirmElement.classList.add("d-none");
-}
-
 export function submitForm(e) {
-    let parent = e.currentTarget.closest(".al-confirm");
+    let parent = e.currentTarget.closest(".modal");
     let form = parent.querySelector("form");
-
-    form.submit();
+    
+    if(form.checkValidity())
+        form.submit();
+    else
+        form.reportValidity();
 }
 
 export function submitExternalForm() {
@@ -194,15 +166,11 @@ export function validateEqualFields(event, firstElementId, secondElementId, erro
 
 }
 
+export function showToastMessage() {    
+    let toastContent = document.getElementById("liveToast");
 
-
-
-
-
-
-
-
- 
-
-    
-     
+    if(toastContent) {
+        let toast = new bootstrap.Toast(toastContent);
+        toast.show();
+    }
+}
