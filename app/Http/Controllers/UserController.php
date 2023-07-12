@@ -97,9 +97,6 @@ class UserController extends Controller
             if($dish->image != null)
                 Storage::delete($dish->image);
 
-        foreach($restaurant->dishes as $dish)
-            $dish->orders()->delete();
-
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         $user->delete();

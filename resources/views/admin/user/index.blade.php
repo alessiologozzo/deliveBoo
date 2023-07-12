@@ -2,15 +2,11 @@
 
 @section('content')
     @error('password')
-        <div class="al-mex bg-danger">
-            {{ $message }}
-        </div>
+        <x-toast-message mex="{{ $message }}" failed />
     @enderror
 
     @if (session()->has('mex'))
-        <div class="al-mex">
-            {{ session()->get('mex') }}
-        </div>
+        <x-toast-message mex="{{ session()->get('mex') }}" />
     @endif
 
     <x-modal-ask route="{{ route('users.destroy', $user->id) }}" method="DELETE"
@@ -28,7 +24,7 @@
                 <div class="d-flex justify-content-center gap-3 gap-lg-4 flex-wrap pt-3">
                     <a href="{{ route('users.edit', $user->id) }}" class="btn btn-warning text-white">EDIT</a>
 
-                    <button onclick="window.Func.askConfirm(event)" class="delete-button btn btn-danger text-white">
+                    <button data-bs-toggle="modal" data-bs-target="#confirmModal" class="delete-button btn btn-danger text-white">
                         DELETE
                     </button>
                 </div>
