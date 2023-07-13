@@ -1,5 +1,9 @@
 @extends('layouts.admin')
 
+@section('page_title')
+    Dashboard
+@endsection
+
 @section('content')
     <div class="row pt-4 pb-5 gy-4">
         <div class="col-12 col-md-6 col-xl-3 px-3 px-xl-2 px-xxl-3">
@@ -29,7 +33,7 @@
         </div>
 
         <div class="col-12 col-md-6 col-xl-3 px-3 px-xl-2 px-xxl-3">
-            <a href="{{route('images.index')}}" class="d-flex p-4 dashboard-card third-dashboard-card">
+            <a href="{{ route('images.index') }}" class="d-flex p-4 dashboard-card third-dashboard-card">
                 <div>
                     <h4 class="mb-0">My</h4>
                     <h3>Images</h3>
@@ -55,14 +59,16 @@
                 </div>
 
                 <div class="d-flex section-2 w-100">
-                    <a href="{{route('users.index')}}" class="col-6 py-4 d-flex justify-content-center align-items-center">
+                    <a href="{{ route('users.index') }}"
+                        class="col-6 py-4 d-flex justify-content-center align-items-center">
                         <div class="d-flex flex-column">
                             <h4>User</h4>
                             <i class="fa-solid fa-user fs-2 text-center"></i>
                         </div>
                     </a>
 
-                    <a href="{{route('restaurants.index')}}" class="col-6 py-4 d-flex justify-content-center align-items-center">
+                    <a href="{{ route('restaurants.index') }}"
+                        class="col-6 py-4 d-flex justify-content-center align-items-center">
                         <div class="d-flex flex-column">
                             <h4>Restaurant</h4>
                             <i class="fa-solid fa-utensils fs-2 text-center"></i>

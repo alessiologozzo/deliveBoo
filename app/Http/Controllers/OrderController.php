@@ -13,18 +13,18 @@ class OrderController extends Controller
 {
     public function index(Request $request)
 {
-
-    $restaurant = Restaurant::where("user_id", Auth::id())->first();
+    $user = Auth::id();
+    $restaurant = Restaurant::where("user_id", $user)->first();
     if(!$restaurant)
         return redirect()->route("restaurants.index");
 
-    
+
     $dishes = Dish::all();
 
     $selectedDish = $request->input('selectedDish');
     $searchedOrder = $request->input('searchedOrder');
 
-    $userRestaurantIds = Restaurant::where('user_id', Auth::id())->pluck('id');
+    $userRestaurantIds = Restaurant::where('user_id', $user)->pluck('id');
 
     $ordersQuery = Order::whereHas('dishes.restaurant', function ($query) use ($userRestaurantIds) {
         $query->whereIn('restaurant_id', $userRestaurantIds);
@@ -36,7 +36,7 @@ class OrderController extends Controller
         });
     }
 
-    $orders = $ordersQuery->paginate(10);
+    $orders = $ordersQuery->orderByDesc('orders.date_time')->paginate(10);
 
     $searchedOrder = intval($searchedOrder);
 
@@ -51,10 +51,13 @@ class OrderController extends Controller
     }
 
     $topExpensive = Order::with('dishes')
-    ->select('orders.*')
-    ->join('dish_order', 'dish_order.order_id', '=', 'orders.id')
+    ->select('dish_order.id', 'orders.price', 'dishes.name', 'orders.customer_name')
+    ->join('dish_order', 'dish_order.id', '=', 'orders.id')
     ->join('dishes', 'dishes.id', '=', 'dish_order.dish_id')
-    ->orderBy('dishes.price', 'desc')
+    ->join('restaurants', 'restaurants.id', '=', 'dishes.restaurant_id')
+    ->join('users', 'users.id', '=', 'restaurants.user_id')
+    ->where('users.id', Auth()->id())
+    ->orderByDesc('orders.price')
     ->limit(5)
     ->get();
 

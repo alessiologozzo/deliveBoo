@@ -74,7 +74,7 @@
                                     <th scope="col" class="text-white">Category</th>
                                     <th scope="col" class="text-white">Description</th>
                                     <th scope="col" class="text-white">Price</th>
-                                    <th scope="col" class="text-white rounded-end">Image</th>
+                                    <th scope="col" class="text-white rounded-end">Click me!</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -97,7 +97,9 @@
                                             </span>
                                         </td>
                                         <td>
-                                            <img src="{{ asset('storage/' . $dish->image) }}" style="width: 100%">
+                                            <a href="{{ route('dishes.show', $dish->slug) }}">
+                                                <img src="{{ asset('storage/' . $dish->image) }}" style="width: 100%">
+                                            </a>
                                         </td>
                                     </tr>
                                 @endforeach

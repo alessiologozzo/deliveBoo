@@ -1,58 +1,77 @@
-@extends("layouts.admin")
+@extends('layouts.admin')
 
-@section("content")
-<div class="row justify-content-center">
-    <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">{{ __('New Restaurant') }}</div>
+@section('page_title')
+    New Restaurant
+@endsection
 
+ createrestaurant
             <div class="card-body">
                 <form class="form" method="POST" action="{{ route('restaurants.store') }}" enctype="multipart/form-data">
                     @csrf
 
-                    <div class="mb-4 row">
-                        <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Name') }} <span class="asterisk-opacity">*</span></label>
+@section('content')
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('New Restaurant') }}</div>
+ main
 
-                        <div class="col-md-6">
-                            <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus maxlength="255">
+                <div class="card-body">
+                    <form method="POST" action="{{ route('restaurants.store') }}" enctype="multipart/form-data">
+                        @csrf
 
-                            @error('name')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                        <div class="mb-4 row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Name') }}
+                                <span class="asterisk-opacity">*</span></label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text"
+                                    class="form-control @error('name') is-invalid @enderror" name="name"
+                                    value="{{ old('name') }}" required autocomplete="name" autofocus maxlength="255">
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
-                    <div class="mb-4 row">
-                        <label for="address" class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Address') }} <span class="asterisk-opacity">*</span></label>
+                        <div class="mb-4 row">
+                            <label for="address"
+                                class="col-md-4 col-form-label text-md-right">{{ __('Restaurant Address') }} <span
+                                    class="asterisk-opacity">*</span></label>
 
-                        <div class="col-md-6">
-                            <input id="address" type="text" class="form-control @error('address') is-invalid @enderror" name="address" value="{{ old('address') }}" required autocomplete="address" autofocus maxlength="255">
+                            <div class="col-md-6">
+                                <input id="address" type="text"
+                                    class="form-control @error('address') is-invalid @enderror" name="address"
+                                    value="{{ old('address') }}" required autocomplete="address" autofocus maxlength="255">
 
-                            @error('address')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('address')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
 
-                    <div class="mb-4 row">
-                        <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
+                        <div class="mb-4 row">
+                            <label for="logo" class="col-md-4 col-form-label text-md-right">{{ __('Logo') }}</label>
 
-                        <div class="col-md-6">
-                            <input id="logo" type="file" class="form-control @error('logo') is-invalid @enderror" name="logo">
+                            <div class="col-md-6">
+                                <input id="logo" type="file"
+                                    class="form-control @error('logo') is-invalid @enderror" name="logo">
 
-                            @error('logo')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                            @enderror
+                                @error('logo')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
                         </div>
-                    </div>
 
+ createrestaurant
                     <div id="form" class="form-group d-flex justify-content-between align-items-center">
                         <p class="m-0">Categories:</p>
                         <div class="d-flex flex-wrap justify-content-center w-100 py-2">
@@ -74,39 +93,26 @@
                             <button type="submit" class="btn btn-primary">
                                 {{ __('Register') }}
                             </button>
+
+                        <div class="mt-5 mb-4 row mb-0">
+                            <div class="col-md-6 offset-md-4 d-flex justify-content-end">
+                                <button type="submit" class="btn btn-primary">
+                                    {{ __('Register') }}
+                                </button>
+                            </div>
+ main
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
+ createrestaurant
 </div>
 @endsection
 
-<script>
-    // document.getElementById("form-group").addEventListener("submit", function(event) {
 
-    // let checkboxes = document.querySelectorAll("input[name='categories']:checked");
-    // console.log(checkboxes);
-    // if (checkboxes.length === 0) {
-    //     alert("Please select at least one option.");
-    //     event.preventDefault();
-    // }
-    // });
 
-    function validateCheckbox(){
-        const myForm = document.getElementById('form');
 
-        const myCheckboxMsg = "Please indicate one category";
-        myform.addEventListener("submit", function(event) {
-
-            let checkboxes = document.querySelectorAll("#box");
-            console.log(checkboxes);
-            if (checkboxes.length === 0) {
-                alert("Please select at least one option.");
-                event.preventDefault();
-            }
-        });
-    }
-</script>
-
+@endsection
+ main

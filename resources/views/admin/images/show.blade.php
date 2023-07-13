@@ -14,7 +14,7 @@
 </div>
 <div class="row justify-content-center pt-5">
     <div class="col-12 col-lg-9 col-xl-8 d-flex justify-content-start">
-        <div onclick="window.Var.modalFormIndex = 1; window.Func.askConfirm(event);" class="trash-button">
+        <div onclick="window.Var.modalFormIndex = 1;" data-bs-toggle="modal" data-bs-target="#confirmModal" class="trash-button">
             <i class="fa-regular fa-trash-can"></i>
         </div>
     </div>

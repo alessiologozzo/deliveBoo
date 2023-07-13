@@ -1,16 +1,16 @@
 @extends('layouts.admin')
 
+@section('page_title')
+    Restaurants
+@endsection
+
 @section('content')
     @error('password')
-        <div class="al-mex bg-danger">
-            {{ $message }}
-        </div>
+        <x-toast-message mex="{{ $message }}" failed />
     @enderror
 
     @if (session()->has('mex'))
-        <div class="al-mex">
-            {{ session()->get('mex') }}
-        </div>
+        <x-toast-message mex="{{ session()->get('mex') }}" />
     @endif
 
 
@@ -44,7 +44,7 @@
                                 class="btn btn-warning text-white">EDIT</a>
                             </a>
 
-                            <button onclick="window.Func.askConfirm(event)" class="delete-button btn btn-danger text-white">
+                            <button data-bs-toggle="modal" data-bs-target="#confirmModal" class="delete-button btn btn-danger text-white">
                                 DELETE
                             </button>
                         </div>

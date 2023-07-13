@@ -100,9 +100,6 @@ class RestaurantController extends Controller
             if($dish->image != null)
                 Storage::delete($dish->image);
 
-        foreach($restaurant->dishes as $dish)
-            $dish->orders()->delete();
-
         $restaurant->delete();
 
         return redirect()->route("restaurants.index")->with("mex", "Your restaurant has been deleted.");
