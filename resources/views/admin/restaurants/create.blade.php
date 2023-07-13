@@ -7,7 +7,7 @@
             <div class="card-header">{{ __('New Restaurant') }}</div>
 
             <div class="card-body">
-                <form method="POST" action="{{ route('restaurants.store') }}" enctype="multipart/form-data">
+                <form class="form" method="POST" action="{{ route('restaurants.store') }}" enctype="multipart/form-data">
                     @csrf
 
                     <div class="mb-4 row">
@@ -53,6 +53,22 @@
                         </div>
                     </div>
 
+                    <div id="form" class="form-group d-flex justify-content-between align-items-center">
+                        <p class="m-0">Categories:</p>
+                        <div class="d-flex flex-wrap justify-content-center w-100 py-2">
+                            @foreach ($categories as $category)
+                                <div class="px-3">
+                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="form-check-input"
+                                        {{ in_array($category->id, old('category', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label">{{ $category->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('categories')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
                     <div class="mt-5 mb-4 row mb-0">
                         <div class="col-md-6 offset-md-4 d-flex justify-content-end">
                             <button type="submit" class="btn btn-primary">
@@ -66,3 +82,31 @@
     </div>
 </div>
 @endsection
+
+<script>
+    // document.getElementById("form-group").addEventListener("submit", function(event) {
+
+    // let checkboxes = document.querySelectorAll("input[name='categories']:checked");
+    // console.log(checkboxes);
+    // if (checkboxes.length === 0) {
+    //     alert("Please select at least one option.");
+    //     event.preventDefault();
+    // }
+    // });
+
+    function validateCheckbox(){
+        const myForm = document.getElementById('form');
+
+        const myCheckboxMsg = "Please indicate one category";
+        myform.addEventListener("submit", function(event) {
+
+            let checkboxes = document.querySelectorAll("#box");
+            console.log(checkboxes);
+            if (checkboxes.length === 0) {
+                alert("Please select at least one option.");
+                event.preventDefault();
+            }
+        });
+    }
+</script>
+

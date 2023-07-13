@@ -1,6 +1,6 @@
 <aside class="d-flex flex-column">
     <div class="logo-container">
-        <img src="{{ Vite::asset('resources/img/logo.svg') }}" alt="logo">
+        {{-- <img src="{{ Vite::asset('resources/img/logo.svg') }}" alt="logo"> --}}
     </div>
 
     <a href="#" class="d-flex align-items-center gap-3 sidebar-item px-3">

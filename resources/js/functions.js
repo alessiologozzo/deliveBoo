@@ -50,7 +50,7 @@ export function resizeSidebar() {
         topbar.classList.remove("topbar-resized");
         sidebar.classList.remove("sidebar-resized");
         main.classList.remove("main-resized");
-        
+
         links.forEach(function (link) {
             let span = link.querySelector("span");
             span.classList.add("d-none");
@@ -85,7 +85,7 @@ export function toggleMenu(event){
 
 export function drawChart(){
     let chartContainers = document.getElementsByClassName("chart-container-data");
-    
+
     if(chartContainers.length > 0){
         for(let i = 0; i < chartContainers.length; i++){
             let chartId = chartContainers[i].dataset.chartId;
@@ -193,3 +193,5 @@ export function validateEqualFields(event, firstElementId, secondElementId, erro
     return result;
 
 }
+
+
