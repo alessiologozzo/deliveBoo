@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Http\Request;
 use App\Http\Requests\RestaurantRequest;
+use App\Models\Category;
 
 class RestaurantController extends Controller
 {
@@ -46,8 +47,10 @@ class RestaurantController extends Controller
      */
     public function edit(Restaurant $restaurant)
     {
+        $categories = Category::all();
         $data = [
             'restaurant' => $restaurant,
+            'categories' => $categories
         ];
         return view('admin.restaurants.edit', $data);
     }
@@ -66,13 +69,17 @@ class RestaurantController extends Controller
         if($request->has("logo")){
             if($restaurant->logo != null)
                 Storage::delete($restaurant->logo);
-            
+
             $imagePath = Storage::put("uploads", $request->logo);
             $validated = array_merge($validated, ["logo" => $imagePath]);
         }
 
         $restaurant->update($validated);
-
+        if ($request->has('categories')) {
+            $restaurant->categories()->sync($request->categories);
+        } else {
+            $restaurant->categories()->sync([]);
+        }
         return redirect()->route("restaurants.index")->with("mex", "Your restaurant has been updated.");
     }
 
@@ -85,7 +92,7 @@ class RestaurantController extends Controller
 
         if($restaurant->logo != null)
             Storage::delete($restaurant->logo);
-            
+
         foreach($restaurant->images as $image)
             Storage::delete($image->image);
 
@@ -99,7 +106,8 @@ class RestaurantController extends Controller
     }
 
     public function create(){
-        return view("admin.restaurants.create");
+        $categories = Category::all();
+        return view("admin.restaurants.create", compact('categories'));
     }
 
     public function store(RestaurantRequest $request){
@@ -114,7 +122,9 @@ class RestaurantController extends Controller
             $restaurant->logo = $imagePath;
         }
         $restaurant->save();
-
+        if ($request->has('categories')) {
+            $restaurant->colors()->attach($request->categories);
+        }
         return redirect()->route("restaurants.index")->with("mex", "You have successfully created a new restaurant.");
     }
 }

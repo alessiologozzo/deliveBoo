@@ -4,11 +4,17 @@
     New Restaurant
 @endsection
 
+ createrestaurant
+            <div class="card-body">
+                <form class="form" method="POST" action="{{ route('restaurants.store') }}" enctype="multipart/form-data">
+                    @csrf
+
 @section('content')
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('New Restaurant') }}</div>
+ main
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('restaurants.store') }}" enctype="multipart/form-data">
@@ -65,16 +71,48 @@
                             </div>
                         </div>
 
+ createrestaurant
+                    <div id="form" class="form-group d-flex justify-content-between align-items-center">
+                        <p class="m-0">Categories:</p>
+                        <div class="d-flex flex-wrap justify-content-center w-100 py-2">
+                            @foreach ($categories as $category)
+                                <div class="px-3">
+                                    <input type="checkbox" name="categories[]" value="{{ $category->id }}" class="form-check-input"
+                                        {{ in_array($category->id, old('category', [])) ? 'checked' : '' }}>
+                                    <label class="form-check-label">{{ $category->name }}</label>
+                                </div>
+                            @endforeach
+                        </div>
+                        @error('categories')
+                            <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
+
+                    <div class="mt-5 mb-4 row mb-0">
+                        <div class="col-md-6 offset-md-4 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary">
+                                {{ __('Register') }}
+                            </button>
+
                         <div class="mt-5 mb-4 row mb-0">
                             <div class="col-md-6 offset-md-4 d-flex justify-content-end">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Register') }}
                                 </button>
                             </div>
+ main
                         </div>
                     </form>
                 </div>
             </div>
         </div>
     </div>
+ createrestaurant
+</div>
 @endsection
+
+
+
+
+@endsection
+ main

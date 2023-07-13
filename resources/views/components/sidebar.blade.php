@@ -1,8 +1,6 @@
 <aside class="d-flex flex-column">
     <div class="logo-container">
-        <a href="http://localhost:5174/">
-            <img src="{{ Vite::asset('resources/img/deliveboo3.png') }}" alt="logo">
-        </a>
+
     </div>
 
     <a href="http://localhost:5174/" class="d-flex align-items-center gap-3 sidebar-item px-3">

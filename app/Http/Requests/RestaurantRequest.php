@@ -24,7 +24,8 @@ class RestaurantRequest extends FormRequest
         return [
             'name' => ['required', 'string', 'max:255'],
             'address' => ['required', 'string', 'max:255'],
-            'logo' => ['nullable','max:255', 'mimes:png,jpg,jpeg,webp,svg']
+            'logo' => ['nullable','max:255', 'mimes:png,jpg,jpeg,webp,svg'],
+            'categories' => ['required', 'array', 'min:1']
         ];
     }
 }

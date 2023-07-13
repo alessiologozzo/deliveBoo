@@ -28,8 +28,8 @@ class HomeController extends Controller
                 foreach ($restaurants as $restaurant) {
                     $restaurant->categories = explode(',', $restaurant->categories);
                 }
-            
-                
+
+
             $data = [
                 'categories'=> $categories,
                 'restaurants'=> $restaurants,
