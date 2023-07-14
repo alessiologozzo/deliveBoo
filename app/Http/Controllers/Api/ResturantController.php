@@ -15,9 +15,11 @@ class ResturantController extends Controller
             $join->on('restaurants.id', 'images.restaurant_id')
                  ->whereRaw('images.id = (SELECT MIN(id) FROM images WHERE images.restaurant_id = restaurants.id)');
                 })->select('restaurants.*', 'images.image')->paginate(10);
+
         $categories = Category::all();
         $data = [
             'restaurants'=> $restaurants,
+            'restaurantsAll'=> $restaurantsAll,
             'categories'=> $categories
         ];
         return response()->json([
