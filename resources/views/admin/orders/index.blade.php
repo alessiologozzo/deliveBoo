@@ -5,6 +5,138 @@
 @endsection
 
 @section('content')
+    <div class="d-flex justify-content-end pb-4">
+        <form action="{{ route('orders.index') }}" method="GET" id="ordersForm"
+            class="orders-filter w-100 d-flex flex-column gap-3 bg-light p-4" style="max-width: 600px">
+
+            <div class="row">
+                <div class="col-12 col-md-6 d-flex flex-column">
+                    <label for="orderNum">Filter by order number</label>
+                    <input type="text" name="orderNum" id="orderNum" value="{{ $oldOrderNum }}"
+                        placeholder="Order number...">
+                </div>
+
+                <div class="col-12 col-md-6 d-flex flex-column">
+                    <label for="customerName">Filter by customer name</label>
+                    <input type="text" name="customerName" id="customerName" value="{{ $oldCustomerName }}"
+                        placeholder="Customer name...">
+                </div>
+            </div>
+            <div class="d-flex flex-column">
+                <label for="dish">Filter by dish in order</label>
+                <select name="dish" id="dish">
+                    <option value="all" selected>All</option>
+                    @foreach ($dishes as $dish)
+                        <option value="{{ $dish->id }}" @if ($oldDish == $dish->id) selected @endif>
+                            {{ $dish->name }}</option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="align-self-end d-flex gap-2 gap-md-3 flex-wrap justify-content-end">
+                <input type="submit" onclick="window.Func.resetOrdersFilter(event)" class="btn btn-warning" value="Reset">
+                <input type="submit" class="btn btn-primary" value="Filter">
+            </div>
+
+            <input type="text" name="orderBy" id="orderBy" class="d-none" value="{{ $oldOrderBy }}">
+            <input type="text" name="direction" id="direction" class="d-none" value="{{ $oldDirection }}">
+        </form>
+    </div>
+
+    <div class="table-responsive box-shadow">
+        <table id="ordersTable" class="table table-light table-striped table-bordered table-hover table-link mb-0">
+            <thead>
+                <tr class="text-center bg-orange">
+                    <th class="text-white" data-order-by="orderNum">
+                        <div class="d-flex gap-3 justify-content-center align-items-center">
+                            <span>Order Number</span>
+
+                            @if (strcmp($oldOrderBy, 'orderNum') == 0 && strcmp($oldDirection, 'desc') == 0)
+                                <i class="fa-solid fa-caret-down"></i>
+                            @elseif (strcmp($oldOrderBy, 'orderNum') == 0 && strcmp($oldDirection, 'asc') == 0)
+                                <i class="fa-solid fa-caret-up"></i>
+                            @endif
+                        </div>
+                    </th>
+                    <th class="text-white" data-order-by="customerName">
+                        <div class="d-flex gap-3 justify-content-center align-items-center">
+                            <span>Customer Name</span>
+
+                            @if (strcmp($oldOrderBy, 'customerName') == 0 && strcmp($oldDirection, 'desc') == 0)
+                                <i class="fa-solid fa-caret-down"></i>
+                            @elseif (strcmp($oldOrderBy, 'customerName') == 0 && strcmp($oldDirection, 'asc') == 0)
+                                <i class="fa-solid fa-caret-up"></i>
+                            @endif
+                        </div>
+                    </th>
+                    <th class="text-white" data-order-by="orderDate">
+                        <div class="d-flex gap-3 justify-content-center align-items-center">
+                            <span>Order Date</span>
+
+                            @if (!$oldOrderBy || (strcmp($oldOrderBy, 'orderDate') == 0 && strcmp($oldDirection, 'desc') == 0))
+                                <i class="fa-solid fa-caret-down"></i>
+                            @elseif (strcmp($oldOrderBy, 'orderDate') == 0 && strcmp($oldDirection, 'asc') == 0)
+                                <i class="fa-solid fa-caret-up"></i>
+                            @endif
+                        </div>
+                    </th>
+                    <th class="text-white" data-order-by="orderPrice">
+                        <div class="d-flex gap-3 justify-content-center align-items-center">
+                            <span>Order Price</span>
+
+                            @if (strcmp($oldOrderBy, 'orderPrice') == 0 && strcmp($oldDirection, 'desc') == 0)
+                                <i class="fa-solid fa-caret-down"></i>
+                            @elseif (strcmp($oldOrderBy, 'orderPrice') == 0 && strcmp($oldDirection, 'asc') == 0)
+                                <i class="fa-solid fa-caret-up"></i>
+                            @endif
+                        </div>
+                    </th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach ($orders as $order)
+                    <tr data-location="/orders/{{ $order->id }}" class="text-center">
+                        <td>
+                            {{ $order->order_num }}
+                        </td>
+
+                        <td>
+                            {{ $order->customer_name }}
+                        </td>
+
+                        <td>
+                            {{ $order->date }}
+                        </td>
+
+                        <td>{{ $order->price }} &euro;</td>
+                    </tr>
+                @endforeach
+
+                @if (count($orders) < 1)
+                    <tr>
+                        <td colspan="4" class="text-center">Your search has no matches in the database.</td>
+                    </tr>
+                @endif
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination mt-3 d-flex justify-content-end">
+        {{ $orders->links('pagination::bootstrap-5') }}
+    </div>
+@endsection
+
+
+
+
+
+{{-- @extends('layouts.admin')
+
+@section('page_title')
+    Orders
+@endsection
+
+@section('content')
     <div class="container">
         <div class="row">
             <div class="col-12 mt-3 mb-3">
@@ -221,4 +353,4 @@
     @if (empty($selectedDish) && empty($searchedOrder))
         {{ $orders->links('vendor.pagination.bootstrap-5') }}
     @endif
-@endsection
+@endsection --}}

@@ -644,3 +644,9 @@ main {
         background-color: rgb(209, 255, 140);
     }
 }
+
+.orders-filter {
+    box-shadow: $box_shadow_color;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+}
