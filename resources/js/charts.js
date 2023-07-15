@@ -1,4 +1,4 @@
-export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
+export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor){
 
     const ctx = document.getElementById(chartId).getContext("2d");
 
@@ -6,8 +6,22 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
     let values = [];
 
     let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(58, 123, 213, 1)");
-    gradient.addColorStop(1, "rgba(0, 210, 255, 0.3)");
+    if(!chartColor || chartColor == "blue") {
+        gradient.addColorStop(0, "rgba(58, 123, 213, 1)");
+        gradient.addColorStop(1, "rgba(0, 210, 255, 0.3)");
+    }
+    else if(chartColor == "violet") {
+        gradient.addColorStop(0, "rgb(208, 70, 166)");
+        gradient.addColorStop(1, "rgba(254, 201, 117, 0.7)");
+    }
+    else if(chartColor == "orange") {
+        gradient.addColorStop(0, "rgba(255, 133, 88, 1)");
+        gradient.addColorStop(1, "rgba(255, 219, 61, 0.6)");
+    }
+    else if(chartColor == "green") {
+        gradient.addColorStop(0, "rgba(60, 191, 174, 1)");
+        gradient.addColorStop(1, "rgba(65, 227, 150, 0.6)");
+    }
 
     let delayed;
 
@@ -116,15 +130,29 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
     let myChart = new Chart(ctx, config);
 }
 
-export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
+export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor){
     const ctx = document.getElementById(chartId).getContext("2d");
 
     let labels = [];
     let values = [];
 
     let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgb(208, 70, 166)");
-    gradient.addColorStop(1, "rgba(254, 201, 117, 0.7)");
+    if(!chartColor || chartColor == "violet") {
+        gradient.addColorStop(0, "rgb(208, 70, 166)");
+        gradient.addColorStop(1, "rgba(254, 201, 117, 0.7)");
+    }
+    else if(chartColor == "blue") {
+        gradient.addColorStop(0, "rgba(58, 123, 213, 1)");
+        gradient.addColorStop(1, "rgba(0, 210, 255, 0.3)");
+    }
+    else if(chartColor == "orange") {
+        gradient.addColorStop(0, "rgba(255, 133, 88, 1)");
+        gradient.addColorStop(1, "rgba(255, 219, 61, 0.6)");
+    }
+    else if(chartColor == "green") {
+        gradient.addColorStop(0, "rgba(60, 191, 174, 1)");
+        gradient.addColorStop(1, "rgba(65, 227, 150, 0.6)");
+    }
 
     let delayed;
 

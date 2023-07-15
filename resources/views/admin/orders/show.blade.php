@@ -72,7 +72,7 @@
                                 <tr class="text-center align-middle">
                                     <th scope="col" class="text-white rounded-start">Dish Name</th>
                                     <th scope="col" class="text-white">Category</th>
-                                    <th scope="col" class="text-white">Quanitity</th>
+                                    <th scope="col" class="text-white">Quantity</th>
                                     <th scope="col" class="text-white">Price</th>
                                     <th scope="col" class="text-white rounded-end">Click me!</th>
                                 </tr>

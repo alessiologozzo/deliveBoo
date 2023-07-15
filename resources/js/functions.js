@@ -99,6 +99,7 @@ export function drawChart() {
             let chartXLabel = chartContainers[i].dataset.chartXLabel;
             let chartYParam = chartContainers[i].dataset.chartYParam;
             let chartTooltipExtra = chartContainers[i].dataset.chartTooltipExtra;
+            let chartColor = chartContainers[i].dataset.chartColor;
 
             if (chartTitle == undefined)
                 chartTitle = "";
@@ -111,10 +112,10 @@ export function drawChart() {
 
             switch (chartType) {
                 case "line-chart":
-                    Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra);
+                    Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor);
                     break;
                 case "bar-chart":
-                    Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra);
+                    Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor);
                     break;
             }
         }
@@ -208,6 +209,8 @@ export function addLinksToOrdersTable() {
                     }
                 ]
             ));
+            else
+                table.scrollIntoView();
 
         let orderByObjects = JSON.parse(sessionStorage.getItem("orderByObjects"));
 
@@ -279,4 +282,14 @@ export function resetOrdersFilter(event) {
     document.getElementById("orderBy").value = "";
     document.getElementById("direction").value = "";
     form.submit();
+}
+
+export function toggleSixMonthsCharts(event) {
+    let sixMonthsCharts = document.getElementsByClassName("sixMonthsCharts")[0];
+    sixMonthsCharts.classList.toggle("expand");
+
+    if(sixMonthsCharts.classList.contains("expand"))
+        event.currentTarget.textContent = "Hide";
+    else
+        event.currentTarget.textContent = "Show";
 }
