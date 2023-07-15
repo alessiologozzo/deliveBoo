@@ -665,7 +665,7 @@ main {
 }
 
 .fs-small {
-    font-size: 0.7rem;
+    font-size: 0.8rem;
 }
 
 .overflow-x-auto {
@@ -695,5 +695,30 @@ main {
 
     @media screen and (min-width: 1400px) {
         height: 280px;
+    }
+}
+
+.dishes-chart {
+    width: 100%;
+    height: 200px;
+
+    @media screen and (min-width: 576px) {
+        height: 250px;
+    }
+
+    @media screen and (min-width: 768px) {
+        height: 200px;
+    }
+
+    @media screen and (min-width: 992px) {
+        height: 200px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        height: 200px;
+    }
+
+    @media screen and (min-width: 1400px) {
+        height: 200px;
     }
 }

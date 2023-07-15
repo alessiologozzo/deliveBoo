@@ -114,8 +114,13 @@ export function drawChart() {
                 case "line-chart":
                     Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor);
                     break;
+
                 case "bar-chart":
                     Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor);
+                    break;
+
+                case "doughnut-chart":
+                    Chart.doughnutChart(chartId, chartData, chartTitle, chartTooltipExtra);
                     break;
             }
         }

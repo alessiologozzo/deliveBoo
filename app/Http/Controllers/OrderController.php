@@ -19,6 +19,11 @@ class OrderController extends Controller
     
     public function index(Request $request)
     {
+        $restaurant = Restaurant::where("user_id", Auth::id())->first();
+
+        if(!$restaurant)
+            return redirect()->route("restaurants.index");
+
         $userId = Auth::id();
         
         $lastMonthDay = DB::select(
@@ -182,7 +187,8 @@ class OrderController extends Controller
             JOIN dishes ON dishes.id = dish_order.dish_id
             JOIN restaurants ON restaurants.id = dishes.restaurant_id
             WHERE restaurants.user_id = $userId
-            AND orders.date_time BETWEEN DATE_SUB(DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), interval 1 day), interval 6 month) AND DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), interval 1 day)
+            AND YEAR(orders.date_time) BETWEEN YEAR(CURDATE() - interval 6 month) AND YEAR(CURDATE())
+            AND MONTH(orders.date_time) BETWEEN MONTH(DATE_FORMAT(CURDATE(), '%Y-%m-01') - interval 6 month) AND MONTH(DATE_FORMAT(CURDATE(), '%Y-%m-01') - interval 1 day)
             GROUP BY 1
             ORDER BY DATE_FORMAT(orders.date_time, '%Y-%m')
             ");
@@ -195,7 +201,8 @@ class OrderController extends Controller
             JOIN dishes ON dishes.id = dish_order.dish_id
             JOIN restaurants ON restaurants.id = dishes.restaurant_id
             WHERE restaurants.user_id = $userId
-            AND orders.date_time BETWEEN DATE_SUB(DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), interval 1 day), interval 6 month) AND DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), interval 1 day)
+            AND YEAR(orders.date_time) BETWEEN YEAR(CURDATE() - interval 6 month) AND YEAR(CURDATE())
+            AND MONTH(orders.date_time) BETWEEN MONTH(DATE_FORMAT(CURDATE(), '%Y-%m-01') - interval 6 month) AND MONTH(DATE_FORMAT(CURDATE(), '%Y-%m-01') - interval 1 day)
             GROUP BY 1
             ORDER BY DATE_FORMAT(orders.date_time, '%Y-%m')
             "

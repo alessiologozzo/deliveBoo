@@ -6,8 +6,6 @@
 
 @section('content')
 
-
-
     <div id="dish-index" class="container-fluid">
         @if (session()->has('message'))
             <div class="alert alert-success">
@@ -51,6 +49,13 @@
                                         </div>
                                     </span>
                                 @endforeach
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <div class="chart-container-data dishes-chart" data-chart-id="dishes-chart"
+                                data-chart-type="doughnut-chart" data-chart-data="{{ json_encode($dishesChart) }}">
+                                <canvas id="dishes-chart"></canvas>
                             </div>
                         </div>
                     </div>
@@ -136,7 +141,7 @@
                 </div>
                 <div class="col-12 col-lg-4">
                     <div class="row">
-                        @if ($topSellers[0]->orders_count != 0)
+                        @if (count($topSellers) != 0)
                             <div class="col-12 mb-5">
                                 <div class="card p-3">
                                     <p class="fs-4">Top 5 seller</p>
@@ -158,7 +163,7 @@
                                                             class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">{{ $item->category }}</span>
                                                     </td>
                                                     <td><span
-                                                            class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">{{ $item->orders_count }}</span>
+                                                            class="badge rounded-pill bg-light text-dark mt-2 pt-2 pb-2">{{ $item->value }}</span>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -212,4 +217,5 @@
         @endif
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @endsection

@@ -253,3 +253,85 @@ export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel
 
     let myChart = new Chart(ctx, config);
 }
+
+export function doughnutChart(chartId, chartData, chartTitle, chartTooltipExtra){
+    const ctx = document.getElementById(chartId).getContext("2d");
+
+    let labels = [];
+    let values = [];
+
+    let delayed;
+
+    chartData.forEach(data => {
+        labels.push(data.label);
+        values.push(data.value)
+    });
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                data: values
+            }
+        ]
+    }
+
+    const config = {
+        type: "doughnut",
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title:{
+                    display: true,
+                    text: chartTitle,
+                    position: "top",
+                    align: "center",
+                    font: {
+                        size: 16
+                    }
+                },
+
+                legend: {
+                    display: false,
+                    position: "top",
+                    align: "end"
+                },
+
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            if(chartTooltipExtra != undefined) {
+                                let label = context.dataset.label;
+
+                                if(label)
+                                    label += ": ";
+                                
+                                if(context.parsed.y !== null)
+                                    label += context.parsed.y + chartTooltipExtra;
+
+                                return label;
+                            }
+                        }
+                    }
+                }
+            },
+
+            animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if(context.type === "data" && context.mode === "default" && !delayed) {
+                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                }
+            }
+        }
+    }
+
+    let myChart = new Chart(ctx, config);
+}

@@ -5,9 +5,7 @@
 @endsection
 
 @section('content')
-    <h1 class="text-center pb-5">Orders statistics</h1>
-
-    <div class="row gy-4">
+    <div class="row gy-4 pt-4">
         <div class="col-12 col-lg-6 col-xl-5 col-xxl-4">
             <div
                 class="d-flex flex-column gap-3 align-items-start bg-light p-3 box-shadow border border-secondary overflow-x-auto">
@@ -123,7 +121,7 @@
                     <span>Avg Order/Revenues<small class="fs-6"> (&euro;)</small></span>
                     <span class="badge bg-secondary fs-4">{{ $revenuesCurrentMonthAvg }}</span>
 
-                    @if ($revenuesCurrentMonthPercentage >= 0)
+                    @if ($revenuesCurrentMonthAvgPercentage >= 0)
                         <span class="badge bg-success fs-small"> +{{ $revenuesCurrentMonthAvgPercentage }} %</span>
                     @else
                         <span class="badge bg-danger fs-small">{{ $revenuesCurrentMonthAvgPercentage }} %</span>
@@ -134,7 +132,7 @@
         </div>
     </div>
 
-
+    
     <button class="btn btn-outline-primary text-uppercase fs-6 mt-5" onclick="window.Func.toggleSixMonthsCharts(event)">Show</button>
     <div class="sixMonthsCharts row pt-4 gy-4 mt-1">
         <div class="col-12 col-lg-6">

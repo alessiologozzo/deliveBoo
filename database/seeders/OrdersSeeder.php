@@ -58,7 +58,7 @@ class OrdersSeeder extends Seeder
 
                 $newOrders[$j] = [
                     "customer_name" => $faker->name(),
-                    "date_time" =>  $faker->dateTimeBetween("-6 months", "now"),
+                    "date_time" =>  $faker->dateTimeBetween("-10 months", "now"),
                     "customer_address" => $faker->address(),
                     "instructions" => $faker->realTextBetween(20, 70),
                     "price" => $price,

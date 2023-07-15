@@ -11,7 +11,7 @@ use App\Http\Requests\UpdateDishRequest;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
-
+use Illuminate\Support\Facades\DB;
 
 
 class DishController extends Controller
@@ -21,11 +21,14 @@ class DishController extends Controller
      */
     public function index(Request $request)
     {
+
+        $restaurant = Restaurant::with("images")->where("user_id", Auth::id())->first();
+
+        if(!$restaurant)
+            return redirect()->route("restaurants.index");
         
         //selezione ristorante user loggato
         $user = Auth::id();
-        $restaurant = Restaurant::where('user_id', $user)->first();
-        //dd($restaurant);
 
         //paginazione piatti
         $dishes = $restaurant->dishes()
@@ -61,12 +64,18 @@ class DishController extends Controller
         ->get();
 
         //top 5 piatti più venduti
-        $topSellers = $restaurant->dishes()
-        ->withCount('orders')
-        ->orderBy('orders_count', 'desc')
-        ->limit(5)
-        ->get();
-        //dd($topSellers);
+        $topSellers = DB::select(
+            "SELECT dishes.id, SUM(dish_order.quantity) AS 'value', dishes.name, dishes.slug, dishes.category
+            FROM orders
+            JOIN dish_order ON orders.id = dish_order.order_id
+            JOIN dishes ON dishes.id = dish_order.dish_id
+            JOIN restaurants ON restaurants.id = dishes.restaurant_id
+            WHERE restaurants.user_id = $user
+            GROUP BY 1
+            ORDER BY 2 DESC
+            LIMIT 5"
+        );
+        // dd($topSellers);
 
         //dd($topSellers);  
         
@@ -79,10 +88,20 @@ class DishController extends Controller
 
         //dd($topExpensive);
 
-
+        $dishesChart = DB::select(
+            "SELECT dishes.id, dishes.name AS 'label', SUM(dish_order.quantity) AS 'value', dishes.name
+            FROM orders
+            JOIN dish_order ON orders.id = dish_order.order_id
+            JOIN dishes ON dishes.id = dish_order.dish_id
+            JOIN restaurants ON restaurants.id = dishes.restaurant_id
+            WHERE restaurants.user_id = $user
+            GROUP BY 1
+            ORDER BY 3 DESC
+            LIMIT 5"
+        );
 
         
-        return view('admin.dishes.index', compact('restaurant','dishes','totalDish','categoryDishes','topSellers','topExpensive','searchDish'));
+        return view('admin.dishes.index', compact('restaurant','dishes','totalDish','categoryDishes','topSellers','topExpensive','searchDish', 'dishesChart'));
         
 
     }
@@ -128,16 +147,24 @@ class DishController extends Controller
      */
     public function show(Dish $dish)
     {
+        $user = Auth::id();
+
         $orderCount = $dish->orders()->count();
 
-        $totalAmount = $dish->orders()->get()->map(function ($item) use ($dish) {
-            return $item->pivot->quantity * $dish->price;
-        })->sum();
+        $totalAmount = DB::select(
+            "SELECT SUM(dish_order.quantity) AS 'value'
+            FROM orders
+            JOIN dish_order ON orders.id = dish_order.order_id
+            JOIN dishes ON dishes.id = dish_order.dish_id
+            JOIN restaurants ON restaurants.id = dishes.restaurant_id
+            WHERE restaurants.user_id = $user
+            AND dishes.id = $dish->id"
+        )[0]->value;
+
         $totalDishes = $dish->orders()->get()->sum(function ($item) {
             return $item->pivot->quantity;
         });
 
-        $user = Auth::id();
         $restaurant = Restaurant::where('user_id', $user)->first();
         $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
         //dd($dishes);
