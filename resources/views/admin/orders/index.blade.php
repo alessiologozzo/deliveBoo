@@ -274,5 +274,8 @@
         {{ $orders->links('pagination::bootstrap-5') }}
     </div>
 
+    <div class="pt-2"></div>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 @endsection
