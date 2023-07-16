@@ -99,9 +99,9 @@
                     Orders
                     <span class="badge bg-primary fs-3">{{ $ordersCurrentMonth }}</span>
 
-                    @if ($ordersCurrentMonthPercentage >= 0)
+                    @if ($ordersCurrentMonthPercentage >= 0 && !$lastMonthUntilEmpty)
                         <span class="badge bg-success fs-small"> +{{ $ordersCurrentMonthPercentage }} %</span>
-                    @else
+                    @elseif(!$lastMonthUntilEmpty)
                         <span class="badge bg-danger fs-small">{{ $ordersCurrentMonthPercentage }} %</span>
                     @endif
                 </div>
@@ -110,9 +110,9 @@
                     <span>Revenues<small class="fs-6"> (&euro;)</small></span>
                     <span class="badge bg-success fs-2">{{ $revenuesCurrentMonth }} <span class="fs-5">k</span></span>
                 
-                    @if ($revenuesCurrentMonthPercentage >= 0)
+                    @if ($revenuesCurrentMonthPercentage >= 0 && !$lastMonthUntilEmpty)
                         <span class="badge bg-success fs-small"> +{{ $revenuesCurrentMonthPercentage }} %</span>
-                    @else
+                    @elseif(!$lastMonthUntilEmpty)
                         <span class="badge bg-danger fs-small">{{ $revenuesCurrentMonthPercentage }} %</span>
                     @endif
                 </div>
@@ -121,9 +121,9 @@
                     <span>Avg Order/Revenues<small class="fs-6"> (&euro;)</small></span>
                     <span class="badge bg-secondary fs-4">{{ $revenuesCurrentMonthAvg }}</span>
 
-                    @if ($revenuesCurrentMonthAvgPercentage >= 0)
+                    @if ($revenuesCurrentMonthAvgPercentage >= 0 && !$lastMonthUntilEmpty)
                         <span class="badge bg-success fs-small"> +{{ $revenuesCurrentMonthAvgPercentage }} %</span>
-                    @else
+                    @elseif(!$lastMonthUntilEmpty)
                         <span class="badge bg-danger fs-small">{{ $revenuesCurrentMonthAvgPercentage }} %</span>
                     @endif
                 </div>

@@ -21,6 +21,8 @@ class OrderController extends Controller
     {
         $userId = Auth::id();
         
+        $lastMonthUntilEmpty = false;
+
         $restaurant = Restaurant::where("user_id", Auth::id())->first();
         if (!$restaurant)
             return redirect()->route("restaurants.index");
@@ -183,6 +185,7 @@ class OrderController extends Controller
         }
         else {
             $ordersCurrentMonthPercentage = $revenuesCurrentMonthPercentage = $revenuesCurrentMonthAvgPercentage = 0;
+            $lastMonthUntilEmpty = true;
         }
 
 
@@ -293,7 +296,7 @@ class OrderController extends Controller
         $oldCustomerName = $request->customerName;
         $oldOrderBy = $request->orderBy;
         $oldDirection = $request->direction;
-        return view("admin.orders.index", ["orders" => $orders, "dishes" => $restaurant->dishes, "oldOrderNum" => $oldOrderNum, "oldDish" => $oldDish, "oldCustomerName" => $oldCustomerName, "oldOrderBy" => $oldOrderBy, "oldDirection" => $oldDirection, "ordersChart" => $ordersChart, "revenuesChart" => $revenuesChart, "ordersTotal" => $ordersTotal, "revenuesTotal" => $revenuesTotal, "ordersAvg" => $ordersAvg, "ordersCurrentMonth" => $ordersCurrentMonth, "ordersLastMonthUntil" => $ordersLastMonthUntil, "revenuesCurrentMonth" => $revenuesCurrentMonth, "revenuesLastMonthUntil" => $revenuesLastMonthUntil, "ordersCurrentMonthPercentage" => $ordersCurrentMonthPercentage, "revenuesCurrentMonthPercentage" => $revenuesCurrentMonthPercentage, "revenuesCurrentMonthAvg" => $revenuesCurrentMonthAvg, "revenuesLastMonthAvg" => $revenuesLastMonthAvg, "ordersLastMonth" => $ordersLastMonth, "revenuesLastMonth" => $revenuesLastMonth, "lastMonthDay" => $lastMonthDay, "revenuesLastMonthAvgUntil" => $revenuesLastMonthAvgUntil, "revenuesCurrentMonthAvgPercentage" => $revenuesCurrentMonthAvgPercentage, "totalOrdersChart" => $totalOrdersChart, "totalRevenuesChart" => $totalRevenuesChart]);
+        return view("admin.orders.index", ["orders" => $orders, "dishes" => $restaurant->dishes, "oldOrderNum" => $oldOrderNum, "oldDish" => $oldDish, "oldCustomerName" => $oldCustomerName, "oldOrderBy" => $oldOrderBy, "oldDirection" => $oldDirection, "ordersChart" => $ordersChart, "revenuesChart" => $revenuesChart, "ordersTotal" => $ordersTotal, "revenuesTotal" => $revenuesTotal, "ordersAvg" => $ordersAvg, "ordersCurrentMonth" => $ordersCurrentMonth, "ordersLastMonthUntil" => $ordersLastMonthUntil, "revenuesCurrentMonth" => $revenuesCurrentMonth, "revenuesLastMonthUntil" => $revenuesLastMonthUntil, "ordersCurrentMonthPercentage" => $ordersCurrentMonthPercentage, "revenuesCurrentMonthPercentage" => $revenuesCurrentMonthPercentage, "revenuesCurrentMonthAvg" => $revenuesCurrentMonthAvg, "revenuesLastMonthAvg" => $revenuesLastMonthAvg, "ordersLastMonth" => $ordersLastMonth, "revenuesLastMonth" => $revenuesLastMonth, "lastMonthDay" => $lastMonthDay, "revenuesLastMonthAvgUntil" => $revenuesLastMonthAvgUntil, "revenuesCurrentMonthAvgPercentage" => $revenuesCurrentMonthAvgPercentage, "totalOrdersChart" => $totalOrdersChart, "totalRevenuesChart" => $totalRevenuesChart, "lastMonthUntilEmpty" => $lastMonthUntilEmpty]);
     }
 
     public function show(Order $order)
