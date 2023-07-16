@@ -4,8 +4,11 @@
 $fa-font-path: "..fonts/webfonts" !default;
 @import "@fortawesome/fontawesome-free/css/all.css";
 
+@import url('https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
-
+body {
+    font-family: 'Asap', sans-serif;
+}
 
 #dish-index {
     img {
@@ -642,5 +645,83 @@ main {
 
     &:hover {
         background-color: rgb(209, 255, 140);
+    }
+}
+
+.orders-filter {
+    box-shadow: $box_shadow_color;
+    border: 1px solid lightgrey;
+    border-radius: 6px;
+}
+
+.sixMonthsCharts {
+    transform: scale(0);
+    height: 0;
+    overflow: hidden;
+    transition: all $transition_time;
+    transform-origin: top left;
+}
+
+.expand {
+    transform: scale(1);
+    height: 100%;
+}
+
+.fs-small {
+    font-size: 0.8rem;
+}
+
+.overflow-x-auto {
+    overflow-x: auto;
+}
+
+.orders-chart {
+    width: 100%;
+    height: 200px;
+    box-shadow: $box_shadow_color;
+
+    @media screen and (min-width: 576px) {
+        height: 250px;
+    }
+
+    @media screen and (min-width: 768px) {
+        height: 300px;
+    }
+
+    @media screen and (min-width: 992px) {
+        height: 275px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        height: 280px;
+    }
+
+    @media screen and (min-width: 1400px) {
+        height: 280px;
+    }
+}
+
+.dishes-chart {
+    width: 100%;
+    height: 200px;
+
+    @media screen and (min-width: 576px) {
+        height: 250px;
+    }
+
+    @media screen and (min-width: 768px) {
+        height: 200px;
+    }
+
+    @media screen and (min-width: 992px) {
+        height: 200px;
+    }
+
+    @media screen and (min-width: 1200px) {
+        height: 200px;
+    }
+
+    @media screen and (min-width: 1400px) {
+        height: 200px;
     }
 }

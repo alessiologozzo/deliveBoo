@@ -1,4 +1,4 @@
-export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
+export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor){
 
     const ctx = document.getElementById(chartId).getContext("2d");
 
@@ -6,8 +6,22 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
     let values = [];
 
     let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgba(58, 123, 213, 1)");
-    gradient.addColorStop(1, "rgba(0, 210, 255, 0.3)");
+    if(!chartColor || chartColor == "blue") {
+        gradient.addColorStop(0, "rgba(58, 123, 213, 1)");
+        gradient.addColorStop(1, "rgba(0, 210, 255, 0.3)");
+    }
+    else if(chartColor == "violet") {
+        gradient.addColorStop(0, "rgb(208, 70, 166)");
+        gradient.addColorStop(1, "rgba(254, 201, 117, 0.7)");
+    }
+    else if(chartColor == "orange") {
+        gradient.addColorStop(0, "rgba(255, 133, 88, 1)");
+        gradient.addColorStop(1, "rgba(255, 219, 61, 0.6)");
+    }
+    else if(chartColor == "green") {
+        gradient.addColorStop(0, "rgba(60, 191, 174, 1)");
+        gradient.addColorStop(1, "rgba(65, 227, 150, 0.6)");
+    }
 
     let delayed;
 
@@ -116,15 +130,29 @@ export function lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabe
     let myChart = new Chart(ctx, config);
 }
 
-export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra){
+export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor){
     const ctx = document.getElementById(chartId).getContext("2d");
 
     let labels = [];
     let values = [];
 
     let gradient = ctx.createLinearGradient(0, 0, 0, 400);
-    gradient.addColorStop(0, "rgb(208, 70, 166)");
-    gradient.addColorStop(1, "rgba(254, 201, 117, 0.7)");
+    if(!chartColor || chartColor == "violet") {
+        gradient.addColorStop(0, "rgb(208, 70, 166)");
+        gradient.addColorStop(1, "rgba(254, 201, 117, 0.7)");
+    }
+    else if(chartColor == "blue") {
+        gradient.addColorStop(0, "rgba(58, 123, 213, 1)");
+        gradient.addColorStop(1, "rgba(0, 210, 255, 0.3)");
+    }
+    else if(chartColor == "orange") {
+        gradient.addColorStop(0, "rgba(255, 133, 88, 1)");
+        gradient.addColorStop(1, "rgba(255, 219, 61, 0.6)");
+    }
+    else if(chartColor == "green") {
+        gradient.addColorStop(0, "rgba(60, 191, 174, 1)");
+        gradient.addColorStop(1, "rgba(65, 227, 150, 0.6)");
+    }
 
     let delayed;
 
@@ -208,6 +236,88 @@ export function barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel
                     }
                 }
             },
+            animation: {
+                onComplete: () => {
+                    delayed = true;
+                },
+                delay: (context) => {
+                    let delay = 0;
+                    if(context.type === "data" && context.mode === "default" && !delayed) {
+                        delay = context.dataIndex * 300 + context.datasetIndex * 100;
+                    }
+                    return delay;
+                }
+            }
+        }
+    }
+
+    let myChart = new Chart(ctx, config);
+}
+
+export function doughnutChart(chartId, chartData, chartTitle, chartTooltipExtra){
+    const ctx = document.getElementById(chartId).getContext("2d");
+
+    let labels = [];
+    let values = [];
+
+    let delayed;
+
+    chartData.forEach(data => {
+        labels.push(data.label);
+        values.push(data.value)
+    });
+
+    const data = {
+        labels,
+        datasets: [
+            {
+                data: values
+            }
+        ]
+    }
+
+    const config = {
+        type: "doughnut",
+        data: data,
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                title:{
+                    display: true,
+                    text: chartTitle,
+                    position: "top",
+                    align: "center",
+                    font: {
+                        size: 16
+                    }
+                },
+
+                legend: {
+                    display: false,
+                    position: "top",
+                    align: "end"
+                },
+
+                tooltip: {
+                    callbacks: {
+                        label: function(context) {
+                            if(chartTooltipExtra != undefined) {
+                                let label = context.dataset.label;
+
+                                if(label)
+                                    label += ": ";
+                                
+                                if(context.parsed.y !== null)
+                                    label += context.parsed.y + chartTooltipExtra;
+
+                                return label;
+                            }
+                        }
+                    }
+                }
+            },
+
             animation: {
                 onComplete: () => {
                     delayed = true;

@@ -22,8 +22,10 @@ class OrdersSeeder extends Seeder
         $dispatcher = DB::connection()->getEventDispatcher();
         DB::connection()->unsetEventDispatcher();
 
+        $pivotOrderId = 0;
+
         for($i = 0; $i < $restaurantsNumber; $i++){
-            $generatedOrdersNumber = rand(1000, 2000);
+            $generatedOrdersNumber = rand(2000, 3000);
             $dishesInTheMenuNumber = count($restaurants[$i]->dishes);
 
             $newOrders = [$generatedOrdersNumber];
@@ -34,6 +36,7 @@ class OrdersSeeder extends Seeder
                 $price = 0;
                 $generatedDishPerOrder = [];
                 $partialsDishOrders = [$generatedEntryPerOrder];
+                $pivotOrderId++;
                 for($k = 0; $k < $generatedEntryPerOrder; $k++){
                     do
                         $randomDish = rand(0, $dishesInTheMenuNumber - 1);
@@ -44,7 +47,7 @@ class OrdersSeeder extends Seeder
                     $partialsDishOrders[$k] = [
                         "dish_id" => $restaurants[$i]->dishes[$randomDish]->id,
                         "quantity" => $quantity,
-                        "order_id" => $j + 1,
+                        "order_id" => $pivotOrderId,
                         "created_at" => now(),
                         "updated_at" => now()
                     ];
@@ -55,11 +58,11 @@ class OrdersSeeder extends Seeder
 
                 $newOrders[$j] = [
                     "customer_name" => $faker->name(),
-                    "date_time" =>  $faker->dateTimeBetween("-6 months", "now"),
+                    "date_time" =>  $faker->dateTimeBetween("-10 months", "now"),
                     "customer_address" => $faker->address(),
                     "instructions" => $faker->realTextBetween(20, 70),
                     "price" => $price,
-                    "order_num" => substr(md5($j + 1), 0, 13),
+                    "order_num" => substr(md5($pivotOrderId), 0, 13),
                     "created_at" => now(),
                     "updated_at" => now()
                 ];

@@ -16,6 +16,7 @@ let app = document.getElementById("app");
 app.addEventListener("click", Func.removeMenusHandler);
 
 Func.showToastMessage();
+Func.addLinksToOrdersTable();
 Func.drawChart();
 
 

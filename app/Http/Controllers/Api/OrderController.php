@@ -12,12 +12,20 @@ use Illuminate\Support\Facades\DB;
 
 class OrderController extends Controller
 {
-    public function store(Request $request) {
+    public function store(Request $request)
+    {
         $data = $request->all();
 
         $dishIds = [];
-        foreach($data["items"] as $item)
+        foreach ($data["items"] as $item)
             array_push($dishIds, $item["id"]);
+
+        $dishQuantities = []; foreach ($data["items"] as $item)
+            array_push($dishQuantities, $item["quantity"]);
+
+        $dishData = [];
+        for ($i = 0; $i < count($dishIds); $i++)
+            $dishData[$dishIds[$i]] = ["quantity" => $dishQuantities[$i]];
 
         $newOrder = new Order();
         $newOrder->customer_name = $data["customer_name"];
@@ -27,6 +35,6 @@ class OrderController extends Controller
         $newOrder->date_time = now();
         $newOrder->order_num = uniqid();
         $newOrder->save();
-        $newOrder->dishes()->attach($dishIds);
+        $newOrder->dishes()->attach($dishData);
     }
 }

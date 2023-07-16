@@ -68,28 +68,28 @@ export function resizeSidebar() {
     }
 }
 
-export function toggleMenu(event){
+export function toggleMenu(event) {
     let dropMenuData = event.currentTarget;
     let dropMenu = dropMenuData.querySelector(".drop-menu");
     let dropArrow = dropMenuData.querySelector(".drop-size");
 
     dropMenu.classList.toggle("drop-menu-grow");
 
-    if(dropArrow.classList.contains("fa-chevron-left")){
+    if (dropArrow.classList.contains("fa-chevron-left")) {
         dropArrow.classList.remove("fa-chevron-left");
         dropArrow.classList.add("fa-chevron-down");
     }
-    else{
+    else {
         dropArrow.classList.remove("fa-chevron-down");
         dropArrow.classList.add("fa-chevron-left");
     }
 }
 
-export function drawChart(){
+export function drawChart() {
     let chartContainers = document.getElementsByClassName("chart-container-data");
 
-    if(chartContainers.length > 0){
-        for(let i = 0; i < chartContainers.length; i++){
+    if (chartContainers.length > 0) {
+        for (let i = 0; i < chartContainers.length; i++) {
             let chartId = chartContainers[i].dataset.chartId;
             let chartType = chartContainers[i].dataset.chartType;
             let chartTitle = chartContainers[i].dataset.chartTitle;
@@ -99,22 +99,28 @@ export function drawChart(){
             let chartXLabel = chartContainers[i].dataset.chartXLabel;
             let chartYParam = chartContainers[i].dataset.chartYParam;
             let chartTooltipExtra = chartContainers[i].dataset.chartTooltipExtra;
+            let chartColor = chartContainers[i].dataset.chartColor;
 
-            if(chartTitle == undefined)
+            if (chartTitle == undefined)
                 chartTitle = "";
-            if(chartYLabel == undefined)
+            if (chartYLabel == undefined)
                 chartYLabel = "";
-            if(chartXLabel == undefined)
+            if (chartXLabel == undefined)
                 chartXLabel = "";
-            if(chartYParam == undefined)
+            if (chartYParam == undefined)
                 chartYParam = "";
 
-            switch(chartType){
+            switch (chartType) {
                 case "line-chart":
-                    Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra);
+                    Chart.lineChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor);
                     break;
+
                 case "bar-chart":
-                    Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra);
+                    Chart.barChart(chartId, chartData, chartTitle, chartLabel, chartYLabel, chartXLabel, chartYParam, chartTooltipExtra, chartColor);
+                    break;
+
+                case "doughnut-chart":
+                    Chart.doughnutChart(chartId, chartData, chartTitle, chartTooltipExtra);
                     break;
             }
         }
@@ -124,8 +130,8 @@ export function drawChart(){
 export function submitForm(e) {
     let parent = e.currentTarget.closest(".modal");
     let form = parent.querySelector("form");
-    
-    if(form.checkValidity())
+
+    if (form.checkValidity())
         form.submit();
     else
         form.reportValidity();
@@ -136,7 +142,7 @@ export function submitExternalForm() {
     form.submit();
 }
 
-export function submitFormIndex(e, index){
+export function submitFormIndex(e, index) {
     e.preventDefault();
 
     let form = document.getElementsByTagName("form")[index];
@@ -151,9 +157,9 @@ export function validateEqualFields(event, firstElementId, secondElementId, erro
     let secondElement = document.getElementById(secondElementId);
     let errorElement = document.getElementById(errorElementId);
 
-    if(firstElement.value == secondElement.value)
+    if (firstElement.value == secondElement.value)
         result = true;
-    else{
+    else {
         firstElement.classList.add("is-invalid");
         firstElement.value = "";
         secondElement.value = "";
@@ -166,15 +172,129 @@ export function validateEqualFields(event, firstElementId, secondElementId, erro
 
 }
 
- createrestaurant
-
-
-export function showToastMessage() {    
+export function showToastMessage() {
     let toastContent = document.getElementById("liveToast");
 
-    if(toastContent) {
+    if (toastContent) {
         let toast = new bootstrap.Toast(toastContent);
         toast.show();
     }
 }
- main
+
+export function addLinksToOrdersTable() {
+    let table = document.getElementById("ordersTable");
+    
+    if (table) {
+        let rows = table.querySelectorAll("tr");
+        let form = document.getElementById("ordersForm");
+        let orderBy = document.getElementById("orderBy");
+        let direction = document.getElementById("direction");
+
+        if(!window.location.href.includes("?"))
+            sessionStorage.setItem("orderByObjects", JSON.stringify(
+                [
+                    {
+                        name: "orderNum",
+                        direction: "asc"
+                    },
+
+                    {
+                        name: "customerName",
+                        direction: "asc"
+                    },
+
+                    {
+                        name: "orderDate",
+                        direction: "desc"
+                    },
+
+                    {
+                        name: "orderPrice",
+                        direction: "asc"
+                    }
+                ]
+            ));
+            else
+                table.scrollIntoView();
+
+        let orderByObjects = JSON.parse(sessionStorage.getItem("orderByObjects"));
+
+        let columns = rows[0].querySelectorAll("th");
+        for (let i = 0; i < columns.length; i++) {
+            columns[i].addEventListener("click", () => {
+                let result = "";
+
+                for(let j = 0; j < orderByObjects.length && !result; j++) {
+                    if(orderByObjects[j].name == columns[i].dataset.orderBy) {
+                        if(orderByObjects[j].direction == "asc")
+                            orderByObjects[j].direction = "desc";
+                        else
+                            orderByObjects[j].direction = "asc";
+
+                        result = orderByObjects[j].direction;
+                    }
+                }
+                sessionStorage.setItem("orderByObjects", JSON.stringify(orderByObjects));
+
+                orderBy.value = columns[i].dataset.orderBy;
+                direction.value = result;
+
+                form.submit();
+            });
+        }
+
+        for (let i = 0; i < rows.length; i++) {
+            let location = rows[i].dataset.location;
+            if (location)
+                rows[i].addEventListener("click", () => {
+                    window.location.href = location;
+                });
+        }
+    }
+}
+
+export function resetOrdersFilter(event) {
+    event.preventDefault();
+
+    sessionStorage.setItem("orderByObjects", JSON.stringify(
+        [
+            {
+                name: "orderNum",
+                direction: "asc"
+            },
+
+            {
+                name: "customerName",
+                direction: "asc"
+            },
+
+            {
+                name: "orderDate",
+                direction: "desc"
+            },
+
+            {
+                name: "orderPrice",
+                direction: "asc"
+            }
+        ]
+    ));
+
+    let form = event.currentTarget.closest("form");
+    document.getElementById("orderNum").value = "";
+    document.getElementById("customerName").value = "";
+    document.getElementById("dish").value = "all";
+    document.getElementById("orderBy").value = "";
+    document.getElementById("direction").value = "";
+    form.submit();
+}
+
+export function toggleSixMonthsCharts(event) {
+    let sixMonthsCharts = document.getElementsByClassName("sixMonthsCharts")[0];
+    sixMonthsCharts.classList.toggle("expand");
+
+    if(sixMonthsCharts.classList.contains("expand"))
+        event.currentTarget.textContent = "Hide";
+    else
+        event.currentTarget.textContent = "Show";
+}

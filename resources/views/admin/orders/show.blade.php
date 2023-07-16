@@ -72,13 +72,13 @@
                                 <tr class="text-center align-middle">
                                     <th scope="col" class="text-white rounded-start">Dish Name</th>
                                     <th scope="col" class="text-white">Category</th>
-                                    <th scope="col" class="text-white">Description</th>
+                                    <th scope="col" class="text-white">Quantity</th>
                                     <th scope="col" class="text-white">Price</th>
                                     <th scope="col" class="text-white rounded-end">Click me!</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($order->dishes as $dish)
+                                @foreach ($dishes as $dish)
                                     <tr class="text-center align-middle">
                                         <th>{{ $dish->name }}</th>
                                         <td>
@@ -88,7 +88,7 @@
                                         </td>
                                         <td>
                                             <span class="badge rounded-pill bg-light text-dark pt-2 pb-2">
-                                                {{ $dish->description }}
+                                                <span class="asterisk-opacity">x</span> {{ $dish->quantity }}
                                             </span>
                                         </td>
                                         <td>
@@ -98,7 +98,7 @@
                                         </td>
                                         <td>
                                             <a href="{{ route('dishes.show', $dish->slug) }}">
-                                                <img src="{{ asset('storage/' . $dish->image) }}" style="width: 100%">
+                                                <img src="{{ asset('storage/' . $dish->image) }}" style="width: 100%; max-width: 100px">
                                             </a>
                                         </td>
                                     </tr>
