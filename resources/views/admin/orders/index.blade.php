@@ -132,7 +132,7 @@
         </div>
     </div>
 
-    
+
     <button class="btn btn-outline-primary text-uppercase fs-6 mt-5" onclick="window.Func.toggleSixMonthsCharts(event)">Show</button>
     <div class="sixMonthsCharts row pt-4 gy-4 mt-1">
         <div class="col-12 col-lg-6">
@@ -159,19 +159,19 @@
 
             <div class="row">
                 <div class="col-12 col-md-6 d-flex flex-column">
-                    <label for="orderNum">Filter by order number</label>
+                    <label for="orderNum">Filter by Order Number</label>
                     <input type="text" name="orderNum" id="orderNum" value="{{ $oldOrderNum }}"
                         placeholder="Order number...">
                 </div>
 
                 <div class="col-12 col-md-6 d-flex flex-column">
-                    <label for="customerName">Filter by customer name</label>
+                    <label for="customerName">Filter by Customer Name</label>
                     <input type="text" name="customerName" id="customerName" value="{{ $oldCustomerName }}"
                         placeholder="Customer name...">
                 </div>
             </div>
             <div class="d-flex flex-column">
-                <label for="dish">Filter by dish in order</label>
+                <label for="dish">Filter by Dish</label>
                 <select name="dish" id="dish">
                     <option value="all" selected>All</option>
                     @foreach ($dishes as $dish)

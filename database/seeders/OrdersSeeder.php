@@ -25,7 +25,7 @@ class OrdersSeeder extends Seeder
         $pivotOrderId = 0;
 
         for($i = 0; $i < $restaurantsNumber; $i++){
-            $generatedOrdersNumber = rand(1000, 2000);
+            $generatedOrdersNumber = rand(2000, 3000);
             $dishesInTheMenuNumber = count($restaurants[$i]->dishes);
 
             $newOrders = [$generatedOrdersNumber];

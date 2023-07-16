@@ -52,7 +52,7 @@
                             </div>
                         </div>
 
-                        <div class="col-12 col-md-6">
+                        <div class="col-12 col-md-6 d-none d-md-block">
                             <div class="chart-container-data dishes-chart" data-chart-id="dishes-chart"
                                 data-chart-type="doughnut-chart" data-chart-data="{{ json_encode($dishesChart) }}">
                                 <canvas id="dishes-chart"></canvas>

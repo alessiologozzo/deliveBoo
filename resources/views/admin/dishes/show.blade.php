@@ -38,9 +38,9 @@
                         <div class="row">
                             <div class="col-6 pb-4">
                                 <div class="card p-3 first-dashboard-card border border-0">
-                                    <p class="fs-4 text-white">Total sell:</p>
+                                    <p class="fs-4 text-white">Revenues (&euro;):</p>
                                     @if (isset($totalAmount))
-                                        <p class="m-0 fs-1 text-white">{{ $totalAmount }} <span class="fs-5">€</span></p>
+                                        <p class="m-0 fs-1 text-white">{{ $totalAmount }}<span class="fs-4"> k</span></p>
                                     @else
                                         <p class="m-0 fs-1 text-white">0</p>
                                     @endif
@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-6 pb-4">
                                 <div class="card p-3 second-dashboard-card border border-0">
-                                    <p class="fs-4 text-white">Total order:</p>
+                                    <p class="fs-4 text-white">Orders:</p>
                                     @if (isset($orderCount))
                                         <p class="m-0 fs-1 text-white">{{ $orderCount }}</p>
                                     @else
@@ -58,7 +58,7 @@
                             </div>
                             <div class="col-6 pb-4">
                                 <div class="card p-3 third-dashboard-card border border-0">
-                                    <p class="fs-4 text-white">Total dish sell:</p>
+                                    <p class="fs-4 text-white">Dishes sold:</p>
                                     @if (isset($totalDishes))
                                         <p class="m-0 fs-1 text-white">{{ $totalDishes }}</p>
                                     @else
@@ -78,7 +78,7 @@
                         <div class="">
                             <div class="card p-3 first-dashboard-card border border-0">
                                 <div>
-                                    <p class="fs-4 text-white">Description Dish</p>
+                                    <p class="fs-4 text-white">Description</p>
                                 </div>
                                 <p class="m-0 mb-2 text-white">Id: <span>{{ $dish->id }}</span></p>
                                 <p class="m-0 mb-2 text-white">Price: <span>{{ $dish->price }} euro</span></p>

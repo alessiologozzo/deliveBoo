@@ -371,6 +371,118 @@ return [
             "description" => "Polpo cotto a bassa temperatura su crema di patate e pomodorini confit.",
             "image" => "polpo-croccante-min.jpg"
         ],
+
+        [
+            "name" => "Tonnarelli ai Gamberi",
+            "price" => 14,
+            "category" => "Primi",
+            "description" => "Tonnarelli all'olio prezzemolo con crumble di pane aromatizzato.",
+            "image" => "tonnarelli-ai-gamberi.webp"
+        ],
+
+        [
+            "name" => "Spaghetti alle Vongole",
+            "price" => 13,
+            "category" => "Primi",
+            "description" => "Con vongole fresche, pomodorini secchi, olive laggiasche e tartare di gamberi.",
+            "image" => "spaghetti-alle-vongole-min.jpg"
+        ],
+
+        [
+            "name" => "Paccheri al ragù",
+            "price" => 11.50,
+            "category" => "Primi",
+            "description" => "Pasta fresca con peperoncino Guglia Calabrese.",
+            "image" => "paccheri-al-ragu-min.jpg"
+        ],
+
+        [
+            "name" => "Fettuccine ai funghi",
+            "price" => 12,
+            "category" => "Primi",
+            "description" => "Funghi porcini appena raccolti, sugo di treccia e asparagi aromatizzati.",
+            "image" => "fettuccine-ai-funghi-min.jpg"
+        ],
+
+        [
+            "name" => "Risotto Carnaroli",
+            "price" => 12,
+            "category" => "Primi",
+            "description" => "Con crema di asparagi, formaggio ubriaco al raboso e mandorle tostate",
+            "image" => "risotto-carnaroli-min.jpg"
+        ],
+
+        [
+            "name" => "Bucatini cacio e pepe",
+            "price" => 11,
+            "category" => "Primi",
+            "description" => "Pecorino romano dop e pepe nero in grani.",
+            "image" => "bucatini-cacio-e-pepe-min.jpg"
+        ],
+
+        [
+            "name" => "Trancio di spigola",
+            "price" => 17,
+            "category" => "Secondi",
+            "description" => "Su purea di patate, cialda di riso, olive taggiasche e yogurt.",
+            "image" => "trancio-di-spigola-min.jpg"
+        ],
+
+        [
+            "name" => "Salmone alla piastra",
+            "price" => 16.50,
+            "category" => "Secondi",
+            "description" => "Con ketchup al peperone rosso e wok di verdure.",
+            "image" => "salmone-alla-piastra-min.jpg"
+        ],
+
+        [
+            "name" => "Burger di Melanzane",
+            "price" => 6.50,
+            "category" => "Panini",
+            "description" => "Foglie di spinacino, gocce di tabasco, salsa allo yogurt e pomodoro fresco.",
+            "image" => "burger-di-melanzane-min.jpg"
+        ],
+
+        [
+            "name" => "Salume di Boghera",
+            "price" => 7,
+            "category" => "Panini",
+            "description" => "Con pomodorini freschi e cipolla caramellata..",
+            "image" => "salume-di-boghera-min.jpg"
+        ],
+
+        [
+            "name" => "La Greca",
+            "price" => 8,
+            "category" => "Insalate",
+            "description" => "Foglie di misticanze, olive nere, cetrioli, pomodori, salsa tzatziki e cipolla.",
+            "image" => "la-greca-min.jpg"
+        ],
+
+        [
+            "name" => "Modo Salad",
+            "price" => 10.50,
+            "category" => "Insalate",
+            "description" => "Accompagnata con scaglie salmone affumicato, misticanze, cetrioli e olive nere.",
+            "image" => "modo-salad-min.jpg"
+        ],
+
+        [
+            "name" => "La Songina",
+            "price" => 9.50,
+            "category" => "Insalate",
+            "description" => "Servita con salsa caesar, guanciale e scaglie di parmigiano.",
+            "image" => "la-songina-min.jpg"
+        ],
+
+        [
+            "name" => "Scaloppine al Limone",
+            "price" => 15,
+            "category" => "Secondi",
+            "description" => "Con limone di Sorrento e spolverata di zafferano.",
+            "image" => "scaloppine-al-limone-min.jpg"
+        ],
     ],
 
     "categories" => [

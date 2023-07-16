@@ -20,35 +20,40 @@ class DishesSeeder extends Seeder
         $dishes = config("dbSeeder.dishes");
         $restaurantsNumber = Restaurant::all()->count();
         $dishId = 0;
-
-
-
-
         $newDishes = [];
-        for($i = 0; $i < $restaurantsNumber; $i++){
-            $dishesNumber = count($dishes);
-            $partialsDishes = [$dishesNumber];
 
-            for($j = 0; $j < $dishesNumber; $j++){
+
+        for($i = 0; $i < $restaurantsNumber; $i++) {
+            $generatedDishNumber = rand(10, 16);
+            $generatedDishIndexes = [];
+
+            for($j = 0; $j < $generatedDishNumber; $j++) {
+                do
+                    $randomDishIndex = rand(0, count($dishes) - 1);
+                while(in_array($randomDishIndex, $generatedDishIndexes));  
+                array_push($generatedDishIndexes, $randomDishIndex); 
+
                 $dishId++;
-                $fileType = File::mimeType(config_path() . "/images/dish-images/" . $dishes[$j]["image"]);
-                $upFile = new UploadedFile(config_path() . "/images/dish-images/" . $dishes[$j]["image"], $dishes[$j]["image"], $fileType, 0, false);
+
+                $fileType = File::mimeType(config_path() . "/images/dish-images/" . $dishes[$randomDishIndex]["image"]);
+                $upFile = new UploadedFile(config_path() . "/images/dish-images/" . $dishes[$randomDishIndex]["image"], $dishes[$randomDishIndex]["image"], $fileType, 0, false);
                 $imagePath = $upFile->store("uploads", "public");
 
-                $partialsDishes[$j] = [
-                    "name" => $dishes[$j]["name"],
-                    "price" => $dishes[$j]["price"],
+                $partialsDishes = [];
+                array_push($partialsDishes, [
+                    "name" => $dishes[$randomDishIndex]["name"],
+                    "price" => $dishes[$randomDishIndex]["price"],
                     "image" => $imagePath,
-                    "category" => $dishes[$j]["category"],
-                    "description" => $dishes[$j]["description"],
-                    "slug" => Str::slug($dishes[$j]["name"]) . "-" . $dishId,
+                    "category" => $dishes[$randomDishIndex]["category"],
+                    "description" => $dishes[$randomDishIndex]["description"],
+                    "slug" => Str::slug($dishes[$randomDishIndex]["name"]) . "-" . $dishId,
                     "restaurant_id" => $i + 1,
                     "created_at" => now(),
                     "updated_at" => now()
-                ];
-            }
+                ]);
 
-            $newDishes = array_merge($newDishes, $partialsDishes);
+                $newDishes = array_merge($newDishes, $partialsDishes);
+            }
         }
 
         DB::table("dishes")->insert($newDishes);

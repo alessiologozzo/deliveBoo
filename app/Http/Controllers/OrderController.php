@@ -16,16 +16,15 @@ use App\Traits\PaginationTrait;
 class OrderController extends Controller
 {
     use PaginationTrait;
-    
+
     public function index(Request $request)
     {
-        $restaurant = Restaurant::where("user_id", Auth::id())->first();
-
-        if(!$restaurant)
-            return redirect()->route("restaurants.index");
-
         $userId = Auth::id();
         
+        $restaurant = Restaurant::where("user_id", Auth::id())->first();
+        if (!$restaurant)
+            return redirect()->route("restaurants.index");
+
         $lastMonthDay = DB::select(
             "SELECT DATE_FORMAT(DATE_SUB(CURDATE(), interval 1 month), '%M %D') AS 'lastMonthDay'"
         )[0]->lastMonthDay;
@@ -37,7 +36,8 @@ class OrderController extends Controller
             JOIN dishes ON dishes.id = dish_order.dish_id
             JOIN restaurants ON restaurants.id = dishes.restaurant_id
             WHERE restaurants.user_id = $userId
-            ")[0]->ordersTotal;
+            "
+        )[0]->ordersTotal;
 
         $revenuesTotal = DB::select(
             "SELECT SUM(a.price) AS 'total' FROM 
@@ -162,23 +162,29 @@ class OrderController extends Controller
 
         $revenuesLastMonth = round(($revenuesLastMonth / 1000), 2);
 
-        $ordersCurrentMonthPercentage  = round(100 - (($ordersCurrentMonth * 100) / $ordersLastMonthUntil), 2);
-        if($ordersCurrentMonthPercentage > 0)
-            $ordersCurrentMonthPercentage = - abs($ordersCurrentMonthPercentage);
-        else
-            $ordersCurrentMonthPercentage = abs($ordersCurrentMonthPercentage);
+        if ($ordersLastMonthUntil > 0 && $revenuesLastMonthUntil > 0 && $revenuesLastMonthAvgUntil > 0) {
+            $ordersCurrentMonthPercentage = round(100 - (($ordersCurrentMonth * 100) / $ordersLastMonthUntil), 2);
+            if ($ordersCurrentMonthPercentage > 0)
+                $ordersCurrentMonthPercentage = -abs($ordersCurrentMonthPercentage);
+            else
+                $ordersCurrentMonthPercentage = abs($ordersCurrentMonthPercentage);
 
-        $revenuesCurrentMonthPercentage  = round(100 - (($revenuesCurrentMonth * 100) / $revenuesLastMonthUntil), 2);
-            if($revenuesCurrentMonthPercentage > 0)
-                $revenuesCurrentMonthPercentage = - abs($revenuesCurrentMonthPercentage);
+            $revenuesCurrentMonthPercentage = round(100 - (($revenuesCurrentMonth * 100) / $revenuesLastMonthUntil), 2);
+            if ($revenuesCurrentMonthPercentage > 0)
+                $revenuesCurrentMonthPercentage = -abs($revenuesCurrentMonthPercentage);
             else
                 $revenuesCurrentMonthPercentage = abs($revenuesCurrentMonthPercentage);
 
-        $revenuesCurrentMonthAvgPercentage  = round(100 - (($revenuesCurrentMonthAvg * 100) / $revenuesLastMonthAvgUntil), 2);
-            if($revenuesCurrentMonthAvgPercentage > 0)
-                $revenuesCurrentMonthAvgPercentage = - abs($revenuesCurrentMonthAvgPercentage);
+            $revenuesCurrentMonthAvgPercentage = round(100 - (($revenuesCurrentMonthAvg * 100) / $revenuesLastMonthAvgUntil), 2);
+            if ($revenuesCurrentMonthAvgPercentage > 0)
+                $revenuesCurrentMonthAvgPercentage = -abs($revenuesCurrentMonthAvgPercentage);
             else
                 $revenuesCurrentMonthAvgPercentage = abs($revenuesCurrentMonthAvgPercentage);
+        }
+        else {
+            $ordersCurrentMonthPercentage = $revenuesCurrentMonthPercentage = $revenuesCurrentMonthAvgPercentage = 0;
+        }
+
 
         $ordersChart = DB::select(
             "SELECT SUBSTR(DATE_FORMAT(orders.date_time, '%Y-%M'), 6, 3) AS 'label', COUNT(DISTINCT orders.id) AS 'value'
@@ -191,7 +197,8 @@ class OrderController extends Controller
             AND MONTH(orders.date_time) BETWEEN MONTH(DATE_FORMAT(CURDATE(), '%Y-%m-01') - interval 6 month) AND MONTH(DATE_FORMAT(CURDATE(), '%Y-%m-01') - interval 1 day)
             GROUP BY 1
             ORDER BY DATE_FORMAT(orders.date_time, '%Y-%m')
-            ");
+            "
+        );
 
 
         $revenuesChart = DB::select(
@@ -218,7 +225,8 @@ class OrderController extends Controller
             AND orders.date_time < DATE_SUB(DATE_FORMAT(CURDATE(), '%Y-%m-01'), interval 1 day)
             GROUP BY 1
             ORDER BY DATE_FORMAT(orders.date_time, '%Y-%m')
-            ");
+            "
+        );
 
         $totalRevenuesChart = DB::select(
             "SELECT SUBSTR(DATE_FORMAT(orders.date_time, '%Y-%M'), 6, 3) AS 'label', SUM(dishes.price * dish_order.quantity) AS 'value'
@@ -249,13 +257,13 @@ class OrderController extends Controller
         $ascQuery = " ASC";
         $descQuery = " DESC";
 
-        if($request->orderNum)
-            $baseQuery .=  $orderNumQuery;
-        
-        if($request->dish && $request->dish != "all")
+        if ($request->orderNum)
+            $baseQuery .= $orderNumQuery;
+
+        if ($request->dish && $request->dish != "all")
             $baseQuery .= $orderDishQuery;
-            
-        if($request->customerName)
+
+        if ($request->customerName)
             $baseQuery .= $orderCustomerQuery;
 
         if (strcmp($request->orderBy, "orderNum") == 0)
@@ -264,18 +272,17 @@ class OrderController extends Controller
             $baseQuery .= $orderByCustomerNameQuery;
         else if (strcmp($request->orderBy, "orderPrice") == 0) {
             $baseQuery .= $orderByPriceQuery;
-        }
-        else
+        } else
             $baseQuery .= $orderByDateQuery;
-            
-        if(strcmp($request->direction, "asc") == 0)
+
+        if (strcmp($request->direction, "asc") == 0)
             $baseQuery .= $ascQuery;
         else
             $baseQuery .= $descQuery;
-        
+
         $orders = DB::select($baseQuery);
         $orders = $this->paginate($orders, $request->fullUrl());
-        
+
 
         $revenuesLastMonthUntil = round(($revenuesLastMonthUntil / 1000), 2);
         $revenuesCurrentMonth = round(($revenuesCurrentMonth / 1000), 2);

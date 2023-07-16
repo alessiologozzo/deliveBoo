@@ -47,7 +47,7 @@ class DishController extends Controller
         } else {
             $searchDish = null;
         }
-         
+        
 
         //dd(!empty($searchDish) && is_string($searchDish));
 
@@ -152,6 +152,24 @@ class DishController extends Controller
         $orderCount = $dish->orders()->count();
 
         $totalAmount = DB::select(
+            "SELECT dishes.id, SUM(dishes.price * dish_order.quantity) AS 'value'
+            FROM orders
+            JOIN dish_order ON orders.id = dish_order.order_id
+            JOIN dishes ON dishes.id = dish_order.dish_id
+            JOIN restaurants ON restaurants.id = dishes.restaurant_id
+            WHERE restaurants.user_id = $user
+            GROUP BY 1
+            ORDER BY 2 DESC"
+        );
+
+        if(count($totalAmount) < 1)
+            $totalAmount = 0;
+        else {
+            $totalAmount = $totalAmount[0]->value;
+            $totalAmount = round(($totalAmount / 1000), 2);
+        }
+
+        $totalDishes = DB::select(
             "SELECT SUM(dish_order.quantity) AS 'value'
             FROM orders
             JOIN dish_order ON orders.id = dish_order.order_id
@@ -161,9 +179,9 @@ class DishController extends Controller
             AND dishes.id = $dish->id"
         )[0]->value;
 
-        $totalDishes = $dish->orders()->get()->sum(function ($item) {
-            return $item->pivot->quantity;
-        });
+        // $totalDishes = $dish->orders()->get()->sum(function ($item) {
+        //     return $item->pivot->quantity;
+        // });
 
         $restaurant = Restaurant::where('user_id', $user)->first();
         $dishes = $restaurant->dishes()->where('id','!=', $dish->id )->get();
